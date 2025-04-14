@@ -1,68 +1,90 @@
+"use server";
+
 import { db } from "@/lib/inngest/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
-// ✅ Update user profile during onboarding
 export async function updateUser(data) {
-  const { userId } = await auth(); // properly extract userId
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
-  const user = await db.user.findUnique({
-    where: {
-      clerkUserId: userId,
-    },
-  });
-
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  try {
-    const result = await db.$transaction(
-      async (tx) => {
-        const updatedUser = await tx.user.update({
-          where: {
-            clerkUserId: userId,
-          },
-          data: {
-            age: data.age ?? user.age ?? 18,
-            height: data.height ?? user.height ?? 170,
-            weight: data.weight ?? user.weight ?? 65,
-            gender: data.gender ?? user.gender ?? "other",
-            displayName: data.displayName ?? user.displayName,
-            imageUrl: data.imageUrl ?? user.imageUrl,
-            email: data.email ?? user.email,
-          },
-        });
-
-        return { user: updatedUser };
-      },
-      {
-        timeout: 10000,
-      }
-    );
-
-    return result.user;
-  } catch (error) {
-    console.error("Error updating user", error.message);
-    throw new Error("Error updating user");
-  }
-}
-
-// ✅ Get onboarding status
-export async function gettingUserOnboardingStatus() {
-  const { userId } = auth(); // must extract `userId` like this
+  const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
   const user = await db.user.findUnique({
     where: { clerkUserId: userId },
-    select: {
-      meals: true, // or profile or anything you use to define onboarding completion
+  });
+
+  if (!user) throw new Error("User not found");
+
+  try {
+    // ✅ Step 1: Check if any food item with that category exists
+    const existingCategoryFood = await db.foodItem.findFirst({
+      where: {
+        category: data.dietaryPreference,
+      },
+    });
+
+    // ✅ Step 2: If not, insert a placeholder food item
+    if (!existingCategoryFood) {
+      await db.foodItem.create({
+        data: {
+          name: `Placeholder for ${data.dietaryPreference}`,
+          calories: 0,
+          protein: 0,
+          carbs: 0,
+          fat: 0,
+          category: data.dietaryPreference,
+          isCustom: true,
+        },
+      });
+    }
+
+    // ✅ Step 3: Update the user
+    const updatedUser = await db.user.update({
+      where: { id: user.id },
+      data: {
+        name: data.name || user.name,
+        age: data.age || user.age,
+        height: data.height || user.height,
+        weight: data.weight || user.weight,
+        gender: data.gender || user.gender,
+        activityLevel: data.activityLevel || user.activityLevel,
+        dietaryPreference: data.dietaryPreference || user.dietaryPreference,
+      },
+    });
+
+    revalidatePath("/");
+    return updatedUser;
+  } catch (error) {
+    console.error("Error updating user and category:", error.message);
+    throw new Error("Failed to update user profile");
+  }
+}
+
+
+export async function getUserOnboardingStatus(){
+  let category = await db.foodCategory.findUnique({
+    where: {
+      name: data.dietaryPreference,
     },
   });
 
-  return {
-    isOnboarded: user?.meals?.length > 0, // or whatever logic you use
-  };
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        clerkUserId: userId,
+      },
+      select:{
+        dietaryPreference: true,
+      }
+    });
+
+    return {
+      isOnboarded: !!user?.industry,
+    };
+
+  } catch (error) {
+    console.error("Error fetching user onboarding status:", error.message);
+    throw new Error("Failed to fetch user onboarding status");
+    
+  }
+
 }

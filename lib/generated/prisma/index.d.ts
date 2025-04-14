@@ -19,30 +19,25 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model Profile
+ * Model FoodItem
  * 
  */
-export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
+export type FoodItem = $Result.DefaultSelection<Prisma.$FoodItemPayload>
+/**
+ * Model FoodLog
+ * 
+ */
+export type FoodLog = $Result.DefaultSelection<Prisma.$FoodLogPayload>
 /**
  * Model MealSuggestion
  * 
  */
 export type MealSuggestion = $Result.DefaultSelection<Prisma.$MealSuggestionPayload>
 /**
- * Model MealLog
+ * Model ProgressRecord
  * 
  */
-export type MealLog = $Result.DefaultSelection<Prisma.$MealLogPayload>
-/**
- * Model Progress
- * 
- */
-export type Progress = $Result.DefaultSelection<Prisma.$ProgressPayload>
-/**
- * Model Food
- * 
- */
-export type Food = $Result.DefaultSelection<Prisma.$FoodPayload>
+export type ProgressRecord = $Result.DefaultSelection<Prisma.$ProgressRecordPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -180,14 +175,24 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.profile`: Exposes CRUD operations for the **Profile** model.
+   * `prisma.foodItem`: Exposes CRUD operations for the **FoodItem** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Profiles
-    * const profiles = await prisma.profile.findMany()
+    * // Fetch zero or more FoodItems
+    * const foodItems = await prisma.foodItem.findMany()
     * ```
     */
-  get profile(): Prisma.ProfileDelegate<ExtArgs, ClientOptions>;
+  get foodItem(): Prisma.FoodItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.foodLog`: Exposes CRUD operations for the **FoodLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FoodLogs
+    * const foodLogs = await prisma.foodLog.findMany()
+    * ```
+    */
+  get foodLog(): Prisma.FoodLogDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.mealSuggestion`: Exposes CRUD operations for the **MealSuggestion** model.
@@ -200,34 +205,14 @@ export class PrismaClient<
   get mealSuggestion(): Prisma.MealSuggestionDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.mealLog`: Exposes CRUD operations for the **MealLog** model.
+   * `prisma.progressRecord`: Exposes CRUD operations for the **ProgressRecord** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more MealLogs
-    * const mealLogs = await prisma.mealLog.findMany()
+    * // Fetch zero or more ProgressRecords
+    * const progressRecords = await prisma.progressRecord.findMany()
     * ```
     */
-  get mealLog(): Prisma.MealLogDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.progress`: Exposes CRUD operations for the **Progress** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Progresses
-    * const progresses = await prisma.progress.findMany()
-    * ```
-    */
-  get progress(): Prisma.ProgressDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.food`: Exposes CRUD operations for the **Food** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Foods
-    * const foods = await prisma.food.findMany()
-    * ```
-    */
-  get food(): Prisma.FoodDelegate<ExtArgs, ClientOptions>;
+  get progressRecord(): Prisma.ProgressRecordDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -669,11 +654,10 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Profile: 'Profile',
+    FoodItem: 'FoodItem',
+    FoodLog: 'FoodLog',
     MealSuggestion: 'MealSuggestion',
-    MealLog: 'MealLog',
-    Progress: 'Progress',
-    Food: 'Food'
+    ProgressRecord: 'ProgressRecord'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "profile" | "mealSuggestion" | "mealLog" | "progress" | "food"
+      modelProps: "user" | "foodItem" | "foodLog" | "mealSuggestion" | "progressRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -770,77 +754,151 @@ export namespace Prisma {
           }
         }
       }
-      Profile: {
-        payload: Prisma.$ProfilePayload<ExtArgs>
-        fields: Prisma.ProfileFieldRefs
+      FoodItem: {
+        payload: Prisma.$FoodItemPayload<ExtArgs>
+        fields: Prisma.FoodItemFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ProfileFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload> | null
+            args: Prisma.FoodItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ProfileFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           findFirst: {
-            args: Prisma.ProfileFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload> | null
+            args: Prisma.FoodItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ProfileFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           findMany: {
-            args: Prisma.ProfileFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.FoodItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
           }
           create: {
-            args: Prisma.ProfileCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           createMany: {
-            args: Prisma.ProfileCreateManyArgs<ExtArgs>
+            args: Prisma.FoodItemCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ProfileCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.FoodItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
           }
           delete: {
-            args: Prisma.ProfileDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           update: {
-            args: Prisma.ProfileUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           deleteMany: {
-            args: Prisma.ProfileDeleteManyArgs<ExtArgs>
+            args: Prisma.FoodItemDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ProfileUpdateManyArgs<ExtArgs>
+            args: Prisma.FoodItemUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ProfileUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>[]
+            args: Prisma.FoodItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
           }
           upsert: {
-            args: Prisma.ProfileUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProfilePayload>
+            args: Prisma.FoodItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodItemPayload>
           }
           aggregate: {
-            args: Prisma.ProfileAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProfile>
+            args: Prisma.FoodItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFoodItem>
           }
           groupBy: {
-            args: Prisma.ProfileGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProfileGroupByOutputType>[]
+            args: Prisma.FoodItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FoodItemGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ProfileCountArgs<ExtArgs>
-            result: $Utils.Optional<ProfileCountAggregateOutputType> | number
+            args: Prisma.FoodItemCountArgs<ExtArgs>
+            result: $Utils.Optional<FoodItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      FoodLog: {
+        payload: Prisma.$FoodLogPayload<ExtArgs>
+        fields: Prisma.FoodLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FoodLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FoodLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          findFirst: {
+            args: Prisma.FoodLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FoodLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          findMany: {
+            args: Prisma.FoodLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>[]
+          }
+          create: {
+            args: Prisma.FoodLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          createMany: {
+            args: Prisma.FoodLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FoodLogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>[]
+          }
+          delete: {
+            args: Prisma.FoodLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          update: {
+            args: Prisma.FoodLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.FoodLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FoodLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FoodLogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>[]
+          }
+          upsert: {
+            args: Prisma.FoodLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FoodLogPayload>
+          }
+          aggregate: {
+            args: Prisma.FoodLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFoodLog>
+          }
+          groupBy: {
+            args: Prisma.FoodLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FoodLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FoodLogCountArgs<ExtArgs>
+            result: $Utils.Optional<FoodLogCountAggregateOutputType> | number
           }
         }
       }
@@ -918,225 +976,77 @@ export namespace Prisma {
           }
         }
       }
-      MealLog: {
-        payload: Prisma.$MealLogPayload<ExtArgs>
-        fields: Prisma.MealLogFieldRefs
+      ProgressRecord: {
+        payload: Prisma.$ProgressRecordPayload<ExtArgs>
+        fields: Prisma.ProgressRecordFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.MealLogFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload> | null
+            args: Prisma.ProgressRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.MealLogFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           findFirst: {
-            args: Prisma.MealLogFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload> | null
+            args: Prisma.ProgressRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.MealLogFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           findMany: {
-            args: Prisma.MealLogFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>[]
+            args: Prisma.ProgressRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>[]
           }
           create: {
-            args: Prisma.MealLogCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           createMany: {
-            args: Prisma.MealLogCreateManyArgs<ExtArgs>
+            args: Prisma.ProgressRecordCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.MealLogCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>[]
+            args: Prisma.ProgressRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>[]
           }
           delete: {
-            args: Prisma.MealLogDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           update: {
-            args: Prisma.MealLogUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           deleteMany: {
-            args: Prisma.MealLogDeleteManyArgs<ExtArgs>
+            args: Prisma.ProgressRecordDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.MealLogUpdateManyArgs<ExtArgs>
+            args: Prisma.ProgressRecordUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.MealLogUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>[]
+            args: Prisma.ProgressRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>[]
           }
           upsert: {
-            args: Prisma.MealLogUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MealLogPayload>
+            args: Prisma.ProgressRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProgressRecordPayload>
           }
           aggregate: {
-            args: Prisma.MealLogAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMealLog>
+            args: Prisma.ProgressRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProgressRecord>
           }
           groupBy: {
-            args: Prisma.MealLogGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MealLogGroupByOutputType>[]
+            args: Prisma.ProgressRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProgressRecordGroupByOutputType>[]
           }
           count: {
-            args: Prisma.MealLogCountArgs<ExtArgs>
-            result: $Utils.Optional<MealLogCountAggregateOutputType> | number
-          }
-        }
-      }
-      Progress: {
-        payload: Prisma.$ProgressPayload<ExtArgs>
-        fields: Prisma.ProgressFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProgressFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProgressFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          findFirst: {
-            args: Prisma.ProgressFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProgressFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          findMany: {
-            args: Prisma.ProgressFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
-          }
-          create: {
-            args: Prisma.ProgressCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          createMany: {
-            args: Prisma.ProgressCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ProgressCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
-          }
-          delete: {
-            args: Prisma.ProgressDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          update: {
-            args: Prisma.ProgressUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          deleteMany: {
-            args: Prisma.ProgressDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProgressUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ProgressUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>[]
-          }
-          upsert: {
-            args: Prisma.ProgressUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProgressPayload>
-          }
-          aggregate: {
-            args: Prisma.ProgressAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProgress>
-          }
-          groupBy: {
-            args: Prisma.ProgressGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProgressGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProgressCountArgs<ExtArgs>
-            result: $Utils.Optional<ProgressCountAggregateOutputType> | number
-          }
-        }
-      }
-      Food: {
-        payload: Prisma.$FoodPayload<ExtArgs>
-        fields: Prisma.FoodFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.FoodFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.FoodFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          findFirst: {
-            args: Prisma.FoodFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.FoodFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          findMany: {
-            args: Prisma.FoodFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>[]
-          }
-          create: {
-            args: Prisma.FoodCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          createMany: {
-            args: Prisma.FoodCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.FoodCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>[]
-          }
-          delete: {
-            args: Prisma.FoodDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          update: {
-            args: Prisma.FoodUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          deleteMany: {
-            args: Prisma.FoodDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.FoodUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.FoodUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>[]
-          }
-          upsert: {
-            args: Prisma.FoodUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$FoodPayload>
-          }
-          aggregate: {
-            args: Prisma.FoodAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateFood>
-          }
-          groupBy: {
-            args: Prisma.FoodGroupByArgs<ExtArgs>
-            result: $Utils.Optional<FoodGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.FoodCountArgs<ExtArgs>
-            result: $Utils.Optional<FoodCountAggregateOutputType> | number
+            args: Prisma.ProgressRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<ProgressRecordCountAggregateOutputType> | number
           }
         }
       }
@@ -1225,11 +1135,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    profile?: ProfileOmit
+    foodItem?: FoodItemOmit
+    foodLog?: FoodLogOmit
     mealSuggestion?: MealSuggestionOmit
-    mealLog?: MealLogOmit
-    progress?: ProgressOmit
-    food?: FoodOmit
+    progressRecord?: ProgressRecordOmit
   }
 
   /* Types for Logging */
@@ -1324,14 +1233,14 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    food: number
-    meals: number
+    foodLogs: number
+    mealSuggestions: number
     progressRecords: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    food?: boolean | UserCountOutputTypeCountFoodArgs
-    meals?: boolean | UserCountOutputTypeCountMealsArgs
+    foodLogs?: boolean | UserCountOutputTypeCountFoodLogsArgs
+    mealSuggestions?: boolean | UserCountOutputTypeCountMealSuggestionsArgs
     progressRecords?: boolean | UserCountOutputTypeCountProgressRecordsArgs
   }
 
@@ -1349,53 +1258,53 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountFoodArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FoodWhereInput
+  export type UserCountOutputTypeCountFoodLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FoodLogWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMealsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MealLogWhereInput
+  export type UserCountOutputTypeCountMealSuggestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MealSuggestionWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountProgressRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
   }
 
 
   /**
-   * Count Type MealSuggestionCountOutputType
+   * Count Type FoodItemCountOutputType
    */
 
-  export type MealSuggestionCountOutputType = {
-    mealsLogged: number
+  export type FoodItemCountOutputType = {
+    foodLogs: number
   }
 
-  export type MealSuggestionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mealsLogged?: boolean | MealSuggestionCountOutputTypeCountMealsLoggedArgs
+  export type FoodItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    foodLogs?: boolean | FoodItemCountOutputTypeCountFoodLogsArgs
   }
 
   // Custom InputTypes
   /**
-   * MealSuggestionCountOutputType without action
+   * FoodItemCountOutputType without action
    */
-  export type MealSuggestionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MealSuggestionCountOutputType
+     * Select specific fields to fetch from the FoodItemCountOutputType
      */
-    select?: MealSuggestionCountOutputTypeSelect<ExtArgs> | null
+    select?: FoodItemCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * MealSuggestionCountOutputType without action
+   * FoodItemCountOutputType without action
    */
-  export type MealSuggestionCountOutputTypeCountMealsLoggedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MealLogWhereInput
+  export type FoodItemCountOutputTypeCountFoodLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FoodLogWhereInput
   }
 
 
@@ -1417,112 +1326,124 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     age: number | null
-    height: number | null
     weight: number | null
+    height: number | null
   }
 
   export type UserSumAggregateOutputType = {
     age: number | null
-    height: number | null
     weight: number | null
+    height: number | null
   }
 
   export type UserMinAggregateOutputType = {
     id: string | null
     clerkUserId: string | null
-    displayName: string | null
-    imageUrl: string | null
+    name: string | null
     email: string | null
+    imageUrl: string | null
     age: number | null
-    height: number | null
     weight: number | null
+    height: number | null
     gender: string | null
     activityLevel: string | null
-    goal: string | null
+    dietaryPreference: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     clerkUserId: string | null
-    displayName: string | null
-    imageUrl: string | null
+    name: string | null
     email: string | null
+    imageUrl: string | null
     age: number | null
-    height: number | null
     weight: number | null
+    height: number | null
     gender: string | null
     activityLevel: string | null
-    goal: string | null
+    dietaryPreference: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     clerkUserId: number
-    displayName: number
-    imageUrl: number
+    name: number
     email: number
+    imageUrl: number
     age: number
-    height: number
     weight: number
+    height: number
     gender: number
     activityLevel: number
-    goal: number
+    dietaryPreference: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
     age?: true
-    height?: true
     weight?: true
+    height?: true
   }
 
   export type UserSumAggregateInputType = {
     age?: true
-    height?: true
     weight?: true
+    height?: true
   }
 
   export type UserMinAggregateInputType = {
     id?: true
     clerkUserId?: true
-    displayName?: true
-    imageUrl?: true
+    name?: true
     email?: true
+    imageUrl?: true
     age?: true
-    height?: true
     weight?: true
+    height?: true
     gender?: true
     activityLevel?: true
-    goal?: true
+    dietaryPreference?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     clerkUserId?: true
-    displayName?: true
-    imageUrl?: true
+    name?: true
     email?: true
+    imageUrl?: true
     age?: true
-    height?: true
     weight?: true
+    height?: true
     gender?: true
     activityLevel?: true
-    goal?: true
+    dietaryPreference?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     clerkUserId?: true
-    displayName?: true
-    imageUrl?: true
+    name?: true
     email?: true
+    imageUrl?: true
     age?: true
-    height?: true
     weight?: true
+    height?: true
     gender?: true
     activityLevel?: true
-    goal?: true
+    dietaryPreference?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1615,15 +1536,17 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age: number | null
-    height: number | null
     weight: number | null
+    height: number | null
     gender: string | null
     activityLevel: string | null
-    goal: string | null
+    dietaryPreference: string | null
+    createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1648,18 +1571,19 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkUserId?: boolean
-    displayName?: boolean
-    imageUrl?: boolean
+    name?: boolean
     email?: boolean
+    imageUrl?: boolean
     age?: boolean
-    height?: boolean
     weight?: boolean
+    height?: boolean
     gender?: boolean
     activityLevel?: boolean
-    goal?: boolean
-    food?: boolean | User$foodArgs<ExtArgs>
-    profile?: boolean | User$profileArgs<ExtArgs>
-    meals?: boolean | User$mealsArgs<ExtArgs>
+    dietaryPreference?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    foodLogs?: boolean | User$foodLogsArgs<ExtArgs>
+    mealSuggestions?: boolean | User$mealSuggestionsArgs<ExtArgs>
     progressRecords?: boolean | User$progressRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1667,50 +1591,55 @@ export namespace Prisma {
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkUserId?: boolean
-    displayName?: boolean
-    imageUrl?: boolean
+    name?: boolean
     email?: boolean
+    imageUrl?: boolean
     age?: boolean
-    height?: boolean
     weight?: boolean
+    height?: boolean
     gender?: boolean
     activityLevel?: boolean
-    goal?: boolean
+    dietaryPreference?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     clerkUserId?: boolean
-    displayName?: boolean
-    imageUrl?: boolean
+    name?: boolean
     email?: boolean
+    imageUrl?: boolean
     age?: boolean
-    height?: boolean
     weight?: boolean
+    height?: boolean
     gender?: boolean
     activityLevel?: boolean
-    goal?: boolean
+    dietaryPreference?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     clerkUserId?: boolean
-    displayName?: boolean
-    imageUrl?: boolean
+    name?: boolean
     email?: boolean
+    imageUrl?: boolean
     age?: boolean
-    height?: boolean
     weight?: boolean
+    height?: boolean
     gender?: boolean
     activityLevel?: boolean
-    goal?: boolean
+    dietaryPreference?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerkUserId" | "displayName" | "imageUrl" | "email" | "age" | "height" | "weight" | "gender" | "activityLevel" | "goal", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clerkUserId" | "name" | "email" | "imageUrl" | "age" | "weight" | "height" | "gender" | "activityLevel" | "dietaryPreference" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    food?: boolean | User$foodArgs<ExtArgs>
-    profile?: boolean | User$profileArgs<ExtArgs>
-    meals?: boolean | User$mealsArgs<ExtArgs>
+    foodLogs?: boolean | User$foodLogsArgs<ExtArgs>
+    mealSuggestions?: boolean | User$mealSuggestionsArgs<ExtArgs>
     progressRecords?: boolean | User$progressRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1720,23 +1649,24 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      food: Prisma.$FoodPayload<ExtArgs>[]
-      profile: Prisma.$ProfilePayload<ExtArgs> | null
-      meals: Prisma.$MealLogPayload<ExtArgs>[]
-      progressRecords: Prisma.$ProgressPayload<ExtArgs>[]
+      foodLogs: Prisma.$FoodLogPayload<ExtArgs>[]
+      mealSuggestions: Prisma.$MealSuggestionPayload<ExtArgs>[]
+      progressRecords: Prisma.$ProgressRecordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       clerkUserId: string
-      displayName: string
-      imageUrl: string
+      name: string
       email: string
+      imageUrl: string
       age: number | null
-      height: number | null
       weight: number | null
+      height: number | null
       gender: string | null
       activityLevel: string | null
-      goal: string | null
+      dietaryPreference: string | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2131,10 +2061,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    food<T extends User$foodArgs<ExtArgs> = {}>(args?: Subset<T, User$foodArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    meals<T extends User$mealsArgs<ExtArgs> = {}>(args?: Subset<T, User$mealsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    progressRecords<T extends User$progressRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$progressRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    foodLogs<T extends User$foodLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$foodLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mealSuggestions<T extends User$mealSuggestionsArgs<ExtArgs> = {}>(args?: Subset<T, User$mealSuggestionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealSuggestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    progressRecords<T extends User$progressRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$progressRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2166,15 +2095,17 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly clerkUserId: FieldRef<"User", 'String'>
-    readonly displayName: FieldRef<"User", 'String'>
-    readonly imageUrl: FieldRef<"User", 'String'>
+    readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly imageUrl: FieldRef<"User", 'String'>
     readonly age: FieldRef<"User", 'Int'>
-    readonly height: FieldRef<"User", 'Float'>
     readonly weight: FieldRef<"User", 'Float'>
+    readonly height: FieldRef<"User", 'Float'>
     readonly gender: FieldRef<"User", 'String'>
     readonly activityLevel: FieldRef<"User", 'String'>
-    readonly goal: FieldRef<"User", 'String'>
+    readonly dietaryPreference: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2563,70 +2494,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.food
+   * User.foodLogs
    */
-  export type User$foodArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$foodLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Food
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: FoodSelect<ExtArgs> | null
+    select?: FoodLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Food
+     * Omit specific fields from the FoodLog
      */
-    omit?: FoodOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: FoodInclude<ExtArgs> | null
-    where?: FoodWhereInput
-    orderBy?: FoodOrderByWithRelationInput | FoodOrderByWithRelationInput[]
-    cursor?: FoodWhereUniqueInput
+    include?: FoodLogInclude<ExtArgs> | null
+    where?: FoodLogWhereInput
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    cursor?: FoodLogWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FoodScalarFieldEnum | FoodScalarFieldEnum[]
+    distinct?: FoodLogScalarFieldEnum | FoodLogScalarFieldEnum[]
   }
 
   /**
-   * User.profile
+   * User.mealSuggestions
    */
-  export type User$profileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$mealSuggestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the MealSuggestion
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: MealSuggestionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the MealSuggestion
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: MealSuggestionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
-    where?: ProfileWhereInput
-  }
-
-  /**
-   * User.meals
-   */
-  export type User$mealsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    where?: MealLogWhereInput
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    cursor?: MealLogWhereUniqueInput
+    include?: MealSuggestionInclude<ExtArgs> | null
+    where?: MealSuggestionWhereInput
+    orderBy?: MealSuggestionOrderByWithRelationInput | MealSuggestionOrderByWithRelationInput[]
+    cursor?: MealSuggestionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MealLogScalarFieldEnum | MealLogScalarFieldEnum[]
+    distinct?: MealSuggestionScalarFieldEnum | MealSuggestionScalarFieldEnum[]
   }
 
   /**
@@ -2634,23 +2546,23 @@ export namespace Prisma {
    */
   export type User$progressRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
-    where?: ProgressWhereInput
-    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
-    cursor?: ProgressWhereUniqueInput
+    include?: ProgressRecordInclude<ExtArgs> | null
+    where?: ProgressRecordWhereInput
+    orderBy?: ProgressRecordOrderByWithRelationInput | ProgressRecordOrderByWithRelationInput[]
+    cursor?: ProgressRecordWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+    distinct?: ProgressRecordScalarFieldEnum | ProgressRecordScalarFieldEnum[]
   }
 
   /**
@@ -2673,384 +2585,428 @@ export namespace Prisma {
 
 
   /**
-   * Model Profile
+   * Model FoodItem
    */
 
-  export type AggregateProfile = {
-    _count: ProfileCountAggregateOutputType | null
-    _avg: ProfileAvgAggregateOutputType | null
-    _sum: ProfileSumAggregateOutputType | null
-    _min: ProfileMinAggregateOutputType | null
-    _max: ProfileMaxAggregateOutputType | null
+  export type AggregateFoodItem = {
+    _count: FoodItemCountAggregateOutputType | null
+    _avg: FoodItemAvgAggregateOutputType | null
+    _sum: FoodItemSumAggregateOutputType | null
+    _min: FoodItemMinAggregateOutputType | null
+    _max: FoodItemMaxAggregateOutputType | null
   }
 
-  export type ProfileAvgAggregateOutputType = {
-    caloricNeeds: number | null
+  export type FoodItemAvgAggregateOutputType = {
+    calories: number | null
+    protein: number | null
+    carbs: number | null
+    fat: number | null
   }
 
-  export type ProfileSumAggregateOutputType = {
-    caloricNeeds: number | null
+  export type FoodItemSumAggregateOutputType = {
+    calories: number | null
+    protein: number | null
+    carbs: number | null
+    fat: number | null
   }
 
-  export type ProfileMinAggregateOutputType = {
+  export type FoodItemMinAggregateOutputType = {
     id: string | null
-    userId: string | null
-    caloricNeeds: number | null
-    macroSplit: string | null
-    createdAt: Date | null
+    name: string | null
+    calories: number | null
+    protein: number | null
+    carbs: number | null
+    fat: number | null
+    category: string | null
+    isCustom: boolean | null
   }
 
-  export type ProfileMaxAggregateOutputType = {
+  export type FoodItemMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
-    caloricNeeds: number | null
-    macroSplit: string | null
-    createdAt: Date | null
+    name: string | null
+    calories: number | null
+    protein: number | null
+    carbs: number | null
+    fat: number | null
+    category: string | null
+    isCustom: boolean | null
   }
 
-  export type ProfileCountAggregateOutputType = {
+  export type FoodItemCountAggregateOutputType = {
     id: number
-    userId: number
-    caloricNeeds: number
-    macroSplit: number
-    createdAt: number
+    name: number
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    category: number
+    isCustom: number
     _all: number
   }
 
 
-  export type ProfileAvgAggregateInputType = {
-    caloricNeeds?: true
+  export type FoodItemAvgAggregateInputType = {
+    calories?: true
+    protein?: true
+    carbs?: true
+    fat?: true
   }
 
-  export type ProfileSumAggregateInputType = {
-    caloricNeeds?: true
+  export type FoodItemSumAggregateInputType = {
+    calories?: true
+    protein?: true
+    carbs?: true
+    fat?: true
   }
 
-  export type ProfileMinAggregateInputType = {
+  export type FoodItemMinAggregateInputType = {
     id?: true
-    userId?: true
-    caloricNeeds?: true
-    macroSplit?: true
-    createdAt?: true
+    name?: true
+    calories?: true
+    protein?: true
+    carbs?: true
+    fat?: true
+    category?: true
+    isCustom?: true
   }
 
-  export type ProfileMaxAggregateInputType = {
+  export type FoodItemMaxAggregateInputType = {
     id?: true
-    userId?: true
-    caloricNeeds?: true
-    macroSplit?: true
-    createdAt?: true
+    name?: true
+    calories?: true
+    protein?: true
+    carbs?: true
+    fat?: true
+    category?: true
+    isCustom?: true
   }
 
-  export type ProfileCountAggregateInputType = {
+  export type FoodItemCountAggregateInputType = {
     id?: true
-    userId?: true
-    caloricNeeds?: true
-    macroSplit?: true
-    createdAt?: true
+    name?: true
+    calories?: true
+    protein?: true
+    carbs?: true
+    fat?: true
+    category?: true
+    isCustom?: true
     _all?: true
   }
 
-  export type ProfileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Profile to aggregate.
+     * Filter which FoodItem to aggregate.
      */
-    where?: ProfileWhereInput
+    where?: FoodItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of FoodItems to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: FoodItemOrderByWithRelationInput | FoodItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: FoodItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` FoodItems from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` FoodItems.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Profiles
+     * Count returned FoodItems
     **/
-    _count?: true | ProfileCountAggregateInputType
+    _count?: true | FoodItemCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ProfileAvgAggregateInputType
+    _avg?: FoodItemAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ProfileSumAggregateInputType
+    _sum?: FoodItemSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ProfileMinAggregateInputType
+    _min?: FoodItemMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ProfileMaxAggregateInputType
+    _max?: FoodItemMaxAggregateInputType
   }
 
-  export type GetProfileAggregateType<T extends ProfileAggregateArgs> = {
-        [P in keyof T & keyof AggregateProfile]: P extends '_count' | 'count'
+  export type GetFoodItemAggregateType<T extends FoodItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateFoodItem]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateProfile[P]>
-      : GetScalarType<T[P], AggregateProfile[P]>
+        : GetScalarType<T[P], AggregateFoodItem[P]>
+      : GetScalarType<T[P], AggregateFoodItem[P]>
   }
 
 
 
 
-  export type ProfileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProfileWhereInput
-    orderBy?: ProfileOrderByWithAggregationInput | ProfileOrderByWithAggregationInput[]
-    by: ProfileScalarFieldEnum[] | ProfileScalarFieldEnum
-    having?: ProfileScalarWhereWithAggregatesInput
+  export type FoodItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FoodItemWhereInput
+    orderBy?: FoodItemOrderByWithAggregationInput | FoodItemOrderByWithAggregationInput[]
+    by: FoodItemScalarFieldEnum[] | FoodItemScalarFieldEnum
+    having?: FoodItemScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ProfileCountAggregateInputType | true
-    _avg?: ProfileAvgAggregateInputType
-    _sum?: ProfileSumAggregateInputType
-    _min?: ProfileMinAggregateInputType
-    _max?: ProfileMaxAggregateInputType
+    _count?: FoodItemCountAggregateInputType | true
+    _avg?: FoodItemAvgAggregateInputType
+    _sum?: FoodItemSumAggregateInputType
+    _min?: FoodItemMinAggregateInputType
+    _max?: FoodItemMaxAggregateInputType
   }
 
-  export type ProfileGroupByOutputType = {
+  export type FoodItemGroupByOutputType = {
     id: string
-    userId: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt: Date
-    _count: ProfileCountAggregateOutputType | null
-    _avg: ProfileAvgAggregateOutputType | null
-    _sum: ProfileSumAggregateOutputType | null
-    _min: ProfileMinAggregateOutputType | null
-    _max: ProfileMaxAggregateOutputType | null
+    name: string
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    category: string | null
+    isCustom: boolean
+    _count: FoodItemCountAggregateOutputType | null
+    _avg: FoodItemAvgAggregateOutputType | null
+    _sum: FoodItemSumAggregateOutputType | null
+    _min: FoodItemMinAggregateOutputType | null
+    _max: FoodItemMaxAggregateOutputType | null
   }
 
-  type GetProfileGroupByPayload<T extends ProfileGroupByArgs> = Prisma.PrismaPromise<
+  type GetFoodItemGroupByPayload<T extends FoodItemGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ProfileGroupByOutputType, T['by']> &
+      PickEnumerable<FoodItemGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ProfileGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof FoodItemGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ProfileGroupByOutputType[P]>
-            : GetScalarType<T[P], ProfileGroupByOutputType[P]>
+              : GetScalarType<T[P], FoodItemGroupByOutputType[P]>
+            : GetScalarType<T[P], FoodItemGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ProfileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FoodItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    caloricNeeds?: boolean
-    macroSplit?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["profile"]>
+    name?: boolean
+    calories?: boolean
+    protein?: boolean
+    carbs?: boolean
+    fat?: boolean
+    category?: boolean
+    isCustom?: boolean
+    foodLogs?: boolean | FoodItem$foodLogsArgs<ExtArgs>
+    _count?: boolean | FoodItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["foodItem"]>
 
-  export type ProfileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FoodItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    caloricNeeds?: boolean
-    macroSplit?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["profile"]>
+    name?: boolean
+    calories?: boolean
+    protein?: boolean
+    carbs?: boolean
+    fat?: boolean
+    category?: boolean
+    isCustom?: boolean
+  }, ExtArgs["result"]["foodItem"]>
 
-  export type ProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type FoodItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    caloricNeeds?: boolean
-    macroSplit?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["profile"]>
+    name?: boolean
+    calories?: boolean
+    protein?: boolean
+    carbs?: boolean
+    fat?: boolean
+    category?: boolean
+    isCustom?: boolean
+  }, ExtArgs["result"]["foodItem"]>
 
-  export type ProfileSelectScalar = {
+  export type FoodItemSelectScalar = {
     id?: boolean
-    userId?: boolean
-    caloricNeeds?: boolean
-    macroSplit?: boolean
-    createdAt?: boolean
+    name?: boolean
+    calories?: boolean
+    protein?: boolean
+    carbs?: boolean
+    fat?: boolean
+    category?: boolean
+    isCustom?: boolean
   }
 
-  export type ProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "caloricNeeds" | "macroSplit" | "createdAt", ExtArgs["result"]["profile"]>
-  export type ProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type FoodItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "calories" | "protein" | "carbs" | "fat" | "category" | "isCustom", ExtArgs["result"]["foodItem"]>
+  export type FoodItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    foodLogs?: boolean | FoodItem$foodLogsArgs<ExtArgs>
+    _count?: boolean | FoodItemCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type ProfileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
+  export type FoodItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type FoodItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $ProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Profile"
+  export type $FoodItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FoodItem"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      foodLogs: Prisma.$FoodLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
-      caloricNeeds: number
-      macroSplit: string
-      createdAt: Date
-    }, ExtArgs["result"]["profile"]>
+      name: string
+      calories: number
+      protein: number
+      carbs: number
+      fat: number
+      category: string | null
+      isCustom: boolean
+    }, ExtArgs["result"]["foodItem"]>
     composites: {}
   }
 
-  type ProfileGetPayload<S extends boolean | null | undefined | ProfileDefaultArgs> = $Result.GetResult<Prisma.$ProfilePayload, S>
+  type FoodItemGetPayload<S extends boolean | null | undefined | FoodItemDefaultArgs> = $Result.GetResult<Prisma.$FoodItemPayload, S>
 
-  type ProfileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProfileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProfileCountAggregateInputType | true
+  type FoodItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FoodItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FoodItemCountAggregateInputType | true
     }
 
-  export interface ProfileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Profile'], meta: { name: 'Profile' } }
+  export interface FoodItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FoodItem'], meta: { name: 'FoodItem' } }
     /**
-     * Find zero or one Profile that matches the filter.
-     * @param {ProfileFindUniqueArgs} args - Arguments to find a Profile
+     * Find zero or one FoodItem that matches the filter.
+     * @param {FoodItemFindUniqueArgs} args - Arguments to find a FoodItem
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findUnique({
+     * // Get one FoodItem
+     * const foodItem = await prisma.foodItem.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ProfileFindUniqueArgs>(args: SelectSubset<T, ProfileFindUniqueArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends FoodItemFindUniqueArgs>(args: SelectSubset<T, FoodItemFindUniqueArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Profile that matches the filter or throw an error with `error.code='P2025'`
+     * Find one FoodItem that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ProfileFindUniqueOrThrowArgs} args - Arguments to find a Profile
+     * @param {FoodItemFindUniqueOrThrowArgs} args - Arguments to find a FoodItem
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findUniqueOrThrow({
+     * // Get one FoodItem
+     * const foodItem = await prisma.foodItem.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProfileFindUniqueOrThrowArgs>(args: SelectSubset<T, ProfileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends FoodItemFindUniqueOrThrowArgs>(args: SelectSubset<T, FoodItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Profile that matches the filter.
+     * Find the first FoodItem that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindFirstArgs} args - Arguments to find a Profile
+     * @param {FoodItemFindFirstArgs} args - Arguments to find a FoodItem
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findFirst({
+     * // Get one FoodItem
+     * const foodItem = await prisma.foodItem.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ProfileFindFirstArgs>(args?: SelectSubset<T, ProfileFindFirstArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends FoodItemFindFirstArgs>(args?: SelectSubset<T, FoodItemFindFirstArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Profile that matches the filter or
+     * Find the first FoodItem that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindFirstOrThrowArgs} args - Arguments to find a Profile
+     * @param {FoodItemFindFirstOrThrowArgs} args - Arguments to find a FoodItem
      * @example
-     * // Get one Profile
-     * const profile = await prisma.profile.findFirstOrThrow({
+     * // Get one FoodItem
+     * const foodItem = await prisma.foodItem.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProfileFindFirstOrThrowArgs>(args?: SelectSubset<T, ProfileFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends FoodItemFindFirstOrThrowArgs>(args?: SelectSubset<T, FoodItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Profiles that matches the filter.
+     * Find zero or more FoodItems that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {FoodItemFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Profiles
-     * const profiles = await prisma.profile.findMany()
+     * // Get all FoodItems
+     * const foodItems = await prisma.foodItem.findMany()
      * 
-     * // Get first 10 Profiles
-     * const profiles = await prisma.profile.findMany({ take: 10 })
+     * // Get first 10 FoodItems
+     * const foodItems = await prisma.foodItem.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const profileWithIdOnly = await prisma.profile.findMany({ select: { id: true } })
+     * const foodItemWithIdOnly = await prisma.foodItem.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ProfileFindManyArgs>(args?: SelectSubset<T, ProfileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends FoodItemFindManyArgs>(args?: SelectSubset<T, FoodItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Profile.
-     * @param {ProfileCreateArgs} args - Arguments to create a Profile.
+     * Create a FoodItem.
+     * @param {FoodItemCreateArgs} args - Arguments to create a FoodItem.
      * @example
-     * // Create one Profile
-     * const Profile = await prisma.profile.create({
+     * // Create one FoodItem
+     * const FoodItem = await prisma.foodItem.create({
      *   data: {
-     *     // ... data to create a Profile
+     *     // ... data to create a FoodItem
      *   }
      * })
      * 
      */
-    create<T extends ProfileCreateArgs>(args: SelectSubset<T, ProfileCreateArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends FoodItemCreateArgs>(args: SelectSubset<T, FoodItemCreateArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Profiles.
-     * @param {ProfileCreateManyArgs} args - Arguments to create many Profiles.
+     * Create many FoodItems.
+     * @param {FoodItemCreateManyArgs} args - Arguments to create many FoodItems.
      * @example
-     * // Create many Profiles
-     * const profile = await prisma.profile.createMany({
+     * // Create many FoodItems
+     * const foodItem = await prisma.foodItem.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ProfileCreateManyArgs>(args?: SelectSubset<T, ProfileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends FoodItemCreateManyArgs>(args?: SelectSubset<T, FoodItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Profiles and returns the data saved in the database.
-     * @param {ProfileCreateManyAndReturnArgs} args - Arguments to create many Profiles.
+     * Create many FoodItems and returns the data saved in the database.
+     * @param {FoodItemCreateManyAndReturnArgs} args - Arguments to create many FoodItems.
      * @example
-     * // Create many Profiles
-     * const profile = await prisma.profile.createManyAndReturn({
+     * // Create many FoodItems
+     * const foodItem = await prisma.foodItem.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Profiles and only return the `id`
-     * const profileWithIdOnly = await prisma.profile.createManyAndReturn({
+     * // Create many FoodItems and only return the `id`
+     * const foodItemWithIdOnly = await prisma.foodItem.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3060,28 +3016,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ProfileCreateManyAndReturnArgs>(args?: SelectSubset<T, ProfileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends FoodItemCreateManyAndReturnArgs>(args?: SelectSubset<T, FoodItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Profile.
-     * @param {ProfileDeleteArgs} args - Arguments to delete one Profile.
+     * Delete a FoodItem.
+     * @param {FoodItemDeleteArgs} args - Arguments to delete one FoodItem.
      * @example
-     * // Delete one Profile
-     * const Profile = await prisma.profile.delete({
+     * // Delete one FoodItem
+     * const FoodItem = await prisma.foodItem.delete({
      *   where: {
-     *     // ... filter to delete one Profile
+     *     // ... filter to delete one FoodItem
      *   }
      * })
      * 
      */
-    delete<T extends ProfileDeleteArgs>(args: SelectSubset<T, ProfileDeleteArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends FoodItemDeleteArgs>(args: SelectSubset<T, FoodItemDeleteArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Profile.
-     * @param {ProfileUpdateArgs} args - Arguments to update one Profile.
+     * Update one FoodItem.
+     * @param {FoodItemUpdateArgs} args - Arguments to update one FoodItem.
      * @example
-     * // Update one Profile
-     * const profile = await prisma.profile.update({
+     * // Update one FoodItem
+     * const foodItem = await prisma.foodItem.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3091,30 +3047,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ProfileUpdateArgs>(args: SelectSubset<T, ProfileUpdateArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends FoodItemUpdateArgs>(args: SelectSubset<T, FoodItemUpdateArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Profiles.
-     * @param {ProfileDeleteManyArgs} args - Arguments to filter Profiles to delete.
+     * Delete zero or more FoodItems.
+     * @param {FoodItemDeleteManyArgs} args - Arguments to filter FoodItems to delete.
      * @example
-     * // Delete a few Profiles
-     * const { count } = await prisma.profile.deleteMany({
+     * // Delete a few FoodItems
+     * const { count } = await prisma.foodItem.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ProfileDeleteManyArgs>(args?: SelectSubset<T, ProfileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends FoodItemDeleteManyArgs>(args?: SelectSubset<T, FoodItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Profiles.
+     * Update zero or more FoodItems.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {FoodItemUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Profiles
-     * const profile = await prisma.profile.updateMany({
+     * // Update many FoodItems
+     * const foodItem = await prisma.foodItem.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3124,14 +3080,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ProfileUpdateManyArgs>(args: SelectSubset<T, ProfileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends FoodItemUpdateManyArgs>(args: SelectSubset<T, FoodItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Profiles and returns the data updated in the database.
-     * @param {ProfileUpdateManyAndReturnArgs} args - Arguments to update many Profiles.
+     * Update zero or more FoodItems and returns the data updated in the database.
+     * @param {FoodItemUpdateManyAndReturnArgs} args - Arguments to update many FoodItems.
      * @example
-     * // Update many Profiles
-     * const profile = await prisma.profile.updateManyAndReturn({
+     * // Update many FoodItems
+     * const foodItem = await prisma.foodItem.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3140,8 +3096,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Profiles and only return the `id`
-     * const profileWithIdOnly = await prisma.profile.updateManyAndReturn({
+     * // Update zero or more FoodItems and only return the `id`
+     * const foodItemWithIdOnly = await prisma.foodItem.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3154,56 +3110,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ProfileUpdateManyAndReturnArgs>(args: SelectSubset<T, ProfileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends FoodItemUpdateManyAndReturnArgs>(args: SelectSubset<T, FoodItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Profile.
-     * @param {ProfileUpsertArgs} args - Arguments to update or create a Profile.
+     * Create or update one FoodItem.
+     * @param {FoodItemUpsertArgs} args - Arguments to update or create a FoodItem.
      * @example
-     * // Update or create a Profile
-     * const profile = await prisma.profile.upsert({
+     * // Update or create a FoodItem
+     * const foodItem = await prisma.foodItem.upsert({
      *   create: {
-     *     // ... data to create a Profile
+     *     // ... data to create a FoodItem
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Profile we want to update
+     *     // ... the filter for the FoodItem we want to update
      *   }
      * })
      */
-    upsert<T extends ProfileUpsertArgs>(args: SelectSubset<T, ProfileUpsertArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends FoodItemUpsertArgs>(args: SelectSubset<T, FoodItemUpsertArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Profiles.
+     * Count the number of FoodItems.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileCountArgs} args - Arguments to filter Profiles to count.
+     * @param {FoodItemCountArgs} args - Arguments to filter FoodItems to count.
      * @example
-     * // Count the number of Profiles
-     * const count = await prisma.profile.count({
+     * // Count the number of FoodItems
+     * const count = await prisma.foodItem.count({
      *   where: {
-     *     // ... the filter for the Profiles we want to count
+     *     // ... the filter for the FoodItems we want to count
      *   }
      * })
     **/
-    count<T extends ProfileCountArgs>(
-      args?: Subset<T, ProfileCountArgs>,
+    count<T extends FoodItemCountArgs>(
+      args?: Subset<T, FoodItemCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ProfileCountAggregateOutputType>
+          : GetScalarType<T['select'], FoodItemCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Profile.
+     * Allows you to perform aggregations operations on a FoodItem.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {FoodItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3223,13 +3179,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProfileAggregateArgs>(args: Subset<T, ProfileAggregateArgs>): Prisma.PrismaPromise<GetProfileAggregateType<T>>
+    aggregate<T extends FoodItemAggregateArgs>(args: Subset<T, FoodItemAggregateArgs>): Prisma.PrismaPromise<GetFoodItemAggregateType<T>>
 
     /**
-     * Group by Profile.
+     * Group by FoodItem.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProfileGroupByArgs} args - Group by arguments.
+     * @param {FoodItemGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3244,14 +3200,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ProfileGroupByArgs,
+      T extends FoodItemGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProfileGroupByArgs['orderBy'] }
-        : { orderBy?: ProfileGroupByArgs['orderBy'] },
+        ? { orderBy: FoodItemGroupByArgs['orderBy'] }
+        : { orderBy?: FoodItemGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3300,22 +3256,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, FoodItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFoodItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Profile model
+   * Fields of the FoodItem model
    */
-  readonly fields: ProfileFieldRefs;
+  readonly fields: FoodItemFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Profile.
+   * The delegate class that acts as a "Promise-like" for FoodItem.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__FoodItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    foodLogs<T extends FoodItem$foodLogsArgs<ExtArgs> = {}>(args?: Subset<T, FoodItem$foodLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3342,425 +3298,1557 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Profile model
+   * Fields of the FoodItem model
    */
-  interface ProfileFieldRefs {
-    readonly id: FieldRef<"Profile", 'String'>
-    readonly userId: FieldRef<"Profile", 'String'>
-    readonly caloricNeeds: FieldRef<"Profile", 'Int'>
-    readonly macroSplit: FieldRef<"Profile", 'String'>
-    readonly createdAt: FieldRef<"Profile", 'DateTime'>
+  interface FoodItemFieldRefs {
+    readonly id: FieldRef<"FoodItem", 'String'>
+    readonly name: FieldRef<"FoodItem", 'String'>
+    readonly calories: FieldRef<"FoodItem", 'Int'>
+    readonly protein: FieldRef<"FoodItem", 'Float'>
+    readonly carbs: FieldRef<"FoodItem", 'Float'>
+    readonly fat: FieldRef<"FoodItem", 'Float'>
+    readonly category: FieldRef<"FoodItem", 'String'>
+    readonly isCustom: FieldRef<"FoodItem", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * Profile findUnique
+   * FoodItem findUnique
    */
-  export type ProfileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Filter, which FoodItem to fetch.
      */
-    where: ProfileWhereUniqueInput
+    where: FoodItemWhereUniqueInput
   }
 
   /**
-   * Profile findUniqueOrThrow
+   * FoodItem findUniqueOrThrow
    */
-  export type ProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Filter, which FoodItem to fetch.
      */
-    where: ProfileWhereUniqueInput
+    where: FoodItemWhereUniqueInput
   }
 
   /**
-   * Profile findFirst
+   * FoodItem findFirst
    */
-  export type ProfileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Filter, which FoodItem to fetch.
      */
-    where?: ProfileWhereInput
+    where?: FoodItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of FoodItems to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: FoodItemOrderByWithRelationInput | FoodItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Profiles.
+     * Sets the position for searching for FoodItems.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: FoodItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` FoodItems from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` FoodItems.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Profiles.
+     * Filter by unique combinations of FoodItems.
      */
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: FoodItemScalarFieldEnum | FoodItemScalarFieldEnum[]
   }
 
   /**
-   * Profile findFirstOrThrow
+   * FoodItem findFirstOrThrow
    */
-  export type ProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * Filter, which Profile to fetch.
+     * Filter, which FoodItem to fetch.
      */
-    where?: ProfileWhereInput
+    where?: FoodItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of FoodItems to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: FoodItemOrderByWithRelationInput | FoodItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Profiles.
+     * Sets the position for searching for FoodItems.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: FoodItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` FoodItems from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` FoodItems.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Profiles.
+     * Filter by unique combinations of FoodItems.
      */
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: FoodItemScalarFieldEnum | FoodItemScalarFieldEnum[]
   }
 
   /**
-   * Profile findMany
+   * FoodItem findMany
    */
-  export type ProfileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * Filter, which Profiles to fetch.
+     * Filter, which FoodItems to fetch.
      */
-    where?: ProfileWhereInput
+    where?: FoodItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Profiles to fetch.
+     * Determine the order of FoodItems to fetch.
      */
-    orderBy?: ProfileOrderByWithRelationInput | ProfileOrderByWithRelationInput[]
+    orderBy?: FoodItemOrderByWithRelationInput | FoodItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Profiles.
+     * Sets the position for listing FoodItems.
      */
-    cursor?: ProfileWhereUniqueInput
+    cursor?: FoodItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Profiles from the position of the cursor.
+     * Take `±n` FoodItems from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Profiles.
+     * Skip the first `n` FoodItems.
      */
     skip?: number
-    distinct?: ProfileScalarFieldEnum | ProfileScalarFieldEnum[]
+    distinct?: FoodItemScalarFieldEnum | FoodItemScalarFieldEnum[]
   }
 
   /**
-   * Profile create
+   * FoodItem create
    */
-  export type ProfileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodItemInclude<ExtArgs> | null
     /**
-     * The data needed to create a Profile.
+     * The data needed to create a FoodItem.
      */
-    data: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
+    data: XOR<FoodItemCreateInput, FoodItemUncheckedCreateInput>
   }
 
   /**
-   * Profile createMany
+   * FoodItem createMany
    */
-  export type ProfileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Profiles.
+     * The data used to create many FoodItems.
      */
-    data: ProfileCreateManyInput | ProfileCreateManyInput[]
+    data: FoodItemCreateManyInput | FoodItemCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Profile createManyAndReturn
+   * FoodItem createManyAndReturn
    */
-  export type ProfileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodItem
      */
-    select?: ProfileSelectCreateManyAndReturn<ExtArgs> | null
+    select?: FoodItemSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodItem
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodItemOmit<ExtArgs> | null
     /**
-     * The data used to create many Profiles.
+     * The data used to create many FoodItems.
      */
-    data: ProfileCreateManyInput | ProfileCreateManyInput[]
+    data: FoodItemCreateManyInput | FoodItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FoodItem update
+   */
+  export type FoodItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodItem
+     */
+    select?: FoodItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodItem
+     */
+    omit?: FoodItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FoodItem.
+     */
+    data: XOR<FoodItemUpdateInput, FoodItemUncheckedUpdateInput>
+    /**
+     * Choose, which FoodItem to update.
+     */
+    where: FoodItemWhereUniqueInput
+  }
+
+  /**
+   * FoodItem updateMany
+   */
+  export type FoodItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FoodItems.
+     */
+    data: XOR<FoodItemUpdateManyMutationInput, FoodItemUncheckedUpdateManyInput>
+    /**
+     * Filter which FoodItems to update
+     */
+    where?: FoodItemWhereInput
+    /**
+     * Limit how many FoodItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FoodItem updateManyAndReturn
+   */
+  export type FoodItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodItem
+     */
+    select?: FoodItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodItem
+     */
+    omit?: FoodItemOmit<ExtArgs> | null
+    /**
+     * The data used to update FoodItems.
+     */
+    data: XOR<FoodItemUpdateManyMutationInput, FoodItemUncheckedUpdateManyInput>
+    /**
+     * Filter which FoodItems to update
+     */
+    where?: FoodItemWhereInput
+    /**
+     * Limit how many FoodItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FoodItem upsert
+   */
+  export type FoodItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodItem
+     */
+    select?: FoodItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodItem
+     */
+    omit?: FoodItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FoodItem to update in case it exists.
+     */
+    where: FoodItemWhereUniqueInput
+    /**
+     * In case the FoodItem found by the `where` argument doesn't exist, create a new FoodItem with this data.
+     */
+    create: XOR<FoodItemCreateInput, FoodItemUncheckedCreateInput>
+    /**
+     * In case the FoodItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FoodItemUpdateInput, FoodItemUncheckedUpdateInput>
+  }
+
+  /**
+   * FoodItem delete
+   */
+  export type FoodItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodItem
+     */
+    select?: FoodItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodItem
+     */
+    omit?: FoodItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodItemInclude<ExtArgs> | null
+    /**
+     * Filter which FoodItem to delete.
+     */
+    where: FoodItemWhereUniqueInput
+  }
+
+  /**
+   * FoodItem deleteMany
+   */
+  export type FoodItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FoodItems to delete
+     */
+    where?: FoodItemWhereInput
+    /**
+     * Limit how many FoodItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FoodItem.foodLogs
+   */
+  export type FoodItem$foodLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    where?: FoodLogWhereInput
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    cursor?: FoodLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FoodLogScalarFieldEnum | FoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * FoodItem without action
+   */
+  export type FoodItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodItem
+     */
+    select?: FoodItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodItem
+     */
+    omit?: FoodItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FoodLog
+   */
+
+  export type AggregateFoodLog = {
+    _count: FoodLogCountAggregateOutputType | null
+    _avg: FoodLogAvgAggregateOutputType | null
+    _sum: FoodLogSumAggregateOutputType | null
+    _min: FoodLogMinAggregateOutputType | null
+    _max: FoodLogMaxAggregateOutputType | null
+  }
+
+  export type FoodLogAvgAggregateOutputType = {
+    quantity: number | null
+  }
+
+  export type FoodLogSumAggregateOutputType = {
+    quantity: number | null
+  }
+
+  export type FoodLogMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    foodItemId: string | null
+    quantity: number | null
+    mealType: string | null
+    timestamp: Date | null
+  }
+
+  export type FoodLogMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    foodItemId: string | null
+    quantity: number | null
+    mealType: string | null
+    timestamp: Date | null
+  }
+
+  export type FoodLogCountAggregateOutputType = {
+    id: number
+    userId: number
+    foodItemId: number
+    quantity: number
+    mealType: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type FoodLogAvgAggregateInputType = {
+    quantity?: true
+  }
+
+  export type FoodLogSumAggregateInputType = {
+    quantity?: true
+  }
+
+  export type FoodLogMinAggregateInputType = {
+    id?: true
+    userId?: true
+    foodItemId?: true
+    quantity?: true
+    mealType?: true
+    timestamp?: true
+  }
+
+  export type FoodLogMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    foodItemId?: true
+    quantity?: true
+    mealType?: true
+    timestamp?: true
+  }
+
+  export type FoodLogCountAggregateInputType = {
+    id?: true
+    userId?: true
+    foodItemId?: true
+    quantity?: true
+    mealType?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type FoodLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FoodLog to aggregate.
+     */
+    where?: FoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FoodLogs to fetch.
+     */
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FoodLogs
+    **/
+    _count?: true | FoodLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FoodLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FoodLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FoodLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FoodLogMaxAggregateInputType
+  }
+
+  export type GetFoodLogAggregateType<T extends FoodLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateFoodLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFoodLog[P]>
+      : GetScalarType<T[P], AggregateFoodLog[P]>
+  }
+
+
+
+
+  export type FoodLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FoodLogWhereInput
+    orderBy?: FoodLogOrderByWithAggregationInput | FoodLogOrderByWithAggregationInput[]
+    by: FoodLogScalarFieldEnum[] | FoodLogScalarFieldEnum
+    having?: FoodLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FoodLogCountAggregateInputType | true
+    _avg?: FoodLogAvgAggregateInputType
+    _sum?: FoodLogSumAggregateInputType
+    _min?: FoodLogMinAggregateInputType
+    _max?: FoodLogMaxAggregateInputType
+  }
+
+  export type FoodLogGroupByOutputType = {
+    id: string
+    userId: string
+    foodItemId: string
+    quantity: number
+    mealType: string
+    timestamp: Date
+    _count: FoodLogCountAggregateOutputType | null
+    _avg: FoodLogAvgAggregateOutputType | null
+    _sum: FoodLogSumAggregateOutputType | null
+    _min: FoodLogMinAggregateOutputType | null
+    _max: FoodLogMaxAggregateOutputType | null
+  }
+
+  type GetFoodLogGroupByPayload<T extends FoodLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FoodLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FoodLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FoodLogGroupByOutputType[P]>
+            : GetScalarType<T[P], FoodLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FoodLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    foodItemId?: boolean
+    quantity?: boolean
+    mealType?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["foodLog"]>
+
+  export type FoodLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    foodItemId?: boolean
+    quantity?: boolean
+    mealType?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["foodLog"]>
+
+  export type FoodLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    foodItemId?: boolean
+    quantity?: boolean
+    mealType?: boolean
+    timestamp?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["foodLog"]>
+
+  export type FoodLogSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    foodItemId?: boolean
+    quantity?: boolean
+    mealType?: boolean
+    timestamp?: boolean
+  }
+
+  export type FoodLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "foodItemId" | "quantity" | "mealType" | "timestamp", ExtArgs["result"]["foodLog"]>
+  export type FoodLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }
+  export type FoodLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }
+  export type FoodLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    foodItem?: boolean | FoodItemDefaultArgs<ExtArgs>
+  }
+
+  export type $FoodLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FoodLog"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      foodItem: Prisma.$FoodItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      foodItemId: string
+      quantity: number
+      mealType: string
+      timestamp: Date
+    }, ExtArgs["result"]["foodLog"]>
+    composites: {}
+  }
+
+  type FoodLogGetPayload<S extends boolean | null | undefined | FoodLogDefaultArgs> = $Result.GetResult<Prisma.$FoodLogPayload, S>
+
+  type FoodLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FoodLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FoodLogCountAggregateInputType | true
+    }
+
+  export interface FoodLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FoodLog'], meta: { name: 'FoodLog' } }
+    /**
+     * Find zero or one FoodLog that matches the filter.
+     * @param {FoodLogFindUniqueArgs} args - Arguments to find a FoodLog
+     * @example
+     * // Get one FoodLog
+     * const foodLog = await prisma.foodLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FoodLogFindUniqueArgs>(args: SelectSubset<T, FoodLogFindUniqueArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FoodLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FoodLogFindUniqueOrThrowArgs} args - Arguments to find a FoodLog
+     * @example
+     * // Get one FoodLog
+     * const foodLog = await prisma.foodLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FoodLogFindUniqueOrThrowArgs>(args: SelectSubset<T, FoodLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FoodLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogFindFirstArgs} args - Arguments to find a FoodLog
+     * @example
+     * // Get one FoodLog
+     * const foodLog = await prisma.foodLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FoodLogFindFirstArgs>(args?: SelectSubset<T, FoodLogFindFirstArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FoodLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogFindFirstOrThrowArgs} args - Arguments to find a FoodLog
+     * @example
+     * // Get one FoodLog
+     * const foodLog = await prisma.foodLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FoodLogFindFirstOrThrowArgs>(args?: SelectSubset<T, FoodLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FoodLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FoodLogs
+     * const foodLogs = await prisma.foodLog.findMany()
+     * 
+     * // Get first 10 FoodLogs
+     * const foodLogs = await prisma.foodLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const foodLogWithIdOnly = await prisma.foodLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FoodLogFindManyArgs>(args?: SelectSubset<T, FoodLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FoodLog.
+     * @param {FoodLogCreateArgs} args - Arguments to create a FoodLog.
+     * @example
+     * // Create one FoodLog
+     * const FoodLog = await prisma.foodLog.create({
+     *   data: {
+     *     // ... data to create a FoodLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends FoodLogCreateArgs>(args: SelectSubset<T, FoodLogCreateArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FoodLogs.
+     * @param {FoodLogCreateManyArgs} args - Arguments to create many FoodLogs.
+     * @example
+     * // Create many FoodLogs
+     * const foodLog = await prisma.foodLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FoodLogCreateManyArgs>(args?: SelectSubset<T, FoodLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FoodLogs and returns the data saved in the database.
+     * @param {FoodLogCreateManyAndReturnArgs} args - Arguments to create many FoodLogs.
+     * @example
+     * // Create many FoodLogs
+     * const foodLog = await prisma.foodLog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FoodLogs and only return the `id`
+     * const foodLogWithIdOnly = await prisma.foodLog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FoodLogCreateManyAndReturnArgs>(args?: SelectSubset<T, FoodLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FoodLog.
+     * @param {FoodLogDeleteArgs} args - Arguments to delete one FoodLog.
+     * @example
+     * // Delete one FoodLog
+     * const FoodLog = await prisma.foodLog.delete({
+     *   where: {
+     *     // ... filter to delete one FoodLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FoodLogDeleteArgs>(args: SelectSubset<T, FoodLogDeleteArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FoodLog.
+     * @param {FoodLogUpdateArgs} args - Arguments to update one FoodLog.
+     * @example
+     * // Update one FoodLog
+     * const foodLog = await prisma.foodLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FoodLogUpdateArgs>(args: SelectSubset<T, FoodLogUpdateArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FoodLogs.
+     * @param {FoodLogDeleteManyArgs} args - Arguments to filter FoodLogs to delete.
+     * @example
+     * // Delete a few FoodLogs
+     * const { count } = await prisma.foodLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FoodLogDeleteManyArgs>(args?: SelectSubset<T, FoodLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FoodLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FoodLogs
+     * const foodLog = await prisma.foodLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FoodLogUpdateManyArgs>(args: SelectSubset<T, FoodLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FoodLogs and returns the data updated in the database.
+     * @param {FoodLogUpdateManyAndReturnArgs} args - Arguments to update many FoodLogs.
+     * @example
+     * // Update many FoodLogs
+     * const foodLog = await prisma.foodLog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FoodLogs and only return the `id`
+     * const foodLogWithIdOnly = await prisma.foodLog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FoodLogUpdateManyAndReturnArgs>(args: SelectSubset<T, FoodLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FoodLog.
+     * @param {FoodLogUpsertArgs} args - Arguments to update or create a FoodLog.
+     * @example
+     * // Update or create a FoodLog
+     * const foodLog = await prisma.foodLog.upsert({
+     *   create: {
+     *     // ... data to create a FoodLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FoodLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FoodLogUpsertArgs>(args: SelectSubset<T, FoodLogUpsertArgs<ExtArgs>>): Prisma__FoodLogClient<$Result.GetResult<Prisma.$FoodLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FoodLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogCountArgs} args - Arguments to filter FoodLogs to count.
+     * @example
+     * // Count the number of FoodLogs
+     * const count = await prisma.foodLog.count({
+     *   where: {
+     *     // ... the filter for the FoodLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends FoodLogCountArgs>(
+      args?: Subset<T, FoodLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FoodLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FoodLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FoodLogAggregateArgs>(args: Subset<T, FoodLogAggregateArgs>): Prisma.PrismaPromise<GetFoodLogAggregateType<T>>
+
+    /**
+     * Group by FoodLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FoodLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FoodLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FoodLogGroupByArgs['orderBy'] }
+        : { orderBy?: FoodLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FoodLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFoodLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FoodLog model
+   */
+  readonly fields: FoodLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FoodLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FoodLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    foodItem<T extends FoodItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FoodItemDefaultArgs<ExtArgs>>): Prisma__FoodItemClient<$Result.GetResult<Prisma.$FoodItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FoodLog model
+   */
+  interface FoodLogFieldRefs {
+    readonly id: FieldRef<"FoodLog", 'String'>
+    readonly userId: FieldRef<"FoodLog", 'String'>
+    readonly foodItemId: FieldRef<"FoodLog", 'String'>
+    readonly quantity: FieldRef<"FoodLog", 'Float'>
+    readonly mealType: FieldRef<"FoodLog", 'String'>
+    readonly timestamp: FieldRef<"FoodLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FoodLog findUnique
+   */
+  export type FoodLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which FoodLog to fetch.
+     */
+    where: FoodLogWhereUniqueInput
+  }
+
+  /**
+   * FoodLog findUniqueOrThrow
+   */
+  export type FoodLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which FoodLog to fetch.
+     */
+    where: FoodLogWhereUniqueInput
+  }
+
+  /**
+   * FoodLog findFirst
+   */
+  export type FoodLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which FoodLog to fetch.
+     */
+    where?: FoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FoodLogs to fetch.
+     */
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FoodLogs.
+     */
+    cursor?: FoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FoodLogs.
+     */
+    distinct?: FoodLogScalarFieldEnum | FoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * FoodLog findFirstOrThrow
+   */
+  export type FoodLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which FoodLog to fetch.
+     */
+    where?: FoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FoodLogs to fetch.
+     */
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FoodLogs.
+     */
+    cursor?: FoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FoodLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FoodLogs.
+     */
+    distinct?: FoodLogScalarFieldEnum | FoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * FoodLog findMany
+   */
+  export type FoodLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * Filter, which FoodLogs to fetch.
+     */
+    where?: FoodLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FoodLogs to fetch.
+     */
+    orderBy?: FoodLogOrderByWithRelationInput | FoodLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FoodLogs.
+     */
+    cursor?: FoodLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FoodLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FoodLogs.
+     */
+    skip?: number
+    distinct?: FoodLogScalarFieldEnum | FoodLogScalarFieldEnum[]
+  }
+
+  /**
+   * FoodLog create
+   */
+  export type FoodLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FoodLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FoodLog.
+     */
+    data: XOR<FoodLogCreateInput, FoodLogUncheckedCreateInput>
+  }
+
+  /**
+   * FoodLog createMany
+   */
+  export type FoodLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FoodLogs.
+     */
+    data: FoodLogCreateManyInput | FoodLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FoodLog createManyAndReturn
+   */
+  export type FoodLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FoodLog
+     */
+    select?: FoodLogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FoodLog
+     */
+    omit?: FoodLogOmit<ExtArgs> | null
+    /**
+     * The data used to create many FoodLogs.
+     */
+    data: FoodLogCreateManyInput | FoodLogCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: FoodLogIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Profile update
+   * FoodLog update
    */
-  export type ProfileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodLog
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodLogInclude<ExtArgs> | null
     /**
-     * The data needed to update a Profile.
+     * The data needed to update a FoodLog.
      */
-    data: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
+    data: XOR<FoodLogUpdateInput, FoodLogUncheckedUpdateInput>
     /**
-     * Choose, which Profile to update.
+     * Choose, which FoodLog to update.
      */
-    where: ProfileWhereUniqueInput
+    where: FoodLogWhereUniqueInput
   }
 
   /**
-   * Profile updateMany
+   * FoodLog updateMany
    */
-  export type ProfileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Profiles.
+     * The data used to update FoodLogs.
      */
-    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyInput>
+    data: XOR<FoodLogUpdateManyMutationInput, FoodLogUncheckedUpdateManyInput>
     /**
-     * Filter which Profiles to update
+     * Filter which FoodLogs to update
      */
-    where?: ProfileWhereInput
+    where?: FoodLogWhereInput
     /**
-     * Limit how many Profiles to update.
+     * Limit how many FoodLogs to update.
      */
     limit?: number
   }
 
   /**
-   * Profile updateManyAndReturn
+   * FoodLog updateManyAndReturn
    */
-  export type ProfileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: ProfileSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: FoodLogSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodLog
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
-     * The data used to update Profiles.
+     * The data used to update FoodLogs.
      */
-    data: XOR<ProfileUpdateManyMutationInput, ProfileUncheckedUpdateManyInput>
+    data: XOR<FoodLogUpdateManyMutationInput, FoodLogUncheckedUpdateManyInput>
     /**
-     * Filter which Profiles to update
+     * Filter which FoodLogs to update
      */
-    where?: ProfileWhereInput
+    where?: FoodLogWhereInput
     /**
-     * Limit how many Profiles to update.
+     * Limit how many FoodLogs to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: FoodLogIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Profile upsert
+   * FoodLog upsert
    */
-  export type ProfileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodLog
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodLogInclude<ExtArgs> | null
     /**
-     * The filter to search for the Profile to update in case it exists.
+     * The filter to search for the FoodLog to update in case it exists.
      */
-    where: ProfileWhereUniqueInput
+    where: FoodLogWhereUniqueInput
     /**
-     * In case the Profile found by the `where` argument doesn't exist, create a new Profile with this data.
+     * In case the FoodLog found by the `where` argument doesn't exist, create a new FoodLog with this data.
      */
-    create: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>
+    create: XOR<FoodLogCreateInput, FoodLogUncheckedCreateInput>
     /**
-     * In case the Profile was found with the provided `where` argument, update it with this data.
+     * In case the FoodLog was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ProfileUpdateInput, ProfileUncheckedUpdateInput>
+    update: XOR<FoodLogUpdateInput, FoodLogUncheckedUpdateInput>
   }
 
   /**
-   * Profile delete
+   * FoodLog delete
    */
-  export type ProfileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodLog
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodLogInclude<ExtArgs> | null
     /**
-     * Filter which Profile to delete.
+     * Filter which FoodLog to delete.
      */
-    where: ProfileWhereUniqueInput
+    where: FoodLogWhereUniqueInput
   }
 
   /**
-   * Profile deleteMany
+   * FoodLog deleteMany
    */
-  export type ProfileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Profiles to delete
+     * Filter which FoodLogs to delete
      */
-    where?: ProfileWhereInput
+    where?: FoodLogWhereInput
     /**
-     * Limit how many Profiles to delete.
+     * Limit how many FoodLogs to delete.
      */
     limit?: number
   }
 
   /**
-   * Profile without action
+   * FoodLog without action
    */
-  export type ProfileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type FoodLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Profile
+     * Select specific fields to fetch from the FoodLog
      */
-    select?: ProfileSelect<ExtArgs> | null
+    select?: FoodLogSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Profile
+     * Omit specific fields from the FoodLog
      */
-    omit?: ProfileOmit<ExtArgs> | null
+    omit?: FoodLogOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProfileInclude<ExtArgs> | null
+    include?: FoodLogInclude<ExtArgs> | null
   }
 
 
@@ -3778,98 +4866,76 @@ export namespace Prisma {
 
   export type MealSuggestionAvgAggregateOutputType = {
     calories: number | null
-    proteins: number | null
-    fats: number | null
-    carbs: number | null
   }
 
   export type MealSuggestionSumAggregateOutputType = {
     calories: number | null
-    proteins: number | null
-    fats: number | null
-    carbs: number | null
   }
 
   export type MealSuggestionMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    userId: string | null
+    suggestion: string | null
     calories: number | null
-    proteins: number | null
-    fats: number | null
-    carbs: number | null
-    ingredients: string | null
-    sourceApiId: string | null
+    createdAt: Date | null
+    aiModelUsed: string | null
   }
 
   export type MealSuggestionMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    userId: string | null
+    suggestion: string | null
     calories: number | null
-    proteins: number | null
-    fats: number | null
-    carbs: number | null
-    ingredients: string | null
-    sourceApiId: string | null
+    createdAt: Date | null
+    aiModelUsed: string | null
   }
 
   export type MealSuggestionCountAggregateOutputType = {
     id: number
-    name: number
+    userId: number
+    suggestion: number
+    meals: number
     calories: number
-    proteins: number
-    fats: number
-    carbs: number
-    ingredients: number
-    sourceApiId: number
+    createdAt: number
+    aiModelUsed: number
     _all: number
   }
 
 
   export type MealSuggestionAvgAggregateInputType = {
     calories?: true
-    proteins?: true
-    fats?: true
-    carbs?: true
   }
 
   export type MealSuggestionSumAggregateInputType = {
     calories?: true
-    proteins?: true
-    fats?: true
-    carbs?: true
   }
 
   export type MealSuggestionMinAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    suggestion?: true
     calories?: true
-    proteins?: true
-    fats?: true
-    carbs?: true
-    ingredients?: true
-    sourceApiId?: true
+    createdAt?: true
+    aiModelUsed?: true
   }
 
   export type MealSuggestionMaxAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    suggestion?: true
     calories?: true
-    proteins?: true
-    fats?: true
-    carbs?: true
-    ingredients?: true
-    sourceApiId?: true
+    createdAt?: true
+    aiModelUsed?: true
   }
 
   export type MealSuggestionCountAggregateInputType = {
     id?: true
-    name?: true
+    userId?: true
+    suggestion?: true
+    meals?: true
     calories?: true
-    proteins?: true
-    fats?: true
-    carbs?: true
-    ingredients?: true
-    sourceApiId?: true
+    createdAt?: true
+    aiModelUsed?: true
     _all?: true
   }
 
@@ -3961,13 +5027,12 @@ export namespace Prisma {
 
   export type MealSuggestionGroupByOutputType = {
     id: string
-    name: string
+    userId: string
+    suggestion: string
+    meals: JsonValue
     calories: number
-    proteins: number
-    fats: number
-    carbs: number
-    ingredients: string
-    sourceApiId: string | null
+    createdAt: Date
+    aiModelUsed: string | null
     _count: MealSuggestionCountAggregateOutputType | null
     _avg: MealSuggestionAvgAggregateOutputType | null
     _sum: MealSuggestionSumAggregateOutputType | null
@@ -3991,72 +5056,71 @@ export namespace Prisma {
 
   export type MealSuggestionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    suggestion?: boolean
+    meals?: boolean
     calories?: boolean
-    proteins?: boolean
-    fats?: boolean
-    carbs?: boolean
-    ingredients?: boolean
-    sourceApiId?: boolean
-    mealsLogged?: boolean | MealSuggestion$mealsLoggedArgs<ExtArgs>
-    _count?: boolean | MealSuggestionCountOutputTypeDefaultArgs<ExtArgs>
+    createdAt?: boolean
+    aiModelUsed?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mealSuggestion"]>
 
   export type MealSuggestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    suggestion?: boolean
+    meals?: boolean
     calories?: boolean
-    proteins?: boolean
-    fats?: boolean
-    carbs?: boolean
-    ingredients?: boolean
-    sourceApiId?: boolean
+    createdAt?: boolean
+    aiModelUsed?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mealSuggestion"]>
 
   export type MealSuggestionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    suggestion?: boolean
+    meals?: boolean
     calories?: boolean
-    proteins?: boolean
-    fats?: boolean
-    carbs?: boolean
-    ingredients?: boolean
-    sourceApiId?: boolean
+    createdAt?: boolean
+    aiModelUsed?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mealSuggestion"]>
 
   export type MealSuggestionSelectScalar = {
     id?: boolean
-    name?: boolean
+    userId?: boolean
+    suggestion?: boolean
+    meals?: boolean
     calories?: boolean
-    proteins?: boolean
-    fats?: boolean
-    carbs?: boolean
-    ingredients?: boolean
-    sourceApiId?: boolean
+    createdAt?: boolean
+    aiModelUsed?: boolean
   }
 
-  export type MealSuggestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "calories" | "proteins" | "fats" | "carbs" | "ingredients" | "sourceApiId", ExtArgs["result"]["mealSuggestion"]>
+  export type MealSuggestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "suggestion" | "meals" | "calories" | "createdAt" | "aiModelUsed", ExtArgs["result"]["mealSuggestion"]>
   export type MealSuggestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mealsLogged?: boolean | MealSuggestion$mealsLoggedArgs<ExtArgs>
-    _count?: boolean | MealSuggestionCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type MealSuggestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type MealSuggestionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MealSuggestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MealSuggestionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $MealSuggestionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MealSuggestion"
     objects: {
-      mealsLogged: Prisma.$MealLogPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
+      userId: string
+      suggestion: string
+      meals: Prisma.JsonValue
       calories: number
-      proteins: number
-      fats: number
-      carbs: number
-      ingredients: string
-      sourceApiId: string | null
+      createdAt: Date
+      aiModelUsed: string | null
     }, ExtArgs["result"]["mealSuggestion"]>
     composites: {}
   }
@@ -4451,7 +5515,7 @@ export namespace Prisma {
    */
   export interface Prisma__MealSuggestionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    mealsLogged<T extends MealSuggestion$mealsLoggedArgs<ExtArgs> = {}>(args?: Subset<T, MealSuggestion$mealsLoggedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4482,13 +5546,12 @@ export namespace Prisma {
    */
   interface MealSuggestionFieldRefs {
     readonly id: FieldRef<"MealSuggestion", 'String'>
-    readonly name: FieldRef<"MealSuggestion", 'String'>
+    readonly userId: FieldRef<"MealSuggestion", 'String'>
+    readonly suggestion: FieldRef<"MealSuggestion", 'String'>
+    readonly meals: FieldRef<"MealSuggestion", 'Json'>
     readonly calories: FieldRef<"MealSuggestion", 'Int'>
-    readonly proteins: FieldRef<"MealSuggestion", 'Float'>
-    readonly fats: FieldRef<"MealSuggestion", 'Float'>
-    readonly carbs: FieldRef<"MealSuggestion", 'Float'>
-    readonly ingredients: FieldRef<"MealSuggestion", 'String'>
-    readonly sourceApiId: FieldRef<"MealSuggestion", 'String'>
+    readonly createdAt: FieldRef<"MealSuggestion", 'DateTime'>
+    readonly aiModelUsed: FieldRef<"MealSuggestion", 'String'>
   }
     
 
@@ -4738,6 +5801,10 @@ export namespace Prisma {
      */
     data: MealSuggestionCreateManyInput | MealSuggestionCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealSuggestionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4808,6 +5875,10 @@ export namespace Prisma {
      * Limit how many MealSuggestions to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MealSuggestionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4877,30 +5948,6 @@ export namespace Prisma {
   }
 
   /**
-   * MealSuggestion.mealsLogged
-   */
-  export type MealSuggestion$mealsLoggedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    where?: MealLogWhereInput
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    cursor?: MealLogWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MealLogScalarFieldEnum | MealLogScalarFieldEnum[]
-  }
-
-  /**
    * MealSuggestion without action
    */
   export type MealSuggestionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4920,1160 +5967,28 @@ export namespace Prisma {
 
 
   /**
-   * Model MealLog
+   * Model ProgressRecord
    */
 
-  export type AggregateMealLog = {
-    _count: MealLogCountAggregateOutputType | null
-    _avg: MealLogAvgAggregateOutputType | null
-    _sum: MealLogSumAggregateOutputType | null
-    _min: MealLogMinAggregateOutputType | null
-    _max: MealLogMaxAggregateOutputType | null
+  export type AggregateProgressRecord = {
+    _count: ProgressRecordCountAggregateOutputType | null
+    _avg: ProgressRecordAvgAggregateOutputType | null
+    _sum: ProgressRecordSumAggregateOutputType | null
+    _min: ProgressRecordMinAggregateOutputType | null
+    _max: ProgressRecordMaxAggregateOutputType | null
   }
 
-  export type MealLogAvgAggregateOutputType = {
-    calories: number | null
-  }
-
-  export type MealLogSumAggregateOutputType = {
-    calories: number | null
-  }
-
-  export type MealLogMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    suggestionId: string | null
-    customMealName: string | null
-    calories: number | null
-    logTime: Date | null
-  }
-
-  export type MealLogMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    suggestionId: string | null
-    customMealName: string | null
-    calories: number | null
-    logTime: Date | null
-  }
-
-  export type MealLogCountAggregateOutputType = {
-    id: number
-    userId: number
-    suggestionId: number
-    customMealName: number
-    calories: number
-    logTime: number
-    _all: number
-  }
-
-
-  export type MealLogAvgAggregateInputType = {
-    calories?: true
-  }
-
-  export type MealLogSumAggregateInputType = {
-    calories?: true
-  }
-
-  export type MealLogMinAggregateInputType = {
-    id?: true
-    userId?: true
-    suggestionId?: true
-    customMealName?: true
-    calories?: true
-    logTime?: true
-  }
-
-  export type MealLogMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    suggestionId?: true
-    customMealName?: true
-    calories?: true
-    logTime?: true
-  }
-
-  export type MealLogCountAggregateInputType = {
-    id?: true
-    userId?: true
-    suggestionId?: true
-    customMealName?: true
-    calories?: true
-    logTime?: true
-    _all?: true
-  }
-
-  export type MealLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MealLog to aggregate.
-     */
-    where?: MealLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MealLogs to fetch.
-     */
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MealLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MealLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MealLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MealLogs
-    **/
-    _count?: true | MealLogCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: MealLogAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: MealLogSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MealLogMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MealLogMaxAggregateInputType
-  }
-
-  export type GetMealLogAggregateType<T extends MealLogAggregateArgs> = {
-        [P in keyof T & keyof AggregateMealLog]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMealLog[P]>
-      : GetScalarType<T[P], AggregateMealLog[P]>
-  }
-
-
-
-
-  export type MealLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MealLogWhereInput
-    orderBy?: MealLogOrderByWithAggregationInput | MealLogOrderByWithAggregationInput[]
-    by: MealLogScalarFieldEnum[] | MealLogScalarFieldEnum
-    having?: MealLogScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MealLogCountAggregateInputType | true
-    _avg?: MealLogAvgAggregateInputType
-    _sum?: MealLogSumAggregateInputType
-    _min?: MealLogMinAggregateInputType
-    _max?: MealLogMaxAggregateInputType
-  }
-
-  export type MealLogGroupByOutputType = {
-    id: string
-    userId: string
-    suggestionId: string | null
-    customMealName: string | null
-    calories: number
-    logTime: Date
-    _count: MealLogCountAggregateOutputType | null
-    _avg: MealLogAvgAggregateOutputType | null
-    _sum: MealLogSumAggregateOutputType | null
-    _min: MealLogMinAggregateOutputType | null
-    _max: MealLogMaxAggregateOutputType | null
-  }
-
-  type GetMealLogGroupByPayload<T extends MealLogGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MealLogGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MealLogGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MealLogGroupByOutputType[P]>
-            : GetScalarType<T[P], MealLogGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MealLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    suggestionId?: boolean
-    customMealName?: boolean
-    calories?: boolean
-    logTime?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }, ExtArgs["result"]["mealLog"]>
-
-  export type MealLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    suggestionId?: boolean
-    customMealName?: boolean
-    calories?: boolean
-    logTime?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }, ExtArgs["result"]["mealLog"]>
-
-  export type MealLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    suggestionId?: boolean
-    customMealName?: boolean
-    calories?: boolean
-    logTime?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }, ExtArgs["result"]["mealLog"]>
-
-  export type MealLogSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    suggestionId?: boolean
-    customMealName?: boolean
-    calories?: boolean
-    logTime?: boolean
-  }
-
-  export type MealLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "suggestionId" | "customMealName" | "calories" | "logTime", ExtArgs["result"]["mealLog"]>
-  export type MealLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }
-  export type MealLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }
-  export type MealLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    suggestion?: boolean | MealLog$suggestionArgs<ExtArgs>
-  }
-
-  export type $MealLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MealLog"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      suggestion: Prisma.$MealSuggestionPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      suggestionId: string | null
-      customMealName: string | null
-      calories: number
-      logTime: Date
-    }, ExtArgs["result"]["mealLog"]>
-    composites: {}
-  }
-
-  type MealLogGetPayload<S extends boolean | null | undefined | MealLogDefaultArgs> = $Result.GetResult<Prisma.$MealLogPayload, S>
-
-  type MealLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MealLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MealLogCountAggregateInputType | true
-    }
-
-  export interface MealLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MealLog'], meta: { name: 'MealLog' } }
-    /**
-     * Find zero or one MealLog that matches the filter.
-     * @param {MealLogFindUniqueArgs} args - Arguments to find a MealLog
-     * @example
-     * // Get one MealLog
-     * const mealLog = await prisma.mealLog.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MealLogFindUniqueArgs>(args: SelectSubset<T, MealLogFindUniqueArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one MealLog that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MealLogFindUniqueOrThrowArgs} args - Arguments to find a MealLog
-     * @example
-     * // Get one MealLog
-     * const mealLog = await prisma.mealLog.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MealLogFindUniqueOrThrowArgs>(args: SelectSubset<T, MealLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MealLog that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogFindFirstArgs} args - Arguments to find a MealLog
-     * @example
-     * // Get one MealLog
-     * const mealLog = await prisma.mealLog.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MealLogFindFirstArgs>(args?: SelectSubset<T, MealLogFindFirstArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MealLog that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogFindFirstOrThrowArgs} args - Arguments to find a MealLog
-     * @example
-     * // Get one MealLog
-     * const mealLog = await prisma.mealLog.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MealLogFindFirstOrThrowArgs>(args?: SelectSubset<T, MealLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more MealLogs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MealLogs
-     * const mealLogs = await prisma.mealLog.findMany()
-     * 
-     * // Get first 10 MealLogs
-     * const mealLogs = await prisma.mealLog.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const mealLogWithIdOnly = await prisma.mealLog.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MealLogFindManyArgs>(args?: SelectSubset<T, MealLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a MealLog.
-     * @param {MealLogCreateArgs} args - Arguments to create a MealLog.
-     * @example
-     * // Create one MealLog
-     * const MealLog = await prisma.mealLog.create({
-     *   data: {
-     *     // ... data to create a MealLog
-     *   }
-     * })
-     * 
-     */
-    create<T extends MealLogCreateArgs>(args: SelectSubset<T, MealLogCreateArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many MealLogs.
-     * @param {MealLogCreateManyArgs} args - Arguments to create many MealLogs.
-     * @example
-     * // Create many MealLogs
-     * const mealLog = await prisma.mealLog.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MealLogCreateManyArgs>(args?: SelectSubset<T, MealLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MealLogs and returns the data saved in the database.
-     * @param {MealLogCreateManyAndReturnArgs} args - Arguments to create many MealLogs.
-     * @example
-     * // Create many MealLogs
-     * const mealLog = await prisma.mealLog.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MealLogs and only return the `id`
-     * const mealLogWithIdOnly = await prisma.mealLog.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MealLogCreateManyAndReturnArgs>(args?: SelectSubset<T, MealLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a MealLog.
-     * @param {MealLogDeleteArgs} args - Arguments to delete one MealLog.
-     * @example
-     * // Delete one MealLog
-     * const MealLog = await prisma.mealLog.delete({
-     *   where: {
-     *     // ... filter to delete one MealLog
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MealLogDeleteArgs>(args: SelectSubset<T, MealLogDeleteArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one MealLog.
-     * @param {MealLogUpdateArgs} args - Arguments to update one MealLog.
-     * @example
-     * // Update one MealLog
-     * const mealLog = await prisma.mealLog.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MealLogUpdateArgs>(args: SelectSubset<T, MealLogUpdateArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more MealLogs.
-     * @param {MealLogDeleteManyArgs} args - Arguments to filter MealLogs to delete.
-     * @example
-     * // Delete a few MealLogs
-     * const { count } = await prisma.mealLog.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MealLogDeleteManyArgs>(args?: SelectSubset<T, MealLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MealLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MealLogs
-     * const mealLog = await prisma.mealLog.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MealLogUpdateManyArgs>(args: SelectSubset<T, MealLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MealLogs and returns the data updated in the database.
-     * @param {MealLogUpdateManyAndReturnArgs} args - Arguments to update many MealLogs.
-     * @example
-     * // Update many MealLogs
-     * const mealLog = await prisma.mealLog.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more MealLogs and only return the `id`
-     * const mealLogWithIdOnly = await prisma.mealLog.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MealLogUpdateManyAndReturnArgs>(args: SelectSubset<T, MealLogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one MealLog.
-     * @param {MealLogUpsertArgs} args - Arguments to update or create a MealLog.
-     * @example
-     * // Update or create a MealLog
-     * const mealLog = await prisma.mealLog.upsert({
-     *   create: {
-     *     // ... data to create a MealLog
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MealLog we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MealLogUpsertArgs>(args: SelectSubset<T, MealLogUpsertArgs<ExtArgs>>): Prisma__MealLogClient<$Result.GetResult<Prisma.$MealLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of MealLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogCountArgs} args - Arguments to filter MealLogs to count.
-     * @example
-     * // Count the number of MealLogs
-     * const count = await prisma.mealLog.count({
-     *   where: {
-     *     // ... the filter for the MealLogs we want to count
-     *   }
-     * })
-    **/
-    count<T extends MealLogCountArgs>(
-      args?: Subset<T, MealLogCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MealLogCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MealLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MealLogAggregateArgs>(args: Subset<T, MealLogAggregateArgs>): Prisma.PrismaPromise<GetMealLogAggregateType<T>>
-
-    /**
-     * Group by MealLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MealLogGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MealLogGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MealLogGroupByArgs['orderBy'] }
-        : { orderBy?: MealLogGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MealLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMealLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MealLog model
-   */
-  readonly fields: MealLogFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MealLog.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MealLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    suggestion<T extends MealLog$suggestionArgs<ExtArgs> = {}>(args?: Subset<T, MealLog$suggestionArgs<ExtArgs>>): Prisma__MealSuggestionClient<$Result.GetResult<Prisma.$MealSuggestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MealLog model
-   */
-  interface MealLogFieldRefs {
-    readonly id: FieldRef<"MealLog", 'String'>
-    readonly userId: FieldRef<"MealLog", 'String'>
-    readonly suggestionId: FieldRef<"MealLog", 'String'>
-    readonly customMealName: FieldRef<"MealLog", 'String'>
-    readonly calories: FieldRef<"MealLog", 'Int'>
-    readonly logTime: FieldRef<"MealLog", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MealLog findUnique
-   */
-  export type MealLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter, which MealLog to fetch.
-     */
-    where: MealLogWhereUniqueInput
-  }
-
-  /**
-   * MealLog findUniqueOrThrow
-   */
-  export type MealLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter, which MealLog to fetch.
-     */
-    where: MealLogWhereUniqueInput
-  }
-
-  /**
-   * MealLog findFirst
-   */
-  export type MealLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter, which MealLog to fetch.
-     */
-    where?: MealLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MealLogs to fetch.
-     */
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MealLogs.
-     */
-    cursor?: MealLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MealLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MealLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MealLogs.
-     */
-    distinct?: MealLogScalarFieldEnum | MealLogScalarFieldEnum[]
-  }
-
-  /**
-   * MealLog findFirstOrThrow
-   */
-  export type MealLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter, which MealLog to fetch.
-     */
-    where?: MealLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MealLogs to fetch.
-     */
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MealLogs.
-     */
-    cursor?: MealLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MealLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MealLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MealLogs.
-     */
-    distinct?: MealLogScalarFieldEnum | MealLogScalarFieldEnum[]
-  }
-
-  /**
-   * MealLog findMany
-   */
-  export type MealLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter, which MealLogs to fetch.
-     */
-    where?: MealLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MealLogs to fetch.
-     */
-    orderBy?: MealLogOrderByWithRelationInput | MealLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MealLogs.
-     */
-    cursor?: MealLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MealLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MealLogs.
-     */
-    skip?: number
-    distinct?: MealLogScalarFieldEnum | MealLogScalarFieldEnum[]
-  }
-
-  /**
-   * MealLog create
-   */
-  export type MealLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MealLog.
-     */
-    data: XOR<MealLogCreateInput, MealLogUncheckedCreateInput>
-  }
-
-  /**
-   * MealLog createMany
-   */
-  export type MealLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MealLogs.
-     */
-    data: MealLogCreateManyInput | MealLogCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MealLog createManyAndReturn
-   */
-  export type MealLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * The data used to create many MealLogs.
-     */
-    data: MealLogCreateManyInput | MealLogCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MealLog update
-   */
-  export type MealLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MealLog.
-     */
-    data: XOR<MealLogUpdateInput, MealLogUncheckedUpdateInput>
-    /**
-     * Choose, which MealLog to update.
-     */
-    where: MealLogWhereUniqueInput
-  }
-
-  /**
-   * MealLog updateMany
-   */
-  export type MealLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MealLogs.
-     */
-    data: XOR<MealLogUpdateManyMutationInput, MealLogUncheckedUpdateManyInput>
-    /**
-     * Filter which MealLogs to update
-     */
-    where?: MealLogWhereInput
-    /**
-     * Limit how many MealLogs to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * MealLog updateManyAndReturn
-   */
-  export type MealLogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * The data used to update MealLogs.
-     */
-    data: XOR<MealLogUpdateManyMutationInput, MealLogUncheckedUpdateManyInput>
-    /**
-     * Filter which MealLogs to update
-     */
-    where?: MealLogWhereInput
-    /**
-     * Limit how many MealLogs to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MealLog upsert
-   */
-  export type MealLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MealLog to update in case it exists.
-     */
-    where: MealLogWhereUniqueInput
-    /**
-     * In case the MealLog found by the `where` argument doesn't exist, create a new MealLog with this data.
-     */
-    create: XOR<MealLogCreateInput, MealLogUncheckedCreateInput>
-    /**
-     * In case the MealLog was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MealLogUpdateInput, MealLogUncheckedUpdateInput>
-  }
-
-  /**
-   * MealLog delete
-   */
-  export type MealLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-    /**
-     * Filter which MealLog to delete.
-     */
-    where: MealLogWhereUniqueInput
-  }
-
-  /**
-   * MealLog deleteMany
-   */
-  export type MealLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MealLogs to delete
-     */
-    where?: MealLogWhereInput
-    /**
-     * Limit how many MealLogs to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * MealLog.suggestion
-   */
-  export type MealLog$suggestionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealSuggestion
-     */
-    select?: MealSuggestionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealSuggestion
-     */
-    omit?: MealSuggestionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealSuggestionInclude<ExtArgs> | null
-    where?: MealSuggestionWhereInput
-  }
-
-  /**
-   * MealLog without action
-   */
-  export type MealLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MealLog
-     */
-    select?: MealLogSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MealLog
-     */
-    omit?: MealLogOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MealLogInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Progress
-   */
-
-  export type AggregateProgress = {
-    _count: ProgressCountAggregateOutputType | null
-    _avg: ProgressAvgAggregateOutputType | null
-    _sum: ProgressSumAggregateOutputType | null
-    _min: ProgressMinAggregateOutputType | null
-    _max: ProgressMaxAggregateOutputType | null
-  }
-
-  export type ProgressAvgAggregateOutputType = {
+  export type ProgressRecordAvgAggregateOutputType = {
     weight: number | null
     bodyFatPct: number | null
   }
 
-  export type ProgressSumAggregateOutputType = {
+  export type ProgressRecordSumAggregateOutputType = {
     weight: number | null
     bodyFatPct: number | null
   }
 
-  export type ProgressMinAggregateOutputType = {
+  export type ProgressRecordMinAggregateOutputType = {
     id: string | null
     userId: string | null
     weight: number | null
@@ -6081,7 +5996,7 @@ export namespace Prisma {
     loggedAt: Date | null
   }
 
-  export type ProgressMaxAggregateOutputType = {
+  export type ProgressRecordMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     weight: number | null
@@ -6089,7 +6004,7 @@ export namespace Prisma {
     loggedAt: Date | null
   }
 
-  export type ProgressCountAggregateOutputType = {
+  export type ProgressRecordCountAggregateOutputType = {
     id: number
     userId: number
     weight: number
@@ -6099,17 +6014,17 @@ export namespace Prisma {
   }
 
 
-  export type ProgressAvgAggregateInputType = {
+  export type ProgressRecordAvgAggregateInputType = {
     weight?: true
     bodyFatPct?: true
   }
 
-  export type ProgressSumAggregateInputType = {
+  export type ProgressRecordSumAggregateInputType = {
     weight?: true
     bodyFatPct?: true
   }
 
-  export type ProgressMinAggregateInputType = {
+  export type ProgressRecordMinAggregateInputType = {
     id?: true
     userId?: true
     weight?: true
@@ -6117,7 +6032,7 @@ export namespace Prisma {
     loggedAt?: true
   }
 
-  export type ProgressMaxAggregateInputType = {
+  export type ProgressRecordMaxAggregateInputType = {
     id?: true
     userId?: true
     weight?: true
@@ -6125,7 +6040,7 @@ export namespace Prisma {
     loggedAt?: true
   }
 
-  export type ProgressCountAggregateInputType = {
+  export type ProgressRecordCountAggregateInputType = {
     id?: true
     userId?: true
     weight?: true
@@ -6134,147 +6049,147 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ProgressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Progress to aggregate.
+     * Filter which ProgressRecord to aggregate.
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Progresses to fetch.
+     * Determine the order of ProgressRecords to fetch.
      */
-    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    orderBy?: ProgressRecordOrderByWithRelationInput | ProgressRecordOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ProgressWhereUniqueInput
+    cursor?: ProgressRecordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Progresses from the position of the cursor.
+     * Take `±n` ProgressRecords from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Progresses.
+     * Skip the first `n` ProgressRecords.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Progresses
+     * Count returned ProgressRecords
     **/
-    _count?: true | ProgressCountAggregateInputType
+    _count?: true | ProgressRecordCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ProgressAvgAggregateInputType
+    _avg?: ProgressRecordAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ProgressSumAggregateInputType
+    _sum?: ProgressRecordSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ProgressMinAggregateInputType
+    _min?: ProgressRecordMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ProgressMaxAggregateInputType
+    _max?: ProgressRecordMaxAggregateInputType
   }
 
-  export type GetProgressAggregateType<T extends ProgressAggregateArgs> = {
-        [P in keyof T & keyof AggregateProgress]: P extends '_count' | 'count'
+  export type GetProgressRecordAggregateType<T extends ProgressRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateProgressRecord]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateProgress[P]>
-      : GetScalarType<T[P], AggregateProgress[P]>
+        : GetScalarType<T[P], AggregateProgressRecord[P]>
+      : GetScalarType<T[P], AggregateProgressRecord[P]>
   }
 
 
 
 
-  export type ProgressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProgressWhereInput
-    orderBy?: ProgressOrderByWithAggregationInput | ProgressOrderByWithAggregationInput[]
-    by: ProgressScalarFieldEnum[] | ProgressScalarFieldEnum
-    having?: ProgressScalarWhereWithAggregatesInput
+  export type ProgressRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProgressRecordWhereInput
+    orderBy?: ProgressRecordOrderByWithAggregationInput | ProgressRecordOrderByWithAggregationInput[]
+    by: ProgressRecordScalarFieldEnum[] | ProgressRecordScalarFieldEnum
+    having?: ProgressRecordScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ProgressCountAggregateInputType | true
-    _avg?: ProgressAvgAggregateInputType
-    _sum?: ProgressSumAggregateInputType
-    _min?: ProgressMinAggregateInputType
-    _max?: ProgressMaxAggregateInputType
+    _count?: ProgressRecordCountAggregateInputType | true
+    _avg?: ProgressRecordAvgAggregateInputType
+    _sum?: ProgressRecordSumAggregateInputType
+    _min?: ProgressRecordMinAggregateInputType
+    _max?: ProgressRecordMaxAggregateInputType
   }
 
-  export type ProgressGroupByOutputType = {
+  export type ProgressRecordGroupByOutputType = {
     id: string
     userId: string
     weight: number
     bodyFatPct: number | null
     loggedAt: Date
-    _count: ProgressCountAggregateOutputType | null
-    _avg: ProgressAvgAggregateOutputType | null
-    _sum: ProgressSumAggregateOutputType | null
-    _min: ProgressMinAggregateOutputType | null
-    _max: ProgressMaxAggregateOutputType | null
+    _count: ProgressRecordCountAggregateOutputType | null
+    _avg: ProgressRecordAvgAggregateOutputType | null
+    _sum: ProgressRecordSumAggregateOutputType | null
+    _min: ProgressRecordMinAggregateOutputType | null
+    _max: ProgressRecordMaxAggregateOutputType | null
   }
 
-  type GetProgressGroupByPayload<T extends ProgressGroupByArgs> = Prisma.PrismaPromise<
+  type GetProgressRecordGroupByPayload<T extends ProgressRecordGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ProgressGroupByOutputType, T['by']> &
+      PickEnumerable<ProgressRecordGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ProgressGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ProgressRecordGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ProgressGroupByOutputType[P]>
-            : GetScalarType<T[P], ProgressGroupByOutputType[P]>
+              : GetScalarType<T[P], ProgressRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], ProgressRecordGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ProgressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ProgressRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     weight?: boolean
     bodyFatPct?: boolean
     loggedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["progress"]>
+  }, ExtArgs["result"]["progressRecord"]>
 
-  export type ProgressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ProgressRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     weight?: boolean
     bodyFatPct?: boolean
     loggedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["progress"]>
+  }, ExtArgs["result"]["progressRecord"]>
 
-  export type ProgressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ProgressRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     weight?: boolean
     bodyFatPct?: boolean
     loggedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["progress"]>
+  }, ExtArgs["result"]["progressRecord"]>
 
-  export type ProgressSelectScalar = {
+  export type ProgressRecordSelectScalar = {
     id?: boolean
     userId?: boolean
     weight?: boolean
@@ -6282,19 +6197,19 @@ export namespace Prisma {
     loggedAt?: boolean
   }
 
-  export type ProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "weight" | "bodyFatPct" | "loggedAt", ExtArgs["result"]["progress"]>
-  export type ProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "weight" | "bodyFatPct" | "loggedAt", ExtArgs["result"]["progressRecord"]>
+  export type ProgressRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type ProgressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type ProgressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $ProgressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Progress"
+  export type $ProgressRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProgressRecord"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
@@ -6304,136 +6219,136 @@ export namespace Prisma {
       weight: number
       bodyFatPct: number | null
       loggedAt: Date
-    }, ExtArgs["result"]["progress"]>
+    }, ExtArgs["result"]["progressRecord"]>
     composites: {}
   }
 
-  type ProgressGetPayload<S extends boolean | null | undefined | ProgressDefaultArgs> = $Result.GetResult<Prisma.$ProgressPayload, S>
+  type ProgressRecordGetPayload<S extends boolean | null | undefined | ProgressRecordDefaultArgs> = $Result.GetResult<Prisma.$ProgressRecordPayload, S>
 
-  type ProgressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProgressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProgressCountAggregateInputType | true
+  type ProgressRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProgressRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProgressRecordCountAggregateInputType | true
     }
 
-  export interface ProgressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Progress'], meta: { name: 'Progress' } }
+  export interface ProgressRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProgressRecord'], meta: { name: 'ProgressRecord' } }
     /**
-     * Find zero or one Progress that matches the filter.
-     * @param {ProgressFindUniqueArgs} args - Arguments to find a Progress
+     * Find zero or one ProgressRecord that matches the filter.
+     * @param {ProgressRecordFindUniqueArgs} args - Arguments to find a ProgressRecord
      * @example
-     * // Get one Progress
-     * const progress = await prisma.progress.findUnique({
+     * // Get one ProgressRecord
+     * const progressRecord = await prisma.progressRecord.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ProgressFindUniqueArgs>(args: SelectSubset<T, ProgressFindUniqueArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ProgressRecordFindUniqueArgs>(args: SelectSubset<T, ProgressRecordFindUniqueArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Progress that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ProgressRecord that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ProgressFindUniqueOrThrowArgs} args - Arguments to find a Progress
+     * @param {ProgressRecordFindUniqueOrThrowArgs} args - Arguments to find a ProgressRecord
      * @example
-     * // Get one Progress
-     * const progress = await prisma.progress.findUniqueOrThrow({
+     * // Get one ProgressRecord
+     * const progressRecord = await prisma.progressRecord.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ProgressFindUniqueOrThrowArgs>(args: SelectSubset<T, ProgressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ProgressRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, ProgressRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Progress that matches the filter.
+     * Find the first ProgressRecord that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressFindFirstArgs} args - Arguments to find a Progress
+     * @param {ProgressRecordFindFirstArgs} args - Arguments to find a ProgressRecord
      * @example
-     * // Get one Progress
-     * const progress = await prisma.progress.findFirst({
+     * // Get one ProgressRecord
+     * const progressRecord = await prisma.progressRecord.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ProgressFindFirstArgs>(args?: SelectSubset<T, ProgressFindFirstArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ProgressRecordFindFirstArgs>(args?: SelectSubset<T, ProgressRecordFindFirstArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Progress that matches the filter or
+     * Find the first ProgressRecord that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressFindFirstOrThrowArgs} args - Arguments to find a Progress
+     * @param {ProgressRecordFindFirstOrThrowArgs} args - Arguments to find a ProgressRecord
      * @example
-     * // Get one Progress
-     * const progress = await prisma.progress.findFirstOrThrow({
+     * // Get one ProgressRecord
+     * const progressRecord = await prisma.progressRecord.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ProgressFindFirstOrThrowArgs>(args?: SelectSubset<T, ProgressFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ProgressRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, ProgressRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Progresses that matches the filter.
+     * Find zero or more ProgressRecords that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ProgressRecordFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Progresses
-     * const progresses = await prisma.progress.findMany()
+     * // Get all ProgressRecords
+     * const progressRecords = await prisma.progressRecord.findMany()
      * 
-     * // Get first 10 Progresses
-     * const progresses = await prisma.progress.findMany({ take: 10 })
+     * // Get first 10 ProgressRecords
+     * const progressRecords = await prisma.progressRecord.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const progressWithIdOnly = await prisma.progress.findMany({ select: { id: true } })
+     * const progressRecordWithIdOnly = await prisma.progressRecord.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ProgressFindManyArgs>(args?: SelectSubset<T, ProgressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ProgressRecordFindManyArgs>(args?: SelectSubset<T, ProgressRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Progress.
-     * @param {ProgressCreateArgs} args - Arguments to create a Progress.
+     * Create a ProgressRecord.
+     * @param {ProgressRecordCreateArgs} args - Arguments to create a ProgressRecord.
      * @example
-     * // Create one Progress
-     * const Progress = await prisma.progress.create({
+     * // Create one ProgressRecord
+     * const ProgressRecord = await prisma.progressRecord.create({
      *   data: {
-     *     // ... data to create a Progress
+     *     // ... data to create a ProgressRecord
      *   }
      * })
      * 
      */
-    create<T extends ProgressCreateArgs>(args: SelectSubset<T, ProgressCreateArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ProgressRecordCreateArgs>(args: SelectSubset<T, ProgressRecordCreateArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Progresses.
-     * @param {ProgressCreateManyArgs} args - Arguments to create many Progresses.
+     * Create many ProgressRecords.
+     * @param {ProgressRecordCreateManyArgs} args - Arguments to create many ProgressRecords.
      * @example
-     * // Create many Progresses
-     * const progress = await prisma.progress.createMany({
+     * // Create many ProgressRecords
+     * const progressRecord = await prisma.progressRecord.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ProgressCreateManyArgs>(args?: SelectSubset<T, ProgressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ProgressRecordCreateManyArgs>(args?: SelectSubset<T, ProgressRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Progresses and returns the data saved in the database.
-     * @param {ProgressCreateManyAndReturnArgs} args - Arguments to create many Progresses.
+     * Create many ProgressRecords and returns the data saved in the database.
+     * @param {ProgressRecordCreateManyAndReturnArgs} args - Arguments to create many ProgressRecords.
      * @example
-     * // Create many Progresses
-     * const progress = await prisma.progress.createManyAndReturn({
+     * // Create many ProgressRecords
+     * const progressRecord = await prisma.progressRecord.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Progresses and only return the `id`
-     * const progressWithIdOnly = await prisma.progress.createManyAndReturn({
+     * // Create many ProgressRecords and only return the `id`
+     * const progressRecordWithIdOnly = await prisma.progressRecord.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -6443,28 +6358,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ProgressCreateManyAndReturnArgs>(args?: SelectSubset<T, ProgressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ProgressRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, ProgressRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Progress.
-     * @param {ProgressDeleteArgs} args - Arguments to delete one Progress.
+     * Delete a ProgressRecord.
+     * @param {ProgressRecordDeleteArgs} args - Arguments to delete one ProgressRecord.
      * @example
-     * // Delete one Progress
-     * const Progress = await prisma.progress.delete({
+     * // Delete one ProgressRecord
+     * const ProgressRecord = await prisma.progressRecord.delete({
      *   where: {
-     *     // ... filter to delete one Progress
+     *     // ... filter to delete one ProgressRecord
      *   }
      * })
      * 
      */
-    delete<T extends ProgressDeleteArgs>(args: SelectSubset<T, ProgressDeleteArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ProgressRecordDeleteArgs>(args: SelectSubset<T, ProgressRecordDeleteArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Progress.
-     * @param {ProgressUpdateArgs} args - Arguments to update one Progress.
+     * Update one ProgressRecord.
+     * @param {ProgressRecordUpdateArgs} args - Arguments to update one ProgressRecord.
      * @example
-     * // Update one Progress
-     * const progress = await prisma.progress.update({
+     * // Update one ProgressRecord
+     * const progressRecord = await prisma.progressRecord.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6474,30 +6389,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ProgressUpdateArgs>(args: SelectSubset<T, ProgressUpdateArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ProgressRecordUpdateArgs>(args: SelectSubset<T, ProgressRecordUpdateArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Progresses.
-     * @param {ProgressDeleteManyArgs} args - Arguments to filter Progresses to delete.
+     * Delete zero or more ProgressRecords.
+     * @param {ProgressRecordDeleteManyArgs} args - Arguments to filter ProgressRecords to delete.
      * @example
-     * // Delete a few Progresses
-     * const { count } = await prisma.progress.deleteMany({
+     * // Delete a few ProgressRecords
+     * const { count } = await prisma.progressRecord.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ProgressDeleteManyArgs>(args?: SelectSubset<T, ProgressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ProgressRecordDeleteManyArgs>(args?: SelectSubset<T, ProgressRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Progresses.
+     * Update zero or more ProgressRecords.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ProgressRecordUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Progresses
-     * const progress = await prisma.progress.updateMany({
+     * // Update many ProgressRecords
+     * const progressRecord = await prisma.progressRecord.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6507,14 +6422,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ProgressUpdateManyArgs>(args: SelectSubset<T, ProgressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ProgressRecordUpdateManyArgs>(args: SelectSubset<T, ProgressRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Progresses and returns the data updated in the database.
-     * @param {ProgressUpdateManyAndReturnArgs} args - Arguments to update many Progresses.
+     * Update zero or more ProgressRecords and returns the data updated in the database.
+     * @param {ProgressRecordUpdateManyAndReturnArgs} args - Arguments to update many ProgressRecords.
      * @example
-     * // Update many Progresses
-     * const progress = await prisma.progress.updateManyAndReturn({
+     * // Update many ProgressRecords
+     * const progressRecord = await prisma.progressRecord.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -6523,8 +6438,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Progresses and only return the `id`
-     * const progressWithIdOnly = await prisma.progress.updateManyAndReturn({
+     * // Update zero or more ProgressRecords and only return the `id`
+     * const progressRecordWithIdOnly = await prisma.progressRecord.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -6537,56 +6452,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ProgressUpdateManyAndReturnArgs>(args: SelectSubset<T, ProgressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ProgressRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, ProgressRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Progress.
-     * @param {ProgressUpsertArgs} args - Arguments to update or create a Progress.
+     * Create or update one ProgressRecord.
+     * @param {ProgressRecordUpsertArgs} args - Arguments to update or create a ProgressRecord.
      * @example
-     * // Update or create a Progress
-     * const progress = await prisma.progress.upsert({
+     * // Update or create a ProgressRecord
+     * const progressRecord = await prisma.progressRecord.upsert({
      *   create: {
-     *     // ... data to create a Progress
+     *     // ... data to create a ProgressRecord
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Progress we want to update
+     *     // ... the filter for the ProgressRecord we want to update
      *   }
      * })
      */
-    upsert<T extends ProgressUpsertArgs>(args: SelectSubset<T, ProgressUpsertArgs<ExtArgs>>): Prisma__ProgressClient<$Result.GetResult<Prisma.$ProgressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ProgressRecordUpsertArgs>(args: SelectSubset<T, ProgressRecordUpsertArgs<ExtArgs>>): Prisma__ProgressRecordClient<$Result.GetResult<Prisma.$ProgressRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Progresses.
+     * Count the number of ProgressRecords.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressCountArgs} args - Arguments to filter Progresses to count.
+     * @param {ProgressRecordCountArgs} args - Arguments to filter ProgressRecords to count.
      * @example
-     * // Count the number of Progresses
-     * const count = await prisma.progress.count({
+     * // Count the number of ProgressRecords
+     * const count = await prisma.progressRecord.count({
      *   where: {
-     *     // ... the filter for the Progresses we want to count
+     *     // ... the filter for the ProgressRecords we want to count
      *   }
      * })
     **/
-    count<T extends ProgressCountArgs>(
-      args?: Subset<T, ProgressCountArgs>,
+    count<T extends ProgressRecordCountArgs>(
+      args?: Subset<T, ProgressRecordCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ProgressCountAggregateOutputType>
+          : GetScalarType<T['select'], ProgressRecordCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Progress.
+     * Allows you to perform aggregations operations on a ProgressRecord.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ProgressRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -6606,13 +6521,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ProgressAggregateArgs>(args: Subset<T, ProgressAggregateArgs>): Prisma.PrismaPromise<GetProgressAggregateType<T>>
+    aggregate<T extends ProgressRecordAggregateArgs>(args: Subset<T, ProgressRecordAggregateArgs>): Prisma.PrismaPromise<GetProgressRecordAggregateType<T>>
 
     /**
-     * Group by Progress.
+     * Group by ProgressRecord.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProgressGroupByArgs} args - Group by arguments.
+     * @param {ProgressRecordGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -6627,14 +6542,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ProgressGroupByArgs,
+      T extends ProgressRecordGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProgressGroupByArgs['orderBy'] }
-        : { orderBy?: ProgressGroupByArgs['orderBy'] },
+        ? { orderBy: ProgressRecordGroupByArgs['orderBy'] }
+        : { orderBy?: ProgressRecordGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6683,20 +6598,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ProgressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProgressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ProgressRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProgressRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Progress model
+   * Fields of the ProgressRecord model
    */
-  readonly fields: ProgressFieldRefs;
+  readonly fields: ProgressRecordFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Progress.
+   * The delegate class that acts as a "Promise-like" for ProgressRecord.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ProgressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ProgressRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -6725,1504 +6640,425 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Progress model
+   * Fields of the ProgressRecord model
    */
-  interface ProgressFieldRefs {
-    readonly id: FieldRef<"Progress", 'String'>
-    readonly userId: FieldRef<"Progress", 'String'>
-    readonly weight: FieldRef<"Progress", 'Float'>
-    readonly bodyFatPct: FieldRef<"Progress", 'Float'>
-    readonly loggedAt: FieldRef<"Progress", 'DateTime'>
+  interface ProgressRecordFieldRefs {
+    readonly id: FieldRef<"ProgressRecord", 'String'>
+    readonly userId: FieldRef<"ProgressRecord", 'String'>
+    readonly weight: FieldRef<"ProgressRecord", 'Float'>
+    readonly bodyFatPct: FieldRef<"ProgressRecord", 'Float'>
+    readonly loggedAt: FieldRef<"ProgressRecord", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Progress findUnique
+   * ProgressRecord findUnique
    */
-  export type ProgressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter, which Progress to fetch.
+     * Filter, which ProgressRecord to fetch.
      */
-    where: ProgressWhereUniqueInput
+    where: ProgressRecordWhereUniqueInput
   }
 
   /**
-   * Progress findUniqueOrThrow
+   * ProgressRecord findUniqueOrThrow
    */
-  export type ProgressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter, which Progress to fetch.
+     * Filter, which ProgressRecord to fetch.
      */
-    where: ProgressWhereUniqueInput
+    where: ProgressRecordWhereUniqueInput
   }
 
   /**
-   * Progress findFirst
+   * ProgressRecord findFirst
    */
-  export type ProgressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter, which Progress to fetch.
+     * Filter, which ProgressRecord to fetch.
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Progresses to fetch.
+     * Determine the order of ProgressRecords to fetch.
      */
-    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    orderBy?: ProgressRecordOrderByWithRelationInput | ProgressRecordOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Progresses.
+     * Sets the position for searching for ProgressRecords.
      */
-    cursor?: ProgressWhereUniqueInput
+    cursor?: ProgressRecordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Progresses from the position of the cursor.
+     * Take `±n` ProgressRecords from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Progresses.
+     * Skip the first `n` ProgressRecords.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Progresses.
+     * Filter by unique combinations of ProgressRecords.
      */
-    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+    distinct?: ProgressRecordScalarFieldEnum | ProgressRecordScalarFieldEnum[]
   }
 
   /**
-   * Progress findFirstOrThrow
+   * ProgressRecord findFirstOrThrow
    */
-  export type ProgressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter, which Progress to fetch.
+     * Filter, which ProgressRecord to fetch.
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Progresses to fetch.
+     * Determine the order of ProgressRecords to fetch.
      */
-    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    orderBy?: ProgressRecordOrderByWithRelationInput | ProgressRecordOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Progresses.
+     * Sets the position for searching for ProgressRecords.
      */
-    cursor?: ProgressWhereUniqueInput
+    cursor?: ProgressRecordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Progresses from the position of the cursor.
+     * Take `±n` ProgressRecords from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Progresses.
+     * Skip the first `n` ProgressRecords.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Progresses.
+     * Filter by unique combinations of ProgressRecords.
      */
-    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+    distinct?: ProgressRecordScalarFieldEnum | ProgressRecordScalarFieldEnum[]
   }
 
   /**
-   * Progress findMany
+   * ProgressRecord findMany
    */
-  export type ProgressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter, which Progresses to fetch.
+     * Filter, which ProgressRecords to fetch.
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Progresses to fetch.
+     * Determine the order of ProgressRecords to fetch.
      */
-    orderBy?: ProgressOrderByWithRelationInput | ProgressOrderByWithRelationInput[]
+    orderBy?: ProgressRecordOrderByWithRelationInput | ProgressRecordOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Progresses.
+     * Sets the position for listing ProgressRecords.
      */
-    cursor?: ProgressWhereUniqueInput
+    cursor?: ProgressRecordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Progresses from the position of the cursor.
+     * Take `±n` ProgressRecords from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Progresses.
+     * Skip the first `n` ProgressRecords.
      */
     skip?: number
-    distinct?: ProgressScalarFieldEnum | ProgressScalarFieldEnum[]
+    distinct?: ProgressRecordScalarFieldEnum | ProgressRecordScalarFieldEnum[]
   }
 
   /**
-   * Progress create
+   * ProgressRecord create
    */
-  export type ProgressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * The data needed to create a Progress.
+     * The data needed to create a ProgressRecord.
      */
-    data: XOR<ProgressCreateInput, ProgressUncheckedCreateInput>
+    data: XOR<ProgressRecordCreateInput, ProgressRecordUncheckedCreateInput>
   }
 
   /**
-   * Progress createMany
+   * ProgressRecord createMany
    */
-  export type ProgressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Progresses.
+     * The data used to create many ProgressRecords.
      */
-    data: ProgressCreateManyInput | ProgressCreateManyInput[]
+    data: ProgressRecordCreateManyInput | ProgressRecordCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Progress createManyAndReturn
+   * ProgressRecord createManyAndReturn
    */
-  export type ProgressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ProgressRecordSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
-     * The data used to create many Progresses.
+     * The data used to create many ProgressRecords.
      */
-    data: ProgressCreateManyInput | ProgressCreateManyInput[]
+    data: ProgressRecordCreateManyInput | ProgressRecordCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ProgressRecordIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Progress update
+   * ProgressRecord update
    */
-  export type ProgressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * The data needed to update a Progress.
+     * The data needed to update a ProgressRecord.
      */
-    data: XOR<ProgressUpdateInput, ProgressUncheckedUpdateInput>
+    data: XOR<ProgressRecordUpdateInput, ProgressRecordUncheckedUpdateInput>
     /**
-     * Choose, which Progress to update.
+     * Choose, which ProgressRecord to update.
      */
-    where: ProgressWhereUniqueInput
+    where: ProgressRecordWhereUniqueInput
   }
 
   /**
-   * Progress updateMany
+   * ProgressRecord updateMany
    */
-  export type ProgressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Progresses.
+     * The data used to update ProgressRecords.
      */
-    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyInput>
+    data: XOR<ProgressRecordUpdateManyMutationInput, ProgressRecordUncheckedUpdateManyInput>
     /**
-     * Filter which Progresses to update
+     * Filter which ProgressRecords to update
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
-     * Limit how many Progresses to update.
+     * Limit how many ProgressRecords to update.
      */
     limit?: number
   }
 
   /**
-   * Progress updateManyAndReturn
+   * ProgressRecord updateManyAndReturn
    */
-  export type ProgressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ProgressRecordSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
-     * The data used to update Progresses.
+     * The data used to update ProgressRecords.
      */
-    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyInput>
+    data: XOR<ProgressRecordUpdateManyMutationInput, ProgressRecordUncheckedUpdateManyInput>
     /**
-     * Filter which Progresses to update
+     * Filter which ProgressRecords to update
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
-     * Limit how many Progresses to update.
+     * Limit how many ProgressRecords to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ProgressRecordIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Progress upsert
+   * ProgressRecord upsert
    */
-  export type ProgressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * The filter to search for the Progress to update in case it exists.
+     * The filter to search for the ProgressRecord to update in case it exists.
      */
-    where: ProgressWhereUniqueInput
+    where: ProgressRecordWhereUniqueInput
     /**
-     * In case the Progress found by the `where` argument doesn't exist, create a new Progress with this data.
+     * In case the ProgressRecord found by the `where` argument doesn't exist, create a new ProgressRecord with this data.
      */
-    create: XOR<ProgressCreateInput, ProgressUncheckedCreateInput>
+    create: XOR<ProgressRecordCreateInput, ProgressRecordUncheckedCreateInput>
     /**
-     * In case the Progress was found with the provided `where` argument, update it with this data.
+     * In case the ProgressRecord was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ProgressUpdateInput, ProgressUncheckedUpdateInput>
+    update: XOR<ProgressRecordUpdateInput, ProgressRecordUncheckedUpdateInput>
   }
 
   /**
-   * Progress delete
+   * ProgressRecord delete
    */
-  export type ProgressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
     /**
-     * Filter which Progress to delete.
+     * Filter which ProgressRecord to delete.
      */
-    where: ProgressWhereUniqueInput
+    where: ProgressRecordWhereUniqueInput
   }
 
   /**
-   * Progress deleteMany
+   * ProgressRecord deleteMany
    */
-  export type ProgressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Progresses to delete
+     * Filter which ProgressRecords to delete
      */
-    where?: ProgressWhereInput
+    where?: ProgressRecordWhereInput
     /**
-     * Limit how many Progresses to delete.
+     * Limit how many ProgressRecords to delete.
      */
     limit?: number
   }
 
   /**
-   * Progress without action
+   * ProgressRecord without action
    */
-  export type ProgressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProgressRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Progress
+     * Select specific fields to fetch from the ProgressRecord
      */
-    select?: ProgressSelect<ExtArgs> | null
+    select?: ProgressRecordSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Progress
+     * Omit specific fields from the ProgressRecord
      */
-    omit?: ProgressOmit<ExtArgs> | null
+    omit?: ProgressRecordOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ProgressInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Food
-   */
-
-  export type AggregateFood = {
-    _count: FoodCountAggregateOutputType | null
-    _avg: FoodAvgAggregateOutputType | null
-    _sum: FoodSumAggregateOutputType | null
-    _min: FoodMinAggregateOutputType | null
-    _max: FoodMaxAggregateOutputType | null
-  }
-
-  export type FoodAvgAggregateOutputType = {
-    calories: number | null
-  }
-
-  export type FoodSumAggregateOutputType = {
-    calories: number | null
-  }
-
-  export type FoodMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    calories: number | null
-    userId: string | null
-  }
-
-  export type FoodMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    calories: number | null
-    userId: string | null
-  }
-
-  export type FoodCountAggregateOutputType = {
-    id: number
-    name: number
-    calories: number
-    userId: number
-    _all: number
-  }
-
-
-  export type FoodAvgAggregateInputType = {
-    calories?: true
-  }
-
-  export type FoodSumAggregateInputType = {
-    calories?: true
-  }
-
-  export type FoodMinAggregateInputType = {
-    id?: true
-    name?: true
-    calories?: true
-    userId?: true
-  }
-
-  export type FoodMaxAggregateInputType = {
-    id?: true
-    name?: true
-    calories?: true
-    userId?: true
-  }
-
-  export type FoodCountAggregateInputType = {
-    id?: true
-    name?: true
-    calories?: true
-    userId?: true
-    _all?: true
-  }
-
-  export type FoodAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Food to aggregate.
-     */
-    where?: FoodWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Foods to fetch.
-     */
-    orderBy?: FoodOrderByWithRelationInput | FoodOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: FoodWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Foods from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Foods.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Foods
-    **/
-    _count?: true | FoodCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: FoodAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: FoodSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: FoodMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: FoodMaxAggregateInputType
-  }
-
-  export type GetFoodAggregateType<T extends FoodAggregateArgs> = {
-        [P in keyof T & keyof AggregateFood]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateFood[P]>
-      : GetScalarType<T[P], AggregateFood[P]>
-  }
-
-
-
-
-  export type FoodGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FoodWhereInput
-    orderBy?: FoodOrderByWithAggregationInput | FoodOrderByWithAggregationInput[]
-    by: FoodScalarFieldEnum[] | FoodScalarFieldEnum
-    having?: FoodScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: FoodCountAggregateInputType | true
-    _avg?: FoodAvgAggregateInputType
-    _sum?: FoodSumAggregateInputType
-    _min?: FoodMinAggregateInputType
-    _max?: FoodMaxAggregateInputType
-  }
-
-  export type FoodGroupByOutputType = {
-    id: string
-    name: string
-    calories: number
-    userId: string
-    _count: FoodCountAggregateOutputType | null
-    _avg: FoodAvgAggregateOutputType | null
-    _sum: FoodSumAggregateOutputType | null
-    _min: FoodMinAggregateOutputType | null
-    _max: FoodMaxAggregateOutputType | null
-  }
-
-  type GetFoodGroupByPayload<T extends FoodGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<FoodGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof FoodGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], FoodGroupByOutputType[P]>
-            : GetScalarType<T[P], FoodGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type FoodSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    calories?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["food"]>
-
-  export type FoodSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    calories?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["food"]>
-
-  export type FoodSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    calories?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["food"]>
-
-  export type FoodSelectScalar = {
-    id?: boolean
-    name?: boolean
-    calories?: boolean
-    userId?: boolean
-  }
-
-  export type FoodOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "calories" | "userId", ExtArgs["result"]["food"]>
-  export type FoodInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type FoodIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type FoodIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $FoodPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Food"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      calories: number
-      userId: string
-    }, ExtArgs["result"]["food"]>
-    composites: {}
-  }
-
-  type FoodGetPayload<S extends boolean | null | undefined | FoodDefaultArgs> = $Result.GetResult<Prisma.$FoodPayload, S>
-
-  type FoodCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<FoodFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: FoodCountAggregateInputType | true
-    }
-
-  export interface FoodDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Food'], meta: { name: 'Food' } }
-    /**
-     * Find zero or one Food that matches the filter.
-     * @param {FoodFindUniqueArgs} args - Arguments to find a Food
-     * @example
-     * // Get one Food
-     * const food = await prisma.food.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends FoodFindUniqueArgs>(args: SelectSubset<T, FoodFindUniqueArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Food that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {FoodFindUniqueOrThrowArgs} args - Arguments to find a Food
-     * @example
-     * // Get one Food
-     * const food = await prisma.food.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends FoodFindUniqueOrThrowArgs>(args: SelectSubset<T, FoodFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Food that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodFindFirstArgs} args - Arguments to find a Food
-     * @example
-     * // Get one Food
-     * const food = await prisma.food.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends FoodFindFirstArgs>(args?: SelectSubset<T, FoodFindFirstArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Food that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodFindFirstOrThrowArgs} args - Arguments to find a Food
-     * @example
-     * // Get one Food
-     * const food = await prisma.food.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends FoodFindFirstOrThrowArgs>(args?: SelectSubset<T, FoodFindFirstOrThrowArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Foods that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Foods
-     * const foods = await prisma.food.findMany()
-     * 
-     * // Get first 10 Foods
-     * const foods = await prisma.food.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const foodWithIdOnly = await prisma.food.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends FoodFindManyArgs>(args?: SelectSubset<T, FoodFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Food.
-     * @param {FoodCreateArgs} args - Arguments to create a Food.
-     * @example
-     * // Create one Food
-     * const Food = await prisma.food.create({
-     *   data: {
-     *     // ... data to create a Food
-     *   }
-     * })
-     * 
-     */
-    create<T extends FoodCreateArgs>(args: SelectSubset<T, FoodCreateArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Foods.
-     * @param {FoodCreateManyArgs} args - Arguments to create many Foods.
-     * @example
-     * // Create many Foods
-     * const food = await prisma.food.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends FoodCreateManyArgs>(args?: SelectSubset<T, FoodCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Foods and returns the data saved in the database.
-     * @param {FoodCreateManyAndReturnArgs} args - Arguments to create many Foods.
-     * @example
-     * // Create many Foods
-     * const food = await prisma.food.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Foods and only return the `id`
-     * const foodWithIdOnly = await prisma.food.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends FoodCreateManyAndReturnArgs>(args?: SelectSubset<T, FoodCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Food.
-     * @param {FoodDeleteArgs} args - Arguments to delete one Food.
-     * @example
-     * // Delete one Food
-     * const Food = await prisma.food.delete({
-     *   where: {
-     *     // ... filter to delete one Food
-     *   }
-     * })
-     * 
-     */
-    delete<T extends FoodDeleteArgs>(args: SelectSubset<T, FoodDeleteArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Food.
-     * @param {FoodUpdateArgs} args - Arguments to update one Food.
-     * @example
-     * // Update one Food
-     * const food = await prisma.food.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends FoodUpdateArgs>(args: SelectSubset<T, FoodUpdateArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Foods.
-     * @param {FoodDeleteManyArgs} args - Arguments to filter Foods to delete.
-     * @example
-     * // Delete a few Foods
-     * const { count } = await prisma.food.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends FoodDeleteManyArgs>(args?: SelectSubset<T, FoodDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Foods.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Foods
-     * const food = await prisma.food.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends FoodUpdateManyArgs>(args: SelectSubset<T, FoodUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Foods and returns the data updated in the database.
-     * @param {FoodUpdateManyAndReturnArgs} args - Arguments to update many Foods.
-     * @example
-     * // Update many Foods
-     * const food = await prisma.food.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Foods and only return the `id`
-     * const foodWithIdOnly = await prisma.food.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends FoodUpdateManyAndReturnArgs>(args: SelectSubset<T, FoodUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Food.
-     * @param {FoodUpsertArgs} args - Arguments to update or create a Food.
-     * @example
-     * // Update or create a Food
-     * const food = await prisma.food.upsert({
-     *   create: {
-     *     // ... data to create a Food
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Food we want to update
-     *   }
-     * })
-     */
-    upsert<T extends FoodUpsertArgs>(args: SelectSubset<T, FoodUpsertArgs<ExtArgs>>): Prisma__FoodClient<$Result.GetResult<Prisma.$FoodPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Foods.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodCountArgs} args - Arguments to filter Foods to count.
-     * @example
-     * // Count the number of Foods
-     * const count = await prisma.food.count({
-     *   where: {
-     *     // ... the filter for the Foods we want to count
-     *   }
-     * })
-    **/
-    count<T extends FoodCountArgs>(
-      args?: Subset<T, FoodCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], FoodCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Food.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends FoodAggregateArgs>(args: Subset<T, FoodAggregateArgs>): Prisma.PrismaPromise<GetFoodAggregateType<T>>
-
-    /**
-     * Group by Food.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FoodGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends FoodGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: FoodGroupByArgs['orderBy'] }
-        : { orderBy?: FoodGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, FoodGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFoodGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Food model
-   */
-  readonly fields: FoodFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Food.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__FoodClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Food model
-   */
-  interface FoodFieldRefs {
-    readonly id: FieldRef<"Food", 'String'>
-    readonly name: FieldRef<"Food", 'String'>
-    readonly calories: FieldRef<"Food", 'Int'>
-    readonly userId: FieldRef<"Food", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Food findUnique
-   */
-  export type FoodFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter, which Food to fetch.
-     */
-    where: FoodWhereUniqueInput
-  }
-
-  /**
-   * Food findUniqueOrThrow
-   */
-  export type FoodFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter, which Food to fetch.
-     */
-    where: FoodWhereUniqueInput
-  }
-
-  /**
-   * Food findFirst
-   */
-  export type FoodFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter, which Food to fetch.
-     */
-    where?: FoodWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Foods to fetch.
-     */
-    orderBy?: FoodOrderByWithRelationInput | FoodOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Foods.
-     */
-    cursor?: FoodWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Foods from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Foods.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Foods.
-     */
-    distinct?: FoodScalarFieldEnum | FoodScalarFieldEnum[]
-  }
-
-  /**
-   * Food findFirstOrThrow
-   */
-  export type FoodFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter, which Food to fetch.
-     */
-    where?: FoodWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Foods to fetch.
-     */
-    orderBy?: FoodOrderByWithRelationInput | FoodOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Foods.
-     */
-    cursor?: FoodWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Foods from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Foods.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Foods.
-     */
-    distinct?: FoodScalarFieldEnum | FoodScalarFieldEnum[]
-  }
-
-  /**
-   * Food findMany
-   */
-  export type FoodFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter, which Foods to fetch.
-     */
-    where?: FoodWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Foods to fetch.
-     */
-    orderBy?: FoodOrderByWithRelationInput | FoodOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Foods.
-     */
-    cursor?: FoodWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Foods from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Foods.
-     */
-    skip?: number
-    distinct?: FoodScalarFieldEnum | FoodScalarFieldEnum[]
-  }
-
-  /**
-   * Food create
-   */
-  export type FoodCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Food.
-     */
-    data: XOR<FoodCreateInput, FoodUncheckedCreateInput>
-  }
-
-  /**
-   * Food createMany
-   */
-  export type FoodCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Foods.
-     */
-    data: FoodCreateManyInput | FoodCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Food createManyAndReturn
-   */
-  export type FoodCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * The data used to create many Foods.
-     */
-    data: FoodCreateManyInput | FoodCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Food update
-   */
-  export type FoodUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Food.
-     */
-    data: XOR<FoodUpdateInput, FoodUncheckedUpdateInput>
-    /**
-     * Choose, which Food to update.
-     */
-    where: FoodWhereUniqueInput
-  }
-
-  /**
-   * Food updateMany
-   */
-  export type FoodUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Foods.
-     */
-    data: XOR<FoodUpdateManyMutationInput, FoodUncheckedUpdateManyInput>
-    /**
-     * Filter which Foods to update
-     */
-    where?: FoodWhereInput
-    /**
-     * Limit how many Foods to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Food updateManyAndReturn
-   */
-  export type FoodUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * The data used to update Foods.
-     */
-    data: XOR<FoodUpdateManyMutationInput, FoodUncheckedUpdateManyInput>
-    /**
-     * Filter which Foods to update
-     */
-    where?: FoodWhereInput
-    /**
-     * Limit how many Foods to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Food upsert
-   */
-  export type FoodUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Food to update in case it exists.
-     */
-    where: FoodWhereUniqueInput
-    /**
-     * In case the Food found by the `where` argument doesn't exist, create a new Food with this data.
-     */
-    create: XOR<FoodCreateInput, FoodUncheckedCreateInput>
-    /**
-     * In case the Food was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<FoodUpdateInput, FoodUncheckedUpdateInput>
-  }
-
-  /**
-   * Food delete
-   */
-  export type FoodDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
-    /**
-     * Filter which Food to delete.
-     */
-    where: FoodWhereUniqueInput
-  }
-
-  /**
-   * Food deleteMany
-   */
-  export type FoodDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Foods to delete
-     */
-    where?: FoodWhereInput
-    /**
-     * Limit how many Foods to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Food without action
-   */
-  export type FoodDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Food
-     */
-    select?: FoodSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Food
-     */
-    omit?: FoodOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FoodInclude<ExtArgs> | null
+    include?: ProgressRecordInclude<ExtArgs> | null
   }
 
 
@@ -8243,58 +7079,62 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     clerkUserId: 'clerkUserId',
-    displayName: 'displayName',
-    imageUrl: 'imageUrl',
+    name: 'name',
     email: 'email',
+    imageUrl: 'imageUrl',
     age: 'age',
-    height: 'height',
     weight: 'weight',
+    height: 'height',
     gender: 'gender',
     activityLevel: 'activityLevel',
-    goal: 'goal'
+    dietaryPreference: 'dietaryPreference',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const ProfileScalarFieldEnum: {
+  export const FoodItemScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
-    caloricNeeds: 'caloricNeeds',
-    macroSplit: 'macroSplit',
-    createdAt: 'createdAt'
+    name: 'name',
+    calories: 'calories',
+    protein: 'protein',
+    carbs: 'carbs',
+    fat: 'fat',
+    category: 'category',
+    isCustom: 'isCustom'
   };
 
-  export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+  export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
+
+
+  export const FoodLogScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    foodItemId: 'foodItemId',
+    quantity: 'quantity',
+    mealType: 'mealType',
+    timestamp: 'timestamp'
+  };
+
+  export type FoodLogScalarFieldEnum = (typeof FoodLogScalarFieldEnum)[keyof typeof FoodLogScalarFieldEnum]
 
 
   export const MealSuggestionScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    userId: 'userId',
+    suggestion: 'suggestion',
+    meals: 'meals',
     calories: 'calories',
-    proteins: 'proteins',
-    fats: 'fats',
-    carbs: 'carbs',
-    ingredients: 'ingredients',
-    sourceApiId: 'sourceApiId'
+    createdAt: 'createdAt',
+    aiModelUsed: 'aiModelUsed'
   };
 
   export type MealSuggestionScalarFieldEnum = (typeof MealSuggestionScalarFieldEnum)[keyof typeof MealSuggestionScalarFieldEnum]
 
 
-  export const MealLogScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    suggestionId: 'suggestionId',
-    customMealName: 'customMealName',
-    calories: 'calories',
-    logTime: 'logTime'
-  };
-
-  export type MealLogScalarFieldEnum = (typeof MealLogScalarFieldEnum)[keyof typeof MealLogScalarFieldEnum]
-
-
-  export const ProgressScalarFieldEnum: {
+  export const ProgressRecordScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
     weight: 'weight',
@@ -8302,17 +7142,7 @@ export namespace Prisma {
     loggedAt: 'loggedAt'
   };
 
-  export type ProgressScalarFieldEnum = (typeof ProgressScalarFieldEnum)[keyof typeof ProgressScalarFieldEnum]
-
-
-  export const FoodScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    calories: 'calories',
-    userId: 'userId'
-  };
-
-  export type FoodScalarFieldEnum = (typeof FoodScalarFieldEnum)[keyof typeof FoodScalarFieldEnum]
+  export type ProgressRecordScalarFieldEnum = (typeof ProgressRecordScalarFieldEnum)[keyof typeof ProgressRecordScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8321,6 +7151,13 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -8337,6 +7174,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -8398,6 +7244,27 @@ export namespace Prisma {
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
   /**
    * Deep Input Types
    */
@@ -8409,37 +7276,39 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     clerkUserId?: StringFilter<"User"> | string
-    displayName?: StringFilter<"User"> | string
-    imageUrl?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    imageUrl?: StringFilter<"User"> | string
     age?: IntNullableFilter<"User"> | number | null
-    height?: FloatNullableFilter<"User"> | number | null
     weight?: FloatNullableFilter<"User"> | number | null
+    height?: FloatNullableFilter<"User"> | number | null
     gender?: StringNullableFilter<"User"> | string | null
     activityLevel?: StringNullableFilter<"User"> | string | null
-    goal?: StringNullableFilter<"User"> | string | null
-    food?: FoodListRelationFilter
-    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
-    meals?: MealLogListRelationFilter
-    progressRecords?: ProgressListRelationFilter
+    dietaryPreference?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    foodLogs?: FoodLogListRelationFilter
+    mealSuggestions?: MealSuggestionListRelationFilter
+    progressRecords?: ProgressRecordListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
-    displayName?: SortOrder
-    imageUrl?: SortOrder
+    name?: SortOrder
     email?: SortOrder
+    imageUrl?: SortOrder
     age?: SortOrderInput | SortOrder
-    height?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     activityLevel?: SortOrderInput | SortOrder
-    goal?: SortOrderInput | SortOrder
-    food?: FoodOrderByRelationAggregateInput
-    profile?: ProfileOrderByWithRelationInput
-    meals?: MealLogOrderByRelationAggregateInput
-    progressRecords?: ProgressOrderByRelationAggregateInput
+    dietaryPreference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    foodLogs?: FoodLogOrderByRelationAggregateInput
+    mealSuggestions?: MealSuggestionOrderByRelationAggregateInput
+    progressRecords?: ProgressRecordOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8449,32 +7318,35 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    displayName?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
     imageUrl?: StringFilter<"User"> | string
     age?: IntNullableFilter<"User"> | number | null
-    height?: FloatNullableFilter<"User"> | number | null
     weight?: FloatNullableFilter<"User"> | number | null
+    height?: FloatNullableFilter<"User"> | number | null
     gender?: StringNullableFilter<"User"> | string | null
     activityLevel?: StringNullableFilter<"User"> | string | null
-    goal?: StringNullableFilter<"User"> | string | null
-    food?: FoodListRelationFilter
-    profile?: XOR<ProfileNullableScalarRelationFilter, ProfileWhereInput> | null
-    meals?: MealLogListRelationFilter
-    progressRecords?: ProgressListRelationFilter
+    dietaryPreference?: StringNullableFilter<"User"> | string | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    foodLogs?: FoodLogListRelationFilter
+    mealSuggestions?: MealSuggestionListRelationFilter
+    progressRecords?: ProgressRecordListRelationFilter
   }, "id" | "clerkUserId" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
-    displayName?: SortOrder
-    imageUrl?: SortOrder
+    name?: SortOrder
     email?: SortOrder
+    imageUrl?: SortOrder
     age?: SortOrderInput | SortOrder
-    height?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
     activityLevel?: SortOrderInput | SortOrder
-    goal?: SortOrderInput | SortOrder
+    dietaryPreference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -8488,72 +7360,154 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     clerkUserId?: StringWithAggregatesFilter<"User"> | string
-    displayName?: StringWithAggregatesFilter<"User"> | string
-    imageUrl?: StringWithAggregatesFilter<"User"> | string
+    name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    imageUrl?: StringWithAggregatesFilter<"User"> | string
     age?: IntNullableWithAggregatesFilter<"User"> | number | null
-    height?: FloatNullableWithAggregatesFilter<"User"> | number | null
     weight?: FloatNullableWithAggregatesFilter<"User"> | number | null
+    height?: FloatNullableWithAggregatesFilter<"User"> | number | null
     gender?: StringNullableWithAggregatesFilter<"User"> | string | null
     activityLevel?: StringNullableWithAggregatesFilter<"User"> | string | null
-    goal?: StringNullableWithAggregatesFilter<"User"> | string | null
+    dietaryPreference?: StringNullableWithAggregatesFilter<"User"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type ProfileWhereInput = {
-    AND?: ProfileWhereInput | ProfileWhereInput[]
-    OR?: ProfileWhereInput[]
-    NOT?: ProfileWhereInput | ProfileWhereInput[]
-    id?: StringFilter<"Profile"> | string
-    userId?: StringFilter<"Profile"> | string
-    caloricNeeds?: IntFilter<"Profile"> | number
-    macroSplit?: StringFilter<"Profile"> | string
-    createdAt?: DateTimeFilter<"Profile"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  export type FoodItemWhereInput = {
+    AND?: FoodItemWhereInput | FoodItemWhereInput[]
+    OR?: FoodItemWhereInput[]
+    NOT?: FoodItemWhereInput | FoodItemWhereInput[]
+    id?: StringFilter<"FoodItem"> | string
+    name?: StringFilter<"FoodItem"> | string
+    calories?: IntFilter<"FoodItem"> | number
+    protein?: FloatFilter<"FoodItem"> | number
+    carbs?: FloatFilter<"FoodItem"> | number
+    fat?: FloatFilter<"FoodItem"> | number
+    category?: StringNullableFilter<"FoodItem"> | string | null
+    isCustom?: BoolFilter<"FoodItem"> | boolean
+    foodLogs?: FoodLogListRelationFilter
   }
 
-  export type ProfileOrderByWithRelationInput = {
+  export type FoodItemOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    caloricNeeds?: SortOrder
-    macroSplit?: SortOrder
-    createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    name?: SortOrder
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isCustom?: SortOrder
+    foodLogs?: FoodLogOrderByRelationAggregateInput
   }
 
-  export type ProfileWhereUniqueInput = Prisma.AtLeast<{
+  export type FoodItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId?: string
-    AND?: ProfileWhereInput | ProfileWhereInput[]
-    OR?: ProfileWhereInput[]
-    NOT?: ProfileWhereInput | ProfileWhereInput[]
-    caloricNeeds?: IntFilter<"Profile"> | number
-    macroSplit?: StringFilter<"Profile"> | string
-    createdAt?: DateTimeFilter<"Profile"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId">
+    AND?: FoodItemWhereInput | FoodItemWhereInput[]
+    OR?: FoodItemWhereInput[]
+    NOT?: FoodItemWhereInput | FoodItemWhereInput[]
+    name?: StringFilter<"FoodItem"> | string
+    calories?: IntFilter<"FoodItem"> | number
+    protein?: FloatFilter<"FoodItem"> | number
+    carbs?: FloatFilter<"FoodItem"> | number
+    fat?: FloatFilter<"FoodItem"> | number
+    category?: StringNullableFilter<"FoodItem"> | string | null
+    isCustom?: BoolFilter<"FoodItem"> | boolean
+    foodLogs?: FoodLogListRelationFilter
+  }, "id">
 
-  export type ProfileOrderByWithAggregationInput = {
+  export type FoodItemOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    caloricNeeds?: SortOrder
-    macroSplit?: SortOrder
-    createdAt?: SortOrder
-    _count?: ProfileCountOrderByAggregateInput
-    _avg?: ProfileAvgOrderByAggregateInput
-    _max?: ProfileMaxOrderByAggregateInput
-    _min?: ProfileMinOrderByAggregateInput
-    _sum?: ProfileSumOrderByAggregateInput
+    name?: SortOrder
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isCustom?: SortOrder
+    _count?: FoodItemCountOrderByAggregateInput
+    _avg?: FoodItemAvgOrderByAggregateInput
+    _max?: FoodItemMaxOrderByAggregateInput
+    _min?: FoodItemMinOrderByAggregateInput
+    _sum?: FoodItemSumOrderByAggregateInput
   }
 
-  export type ProfileScalarWhereWithAggregatesInput = {
-    AND?: ProfileScalarWhereWithAggregatesInput | ProfileScalarWhereWithAggregatesInput[]
-    OR?: ProfileScalarWhereWithAggregatesInput[]
-    NOT?: ProfileScalarWhereWithAggregatesInput | ProfileScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Profile"> | string
-    userId?: StringWithAggregatesFilter<"Profile"> | string
-    caloricNeeds?: IntWithAggregatesFilter<"Profile"> | number
-    macroSplit?: StringWithAggregatesFilter<"Profile"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Profile"> | Date | string
+  export type FoodItemScalarWhereWithAggregatesInput = {
+    AND?: FoodItemScalarWhereWithAggregatesInput | FoodItemScalarWhereWithAggregatesInput[]
+    OR?: FoodItemScalarWhereWithAggregatesInput[]
+    NOT?: FoodItemScalarWhereWithAggregatesInput | FoodItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FoodItem"> | string
+    name?: StringWithAggregatesFilter<"FoodItem"> | string
+    calories?: IntWithAggregatesFilter<"FoodItem"> | number
+    protein?: FloatWithAggregatesFilter<"FoodItem"> | number
+    carbs?: FloatWithAggregatesFilter<"FoodItem"> | number
+    fat?: FloatWithAggregatesFilter<"FoodItem"> | number
+    category?: StringNullableWithAggregatesFilter<"FoodItem"> | string | null
+    isCustom?: BoolWithAggregatesFilter<"FoodItem"> | boolean
+  }
+
+  export type FoodLogWhereInput = {
+    AND?: FoodLogWhereInput | FoodLogWhereInput[]
+    OR?: FoodLogWhereInput[]
+    NOT?: FoodLogWhereInput | FoodLogWhereInput[]
+    id?: StringFilter<"FoodLog"> | string
+    userId?: StringFilter<"FoodLog"> | string
+    foodItemId?: StringFilter<"FoodLog"> | string
+    quantity?: FloatFilter<"FoodLog"> | number
+    mealType?: StringFilter<"FoodLog"> | string
+    timestamp?: DateTimeFilter<"FoodLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    foodItem?: XOR<FoodItemScalarRelationFilter, FoodItemWhereInput>
+  }
+
+  export type FoodLogOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    foodItemId?: SortOrder
+    quantity?: SortOrder
+    mealType?: SortOrder
+    timestamp?: SortOrder
+    user?: UserOrderByWithRelationInput
+    foodItem?: FoodItemOrderByWithRelationInput
+  }
+
+  export type FoodLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FoodLogWhereInput | FoodLogWhereInput[]
+    OR?: FoodLogWhereInput[]
+    NOT?: FoodLogWhereInput | FoodLogWhereInput[]
+    userId?: StringFilter<"FoodLog"> | string
+    foodItemId?: StringFilter<"FoodLog"> | string
+    quantity?: FloatFilter<"FoodLog"> | number
+    mealType?: StringFilter<"FoodLog"> | string
+    timestamp?: DateTimeFilter<"FoodLog"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    foodItem?: XOR<FoodItemScalarRelationFilter, FoodItemWhereInput>
+  }, "id">
+
+  export type FoodLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    foodItemId?: SortOrder
+    quantity?: SortOrder
+    mealType?: SortOrder
+    timestamp?: SortOrder
+    _count?: FoodLogCountOrderByAggregateInput
+    _avg?: FoodLogAvgOrderByAggregateInput
+    _max?: FoodLogMaxOrderByAggregateInput
+    _min?: FoodLogMinOrderByAggregateInput
+    _sum?: FoodLogSumOrderByAggregateInput
+  }
+
+  export type FoodLogScalarWhereWithAggregatesInput = {
+    AND?: FoodLogScalarWhereWithAggregatesInput | FoodLogScalarWhereWithAggregatesInput[]
+    OR?: FoodLogScalarWhereWithAggregatesInput[]
+    NOT?: FoodLogScalarWhereWithAggregatesInput | FoodLogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FoodLog"> | string
+    userId?: StringWithAggregatesFilter<"FoodLog"> | string
+    foodItemId?: StringWithAggregatesFilter<"FoodLog"> | string
+    quantity?: FloatWithAggregatesFilter<"FoodLog"> | number
+    mealType?: StringWithAggregatesFilter<"FoodLog"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"FoodLog"> | Date | string
   }
 
   export type MealSuggestionWhereInput = {
@@ -8561,26 +7515,24 @@ export namespace Prisma {
     OR?: MealSuggestionWhereInput[]
     NOT?: MealSuggestionWhereInput | MealSuggestionWhereInput[]
     id?: StringFilter<"MealSuggestion"> | string
-    name?: StringFilter<"MealSuggestion"> | string
+    userId?: StringFilter<"MealSuggestion"> | string
+    suggestion?: StringFilter<"MealSuggestion"> | string
+    meals?: JsonFilter<"MealSuggestion">
     calories?: IntFilter<"MealSuggestion"> | number
-    proteins?: FloatFilter<"MealSuggestion"> | number
-    fats?: FloatFilter<"MealSuggestion"> | number
-    carbs?: FloatFilter<"MealSuggestion"> | number
-    ingredients?: StringFilter<"MealSuggestion"> | string
-    sourceApiId?: StringNullableFilter<"MealSuggestion"> | string | null
-    mealsLogged?: MealLogListRelationFilter
+    createdAt?: DateTimeFilter<"MealSuggestion"> | Date | string
+    aiModelUsed?: StringNullableFilter<"MealSuggestion"> | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type MealSuggestionOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    suggestion?: SortOrder
+    meals?: SortOrder
     calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-    ingredients?: SortOrder
-    sourceApiId?: SortOrderInput | SortOrder
-    mealsLogged?: MealLogOrderByRelationAggregateInput
+    createdAt?: SortOrder
+    aiModelUsed?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type MealSuggestionWhereUniqueInput = Prisma.AtLeast<{
@@ -8588,25 +7540,23 @@ export namespace Prisma {
     AND?: MealSuggestionWhereInput | MealSuggestionWhereInput[]
     OR?: MealSuggestionWhereInput[]
     NOT?: MealSuggestionWhereInput | MealSuggestionWhereInput[]
-    name?: StringFilter<"MealSuggestion"> | string
+    userId?: StringFilter<"MealSuggestion"> | string
+    suggestion?: StringFilter<"MealSuggestion"> | string
+    meals?: JsonFilter<"MealSuggestion">
     calories?: IntFilter<"MealSuggestion"> | number
-    proteins?: FloatFilter<"MealSuggestion"> | number
-    fats?: FloatFilter<"MealSuggestion"> | number
-    carbs?: FloatFilter<"MealSuggestion"> | number
-    ingredients?: StringFilter<"MealSuggestion"> | string
-    sourceApiId?: StringNullableFilter<"MealSuggestion"> | string | null
-    mealsLogged?: MealLogListRelationFilter
+    createdAt?: DateTimeFilter<"MealSuggestion"> | Date | string
+    aiModelUsed?: StringNullableFilter<"MealSuggestion"> | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type MealSuggestionOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    userId?: SortOrder
+    suggestion?: SortOrder
+    meals?: SortOrder
     calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-    ingredients?: SortOrder
-    sourceApiId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    aiModelUsed?: SortOrderInput | SortOrder
     _count?: MealSuggestionCountOrderByAggregateInput
     _avg?: MealSuggestionAvgOrderByAggregateInput
     _max?: MealSuggestionMaxOrderByAggregateInput
@@ -8619,93 +7569,27 @@ export namespace Prisma {
     OR?: MealSuggestionScalarWhereWithAggregatesInput[]
     NOT?: MealSuggestionScalarWhereWithAggregatesInput | MealSuggestionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MealSuggestion"> | string
-    name?: StringWithAggregatesFilter<"MealSuggestion"> | string
+    userId?: StringWithAggregatesFilter<"MealSuggestion"> | string
+    suggestion?: StringWithAggregatesFilter<"MealSuggestion"> | string
+    meals?: JsonWithAggregatesFilter<"MealSuggestion">
     calories?: IntWithAggregatesFilter<"MealSuggestion"> | number
-    proteins?: FloatWithAggregatesFilter<"MealSuggestion"> | number
-    fats?: FloatWithAggregatesFilter<"MealSuggestion"> | number
-    carbs?: FloatWithAggregatesFilter<"MealSuggestion"> | number
-    ingredients?: StringWithAggregatesFilter<"MealSuggestion"> | string
-    sourceApiId?: StringNullableWithAggregatesFilter<"MealSuggestion"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"MealSuggestion"> | Date | string
+    aiModelUsed?: StringNullableWithAggregatesFilter<"MealSuggestion"> | string | null
   }
 
-  export type MealLogWhereInput = {
-    AND?: MealLogWhereInput | MealLogWhereInput[]
-    OR?: MealLogWhereInput[]
-    NOT?: MealLogWhereInput | MealLogWhereInput[]
-    id?: StringFilter<"MealLog"> | string
-    userId?: StringFilter<"MealLog"> | string
-    suggestionId?: StringNullableFilter<"MealLog"> | string | null
-    customMealName?: StringNullableFilter<"MealLog"> | string | null
-    calories?: IntFilter<"MealLog"> | number
-    logTime?: DateTimeFilter<"MealLog"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    suggestion?: XOR<MealSuggestionNullableScalarRelationFilter, MealSuggestionWhereInput> | null
-  }
-
-  export type MealLogOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    suggestionId?: SortOrderInput | SortOrder
-    customMealName?: SortOrderInput | SortOrder
-    calories?: SortOrder
-    logTime?: SortOrder
-    user?: UserOrderByWithRelationInput
-    suggestion?: MealSuggestionOrderByWithRelationInput
-  }
-
-  export type MealLogWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MealLogWhereInput | MealLogWhereInput[]
-    OR?: MealLogWhereInput[]
-    NOT?: MealLogWhereInput | MealLogWhereInput[]
-    userId?: StringFilter<"MealLog"> | string
-    suggestionId?: StringNullableFilter<"MealLog"> | string | null
-    customMealName?: StringNullableFilter<"MealLog"> | string | null
-    calories?: IntFilter<"MealLog"> | number
-    logTime?: DateTimeFilter<"MealLog"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    suggestion?: XOR<MealSuggestionNullableScalarRelationFilter, MealSuggestionWhereInput> | null
-  }, "id">
-
-  export type MealLogOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    suggestionId?: SortOrderInput | SortOrder
-    customMealName?: SortOrderInput | SortOrder
-    calories?: SortOrder
-    logTime?: SortOrder
-    _count?: MealLogCountOrderByAggregateInput
-    _avg?: MealLogAvgOrderByAggregateInput
-    _max?: MealLogMaxOrderByAggregateInput
-    _min?: MealLogMinOrderByAggregateInput
-    _sum?: MealLogSumOrderByAggregateInput
-  }
-
-  export type MealLogScalarWhereWithAggregatesInput = {
-    AND?: MealLogScalarWhereWithAggregatesInput | MealLogScalarWhereWithAggregatesInput[]
-    OR?: MealLogScalarWhereWithAggregatesInput[]
-    NOT?: MealLogScalarWhereWithAggregatesInput | MealLogScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MealLog"> | string
-    userId?: StringWithAggregatesFilter<"MealLog"> | string
-    suggestionId?: StringNullableWithAggregatesFilter<"MealLog"> | string | null
-    customMealName?: StringNullableWithAggregatesFilter<"MealLog"> | string | null
-    calories?: IntWithAggregatesFilter<"MealLog"> | number
-    logTime?: DateTimeWithAggregatesFilter<"MealLog"> | Date | string
-  }
-
-  export type ProgressWhereInput = {
-    AND?: ProgressWhereInput | ProgressWhereInput[]
-    OR?: ProgressWhereInput[]
-    NOT?: ProgressWhereInput | ProgressWhereInput[]
-    id?: StringFilter<"Progress"> | string
-    userId?: StringFilter<"Progress"> | string
-    weight?: FloatFilter<"Progress"> | number
-    bodyFatPct?: FloatNullableFilter<"Progress"> | number | null
-    loggedAt?: DateTimeFilter<"Progress"> | Date | string
+  export type ProgressRecordWhereInput = {
+    AND?: ProgressRecordWhereInput | ProgressRecordWhereInput[]
+    OR?: ProgressRecordWhereInput[]
+    NOT?: ProgressRecordWhereInput | ProgressRecordWhereInput[]
+    id?: StringFilter<"ProgressRecord"> | string
+    userId?: StringFilter<"ProgressRecord"> | string
+    weight?: FloatFilter<"ProgressRecord"> | number
+    bodyFatPct?: FloatNullableFilter<"ProgressRecord"> | number | null
+    loggedAt?: DateTimeFilter<"ProgressRecord"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type ProgressOrderByWithRelationInput = {
+  export type ProgressRecordOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     weight?: SortOrder
@@ -8714,406 +7598,378 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type ProgressWhereUniqueInput = Prisma.AtLeast<{
+  export type ProgressRecordWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: ProgressWhereInput | ProgressWhereInput[]
-    OR?: ProgressWhereInput[]
-    NOT?: ProgressWhereInput | ProgressWhereInput[]
-    userId?: StringFilter<"Progress"> | string
-    weight?: FloatFilter<"Progress"> | number
-    bodyFatPct?: FloatNullableFilter<"Progress"> | number | null
-    loggedAt?: DateTimeFilter<"Progress"> | Date | string
+    AND?: ProgressRecordWhereInput | ProgressRecordWhereInput[]
+    OR?: ProgressRecordWhereInput[]
+    NOT?: ProgressRecordWhereInput | ProgressRecordWhereInput[]
+    userId?: StringFilter<"ProgressRecord"> | string
+    weight?: FloatFilter<"ProgressRecord"> | number
+    bodyFatPct?: FloatNullableFilter<"ProgressRecord"> | number | null
+    loggedAt?: DateTimeFilter<"ProgressRecord"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type ProgressOrderByWithAggregationInput = {
+  export type ProgressRecordOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     weight?: SortOrder
     bodyFatPct?: SortOrderInput | SortOrder
     loggedAt?: SortOrder
-    _count?: ProgressCountOrderByAggregateInput
-    _avg?: ProgressAvgOrderByAggregateInput
-    _max?: ProgressMaxOrderByAggregateInput
-    _min?: ProgressMinOrderByAggregateInput
-    _sum?: ProgressSumOrderByAggregateInput
+    _count?: ProgressRecordCountOrderByAggregateInput
+    _avg?: ProgressRecordAvgOrderByAggregateInput
+    _max?: ProgressRecordMaxOrderByAggregateInput
+    _min?: ProgressRecordMinOrderByAggregateInput
+    _sum?: ProgressRecordSumOrderByAggregateInput
   }
 
-  export type ProgressScalarWhereWithAggregatesInput = {
-    AND?: ProgressScalarWhereWithAggregatesInput | ProgressScalarWhereWithAggregatesInput[]
-    OR?: ProgressScalarWhereWithAggregatesInput[]
-    NOT?: ProgressScalarWhereWithAggregatesInput | ProgressScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Progress"> | string
-    userId?: StringWithAggregatesFilter<"Progress"> | string
-    weight?: FloatWithAggregatesFilter<"Progress"> | number
-    bodyFatPct?: FloatNullableWithAggregatesFilter<"Progress"> | number | null
-    loggedAt?: DateTimeWithAggregatesFilter<"Progress"> | Date | string
-  }
-
-  export type FoodWhereInput = {
-    AND?: FoodWhereInput | FoodWhereInput[]
-    OR?: FoodWhereInput[]
-    NOT?: FoodWhereInput | FoodWhereInput[]
-    id?: StringFilter<"Food"> | string
-    name?: StringFilter<"Food"> | string
-    calories?: IntFilter<"Food"> | number
-    userId?: StringFilter<"Food"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type FoodOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    userId?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type FoodWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: FoodWhereInput | FoodWhereInput[]
-    OR?: FoodWhereInput[]
-    NOT?: FoodWhereInput | FoodWhereInput[]
-    name?: StringFilter<"Food"> | string
-    calories?: IntFilter<"Food"> | number
-    userId?: StringFilter<"Food"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type FoodOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    userId?: SortOrder
-    _count?: FoodCountOrderByAggregateInput
-    _avg?: FoodAvgOrderByAggregateInput
-    _max?: FoodMaxOrderByAggregateInput
-    _min?: FoodMinOrderByAggregateInput
-    _sum?: FoodSumOrderByAggregateInput
-  }
-
-  export type FoodScalarWhereWithAggregatesInput = {
-    AND?: FoodScalarWhereWithAggregatesInput | FoodScalarWhereWithAggregatesInput[]
-    OR?: FoodScalarWhereWithAggregatesInput[]
-    NOT?: FoodScalarWhereWithAggregatesInput | FoodScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Food"> | string
-    name?: StringWithAggregatesFilter<"Food"> | string
-    calories?: IntWithAggregatesFilter<"Food"> | number
-    userId?: StringWithAggregatesFilter<"Food"> | string
+  export type ProgressRecordScalarWhereWithAggregatesInput = {
+    AND?: ProgressRecordScalarWhereWithAggregatesInput | ProgressRecordScalarWhereWithAggregatesInput[]
+    OR?: ProgressRecordScalarWhereWithAggregatesInput[]
+    NOT?: ProgressRecordScalarWhereWithAggregatesInput | ProgressRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProgressRecord"> | string
+    userId?: StringWithAggregatesFilter<"ProgressRecord"> | string
+    weight?: FloatWithAggregatesFilter<"ProgressRecord"> | number
+    bodyFatPct?: FloatNullableWithAggregatesFilter<"ProgressRecord"> | number | null
+    loggedAt?: DateTimeWithAggregatesFilter<"ProgressRecord"> | Date | string
   }
 
   export type UserCreateInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodCreateNestedManyWithoutUserInput
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    meals?: MealLogCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogCreateNestedManyWithoutUserInput
+    mealSuggestions?: MealSuggestionCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodUncheckedCreateNestedManyWithoutUserInput
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    meals?: MealLogUncheckedCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressUncheckedCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogUncheckedCreateNestedManyWithoutUserInput
+    mealSuggestions?: MealSuggestionUncheckedCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUpdateManyWithoutUserNestedInput
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    meals?: MealLogUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUpdateManyWithoutUserNestedInput
+    mealSuggestions?: MealSuggestionUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUncheckedUpdateManyWithoutUserNestedInput
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    meals?: MealLogUncheckedUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUncheckedUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUncheckedUpdateManyWithoutUserNestedInput
+    mealSuggestions?: MealSuggestionUncheckedUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileCreateInput = {
+  export type FoodItemCreateInput = {
     id?: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutProfileInput
+    name: string
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    category?: string | null
+    isCustom?: boolean
+    foodLogs?: FoodLogCreateNestedManyWithoutFoodItemInput
   }
 
-  export type ProfileUncheckedCreateInput = {
+  export type FoodItemUncheckedCreateInput = {
+    id?: string
+    name: string
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    category?: string | null
+    isCustom?: boolean
+    foodLogs?: FoodLogUncheckedCreateNestedManyWithoutFoodItemInput
+  }
+
+  export type FoodItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    calories?: IntFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
+    carbs?: FloatFieldUpdateOperationsInput | number
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
+    foodLogs?: FoodLogUpdateManyWithoutFoodItemNestedInput
+  }
+
+  export type FoodItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    calories?: IntFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
+    carbs?: FloatFieldUpdateOperationsInput | number
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
+    foodLogs?: FoodLogUncheckedUpdateManyWithoutFoodItemNestedInput
+  }
+
+  export type FoodItemCreateManyInput = {
+    id?: string
+    name: string
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    category?: string | null
+    isCustom?: boolean
+  }
+
+  export type FoodItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    calories?: IntFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
+    carbs?: FloatFieldUpdateOperationsInput | number
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FoodItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    calories?: IntFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
+    carbs?: FloatFieldUpdateOperationsInput | number
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type FoodLogCreateInput = {
+    id?: string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutFoodLogsInput
+    foodItem: FoodItemCreateNestedOneWithoutFoodLogsInput
+  }
+
+  export type FoodLogUncheckedCreateInput = {
     id?: string
     userId: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt?: Date | string
+    foodItemId: string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type ProfileUpdateInput = {
+  export type FoodLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutProfileNestedInput
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFoodLogsNestedInput
+    foodItem?: FoodItemUpdateOneRequiredWithoutFoodLogsNestedInput
   }
 
-  export type ProfileUncheckedUpdateInput = {
+  export type FoodLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileCreateManyInput = {
+  export type FoodLogCreateManyInput = {
     id?: string
     userId: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt?: Date | string
+    foodItemId: string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type ProfileUpdateManyMutationInput = {
+  export type FoodLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProfileUncheckedUpdateManyInput = {
+  export type FoodLogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MealSuggestionCreateInput = {
     id?: string
-    name: string
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
-    proteins: number
-    fats: number
-    carbs: number
-    ingredients: string
-    sourceApiId?: string | null
-    mealsLogged?: MealLogCreateNestedManyWithoutSuggestionInput
+    createdAt?: Date | string
+    aiModelUsed?: string | null
+    user: UserCreateNestedOneWithoutMealSuggestionsInput
   }
 
   export type MealSuggestionUncheckedCreateInput = {
     id?: string
-    name: string
+    userId: string
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
-    proteins: number
-    fats: number
-    carbs: number
-    ingredients: string
-    sourceApiId?: string | null
-    mealsLogged?: MealLogUncheckedCreateNestedManyWithoutSuggestionInput
+    createdAt?: Date | string
+    aiModelUsed?: string | null
   }
 
   export type MealSuggestionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
-    carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
-    mealsLogged?: MealLogUpdateManyWithoutSuggestionNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutMealSuggestionsNestedInput
   }
 
   export type MealSuggestionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
-    carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
-    mealsLogged?: MealLogUncheckedUpdateManyWithoutSuggestionNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MealSuggestionCreateManyInput = {
     id?: string
-    name: string
+    userId: string
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
-    proteins: number
-    fats: number
-    carbs: number
-    ingredients: string
-    sourceApiId?: string | null
+    createdAt?: Date | string
+    aiModelUsed?: string | null
   }
 
   export type MealSuggestionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
-    carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MealSuggestionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
-    carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type MealLogCreateInput = {
-    id?: string
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
-    user: UserCreateNestedOneWithoutMealsInput
-    suggestion?: MealSuggestionCreateNestedOneWithoutMealsLoggedInput
-  }
-
-  export type MealLogUncheckedCreateInput = {
-    id?: string
-    userId: string
-    suggestionId?: string | null
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
-  }
-
-  export type MealLogUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMealsNestedInput
-    suggestion?: MealSuggestionUpdateOneWithoutMealsLoggedNestedInput
-  }
-
-  export type MealLogUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    suggestionId?: NullableStringFieldUpdateOperationsInput | string | null
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type MealLogCreateManyInput = {
-    id?: string
-    userId: string
-    suggestionId?: string | null
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
-  }
-
-  export type MealLogUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MealLogUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    suggestionId?: NullableStringFieldUpdateOperationsInput | string | null
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProgressCreateInput = {
+  export type ProgressRecordCreateInput = {
     id?: string
     weight: number
     bodyFatPct?: number | null
@@ -9121,7 +7977,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProgressRecordsInput
   }
 
-  export type ProgressUncheckedCreateInput = {
+  export type ProgressRecordUncheckedCreateInput = {
     id?: string
     userId: string
     weight: number
@@ -9129,7 +7985,7 @@ export namespace Prisma {
     loggedAt?: Date | string
   }
 
-  export type ProgressUpdateInput = {
+  export type ProgressRecordUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9137,7 +7993,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProgressRecordsNestedInput
   }
 
-  export type ProgressUncheckedUpdateInput = {
+  export type ProgressRecordUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
@@ -9145,7 +8001,7 @@ export namespace Prisma {
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProgressCreateManyInput = {
+  export type ProgressRecordCreateManyInput = {
     id?: string
     userId: string
     weight: number
@@ -9153,67 +8009,19 @@ export namespace Prisma {
     loggedAt?: Date | string
   }
 
-  export type ProgressUpdateManyMutationInput = {
+  export type ProgressRecordUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProgressUncheckedUpdateManyInput = {
+  export type ProgressRecordUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FoodCreateInput = {
-    id?: string
-    name: string
-    calories: number
-    user: UserCreateNestedOneWithoutFoodInput
-  }
-
-  export type FoodUncheckedCreateInput = {
-    id?: string
-    name: string
-    calories: number
-    userId: string
-  }
-
-  export type FoodUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
-    user?: UserUpdateOneRequiredWithoutFoodNestedInput
-  }
-
-  export type FoodUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type FoodCreateManyInput = {
-    id?: string
-    name: string
-    calories: number
-    userId: string
-  }
-
-  export type FoodUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type FoodUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9268,27 +8076,33 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type FoodListRelationFilter = {
-    every?: FoodWhereInput
-    some?: FoodWhereInput
-    none?: FoodWhereInput
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type ProfileNullableScalarRelationFilter = {
-    is?: ProfileWhereInput | null
-    isNot?: ProfileWhereInput | null
+  export type FoodLogListRelationFilter = {
+    every?: FoodLogWhereInput
+    some?: FoodLogWhereInput
+    none?: FoodLogWhereInput
   }
 
-  export type MealLogListRelationFilter = {
-    every?: MealLogWhereInput
-    some?: MealLogWhereInput
-    none?: MealLogWhereInput
+  export type MealSuggestionListRelationFilter = {
+    every?: MealSuggestionWhereInput
+    some?: MealSuggestionWhereInput
+    none?: MealSuggestionWhereInput
   }
 
-  export type ProgressListRelationFilter = {
-    every?: ProgressWhereInput
-    some?: ProgressWhereInput
-    none?: ProgressWhereInput
+  export type ProgressRecordListRelationFilter = {
+    every?: ProgressRecordWhereInput
+    some?: ProgressRecordWhereInput
+    none?: ProgressRecordWhereInput
   }
 
   export type SortOrderInput = {
@@ -9296,70 +8110,76 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type FoodOrderByRelationAggregateInput = {
+  export type FoodLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type MealLogOrderByRelationAggregateInput = {
+  export type MealSuggestionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ProgressOrderByRelationAggregateInput = {
+  export type ProgressRecordOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
-    displayName?: SortOrder
-    imageUrl?: SortOrder
+    name?: SortOrder
     email?: SortOrder
+    imageUrl?: SortOrder
     age?: SortOrder
-    height?: SortOrder
     weight?: SortOrder
+    height?: SortOrder
     gender?: SortOrder
     activityLevel?: SortOrder
-    goal?: SortOrder
+    dietaryPreference?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     age?: SortOrder
-    height?: SortOrder
     weight?: SortOrder
+    height?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
-    displayName?: SortOrder
-    imageUrl?: SortOrder
+    name?: SortOrder
     email?: SortOrder
+    imageUrl?: SortOrder
     age?: SortOrder
-    height?: SortOrder
     weight?: SortOrder
+    height?: SortOrder
     gender?: SortOrder
     activityLevel?: SortOrder
-    goal?: SortOrder
+    dietaryPreference?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     clerkUserId?: SortOrder
-    displayName?: SortOrder
-    imageUrl?: SortOrder
+    name?: SortOrder
     email?: SortOrder
+    imageUrl?: SortOrder
     age?: SortOrder
-    height?: SortOrder
     weight?: SortOrder
+    height?: SortOrder
     gender?: SortOrder
     activityLevel?: SortOrder
-    goal?: SortOrder
+    dietaryPreference?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     age?: SortOrder
-    height?: SortOrder
     weight?: SortOrder
+    height?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9430,6 +8250,20 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9441,52 +8275,67 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type ProfileCountOrderByAggregateInput = {
+  export type FoodItemCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    caloricNeeds?: SortOrder
-    macroSplit?: SortOrder
-    createdAt?: SortOrder
+    name?: SortOrder
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
+    category?: SortOrder
+    isCustom?: SortOrder
   }
 
-  export type ProfileAvgOrderByAggregateInput = {
-    caloricNeeds?: SortOrder
+  export type FoodItemAvgOrderByAggregateInput = {
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
   }
 
-  export type ProfileMaxOrderByAggregateInput = {
+  export type FoodItemMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    caloricNeeds?: SortOrder
-    macroSplit?: SortOrder
-    createdAt?: SortOrder
+    name?: SortOrder
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
+    category?: SortOrder
+    isCustom?: SortOrder
   }
 
-  export type ProfileMinOrderByAggregateInput = {
+  export type FoodItemMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    caloricNeeds?: SortOrder
-    macroSplit?: SortOrder
-    createdAt?: SortOrder
+    name?: SortOrder
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
+    category?: SortOrder
+    isCustom?: SortOrder
   }
 
-  export type ProfileSumOrderByAggregateInput = {
-    caloricNeeds?: SortOrder
+  export type FoodItemSumOrderByAggregateInput = {
+    calories?: SortOrder
+    protein?: SortOrder
+    carbs?: SortOrder
+    fat?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9505,78 +8354,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type MealSuggestionCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-    ingredients?: SortOrder
-    sourceApiId?: SortOrder
-  }
-
-  export type MealSuggestionAvgOrderByAggregateInput = {
-    calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-  }
-
-  export type MealSuggestionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-    ingredients?: SortOrder
-    sourceApiId?: SortOrder
-  }
-
-  export type MealSuggestionMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-    ingredients?: SortOrder
-    sourceApiId?: SortOrder
-  }
-
-  export type MealSuggestionSumOrderByAggregateInput = {
-    calories?: SortOrder
-    proteins?: SortOrder
-    fats?: SortOrder
-    carbs?: SortOrder
-  }
-
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -9593,47 +8370,145 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type MealSuggestionNullableScalarRelationFilter = {
-    is?: MealSuggestionWhereInput | null
-    isNot?: MealSuggestionWhereInput | null
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type MealLogCountOrderByAggregateInput = {
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type FoodItemScalarRelationFilter = {
+    is?: FoodItemWhereInput
+    isNot?: FoodItemWhereInput
+  }
+
+  export type FoodLogCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    suggestionId?: SortOrder
-    customMealName?: SortOrder
-    calories?: SortOrder
-    logTime?: SortOrder
+    foodItemId?: SortOrder
+    quantity?: SortOrder
+    mealType?: SortOrder
+    timestamp?: SortOrder
   }
 
-  export type MealLogAvgOrderByAggregateInput = {
-    calories?: SortOrder
+  export type FoodLogAvgOrderByAggregateInput = {
+    quantity?: SortOrder
   }
 
-  export type MealLogMaxOrderByAggregateInput = {
+  export type FoodLogMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    suggestionId?: SortOrder
-    customMealName?: SortOrder
-    calories?: SortOrder
-    logTime?: SortOrder
+    foodItemId?: SortOrder
+    quantity?: SortOrder
+    mealType?: SortOrder
+    timestamp?: SortOrder
   }
 
-  export type MealLogMinOrderByAggregateInput = {
+  export type FoodLogMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    suggestionId?: SortOrder
-    customMealName?: SortOrder
-    calories?: SortOrder
-    logTime?: SortOrder
+    foodItemId?: SortOrder
+    quantity?: SortOrder
+    mealType?: SortOrder
+    timestamp?: SortOrder
   }
 
-  export type MealLogSumOrderByAggregateInput = {
+  export type FoodLogSumOrderByAggregateInput = {
+    quantity?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type MealSuggestionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    suggestion?: SortOrder
+    meals?: SortOrder
+    calories?: SortOrder
+    createdAt?: SortOrder
+    aiModelUsed?: SortOrder
+  }
+
+  export type MealSuggestionAvgOrderByAggregateInput = {
     calories?: SortOrder
   }
 
-  export type ProgressCountOrderByAggregateInput = {
+  export type MealSuggestionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    suggestion?: SortOrder
+    calories?: SortOrder
+    createdAt?: SortOrder
+    aiModelUsed?: SortOrder
+  }
+
+  export type MealSuggestionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    suggestion?: SortOrder
+    calories?: SortOrder
+    createdAt?: SortOrder
+    aiModelUsed?: SortOrder
+  }
+
+  export type MealSuggestionSumOrderByAggregateInput = {
+    calories?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type ProgressRecordCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     weight?: SortOrder
@@ -9641,20 +8516,12 @@ export namespace Prisma {
     loggedAt?: SortOrder
   }
 
-  export type ProgressAvgOrderByAggregateInput = {
+  export type ProgressRecordAvgOrderByAggregateInput = {
     weight?: SortOrder
     bodyFatPct?: SortOrder
   }
 
-  export type ProgressMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    weight?: SortOrder
-    bodyFatPct?: SortOrder
-    loggedAt?: SortOrder
-  }
-
-  export type ProgressMinOrderByAggregateInput = {
+  export type ProgressRecordMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     weight?: SortOrder
@@ -9662,92 +8529,59 @@ export namespace Prisma {
     loggedAt?: SortOrder
   }
 
-  export type ProgressSumOrderByAggregateInput = {
+  export type ProgressRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    weight?: SortOrder
+    bodyFatPct?: SortOrder
+    loggedAt?: SortOrder
+  }
+
+  export type ProgressRecordSumOrderByAggregateInput = {
     weight?: SortOrder
     bodyFatPct?: SortOrder
   }
 
-  export type FoodCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    userId?: SortOrder
+  export type FoodLogCreateNestedManyWithoutUserInput = {
+    create?: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput> | FoodLogCreateWithoutUserInput[] | FoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutUserInput | FoodLogCreateOrConnectWithoutUserInput[]
+    createMany?: FoodLogCreateManyUserInputEnvelope
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
   }
 
-  export type FoodAvgOrderByAggregateInput = {
-    calories?: SortOrder
+  export type MealSuggestionCreateNestedManyWithoutUserInput = {
+    create?: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput> | MealSuggestionCreateWithoutUserInput[] | MealSuggestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MealSuggestionCreateOrConnectWithoutUserInput | MealSuggestionCreateOrConnectWithoutUserInput[]
+    createMany?: MealSuggestionCreateManyUserInputEnvelope
+    connect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
   }
 
-  export type FoodMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    userId?: SortOrder
+  export type ProgressRecordCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput> | ProgressRecordCreateWithoutUserInput[] | ProgressRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressRecordCreateOrConnectWithoutUserInput | ProgressRecordCreateOrConnectWithoutUserInput[]
+    createMany?: ProgressRecordCreateManyUserInputEnvelope
+    connect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
   }
 
-  export type FoodMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    calories?: SortOrder
-    userId?: SortOrder
+  export type FoodLogUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput> | FoodLogCreateWithoutUserInput[] | FoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutUserInput | FoodLogCreateOrConnectWithoutUserInput[]
+    createMany?: FoodLogCreateManyUserInputEnvelope
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
   }
 
-  export type FoodSumOrderByAggregateInput = {
-    calories?: SortOrder
+  export type MealSuggestionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput> | MealSuggestionCreateWithoutUserInput[] | MealSuggestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MealSuggestionCreateOrConnectWithoutUserInput | MealSuggestionCreateOrConnectWithoutUserInput[]
+    createMany?: MealSuggestionCreateManyUserInputEnvelope
+    connect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
   }
 
-  export type FoodCreateNestedManyWithoutUserInput = {
-    create?: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput> | FoodCreateWithoutUserInput[] | FoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FoodCreateOrConnectWithoutUserInput | FoodCreateOrConnectWithoutUserInput[]
-    createMany?: FoodCreateManyUserInputEnvelope
-    connect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-  }
-
-  export type ProfileCreateNestedOneWithoutUserInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    connect?: ProfileWhereUniqueInput
-  }
-
-  export type MealLogCreateNestedManyWithoutUserInput = {
-    create?: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput> | MealLogCreateWithoutUserInput[] | MealLogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutUserInput | MealLogCreateOrConnectWithoutUserInput[]
-    createMany?: MealLogCreateManyUserInputEnvelope
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-  }
-
-  export type ProgressCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
-    createMany?: ProgressCreateManyUserInputEnvelope
-    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-  }
-
-  export type FoodUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput> | FoodCreateWithoutUserInput[] | FoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FoodCreateOrConnectWithoutUserInput | FoodCreateOrConnectWithoutUserInput[]
-    createMany?: FoodCreateManyUserInputEnvelope
-    connect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-  }
-
-  export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    connect?: ProfileWhereUniqueInput
-  }
-
-  export type MealLogUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput> | MealLogCreateWithoutUserInput[] | MealLogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutUserInput | MealLogCreateOrConnectWithoutUserInput[]
-    createMany?: MealLogCreateManyUserInputEnvelope
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-  }
-
-  export type ProgressUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
-    createMany?: ProgressCreateManyUserInputEnvelope
-    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
+  export type ProgressRecordUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput> | ProgressRecordCreateWithoutUserInput[] | ProgressRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressRecordCreateOrConnectWithoutUserInput | ProgressRecordCreateOrConnectWithoutUserInput[]
+    createMany?: ProgressRecordCreateManyUserInputEnvelope
+    connect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9774,114 +8608,106 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type FoodUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput> | FoodCreateWithoutUserInput[] | FoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FoodCreateOrConnectWithoutUserInput | FoodCreateOrConnectWithoutUserInput[]
-    upsert?: FoodUpsertWithWhereUniqueWithoutUserInput | FoodUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FoodCreateManyUserInputEnvelope
-    set?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    disconnect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    delete?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    connect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    update?: FoodUpdateWithWhereUniqueWithoutUserInput | FoodUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FoodUpdateManyWithWhereWithoutUserInput | FoodUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FoodScalarWhereInput | FoodScalarWhereInput[]
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
-  export type ProfileUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    upsert?: ProfileUpsertWithoutUserInput
-    disconnect?: ProfileWhereInput | boolean
-    delete?: ProfileWhereInput | boolean
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
+  export type FoodLogUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput> | FoodLogCreateWithoutUserInput[] | FoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutUserInput | FoodLogCreateOrConnectWithoutUserInput[]
+    upsert?: FoodLogUpsertWithWhereUniqueWithoutUserInput | FoodLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FoodLogCreateManyUserInputEnvelope
+    set?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    disconnect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    delete?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    update?: FoodLogUpdateWithWhereUniqueWithoutUserInput | FoodLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FoodLogUpdateManyWithWhereWithoutUserInput | FoodLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
   }
 
-  export type MealLogUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput> | MealLogCreateWithoutUserInput[] | MealLogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutUserInput | MealLogCreateOrConnectWithoutUserInput[]
-    upsert?: MealLogUpsertWithWhereUniqueWithoutUserInput | MealLogUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MealLogCreateManyUserInputEnvelope
-    set?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    disconnect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    delete?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    update?: MealLogUpdateWithWhereUniqueWithoutUserInput | MealLogUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MealLogUpdateManyWithWhereWithoutUserInput | MealLogUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
+  export type MealSuggestionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput> | MealSuggestionCreateWithoutUserInput[] | MealSuggestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MealSuggestionCreateOrConnectWithoutUserInput | MealSuggestionCreateOrConnectWithoutUserInput[]
+    upsert?: MealSuggestionUpsertWithWhereUniqueWithoutUserInput | MealSuggestionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MealSuggestionCreateManyUserInputEnvelope
+    set?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    disconnect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    delete?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    connect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    update?: MealSuggestionUpdateWithWhereUniqueWithoutUserInput | MealSuggestionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MealSuggestionUpdateManyWithWhereWithoutUserInput | MealSuggestionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MealSuggestionScalarWhereInput | MealSuggestionScalarWhereInput[]
   }
 
-  export type ProgressUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
-    upsert?: ProgressUpsertWithWhereUniqueWithoutUserInput | ProgressUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ProgressCreateManyUserInputEnvelope
-    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    update?: ProgressUpdateWithWhereUniqueWithoutUserInput | ProgressUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProgressUpdateManyWithWhereWithoutUserInput | ProgressUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+  export type ProgressRecordUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput> | ProgressRecordCreateWithoutUserInput[] | ProgressRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressRecordCreateOrConnectWithoutUserInput | ProgressRecordCreateOrConnectWithoutUserInput[]
+    upsert?: ProgressRecordUpsertWithWhereUniqueWithoutUserInput | ProgressRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProgressRecordCreateManyUserInputEnvelope
+    set?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    disconnect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    delete?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    connect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    update?: ProgressRecordUpdateWithWhereUniqueWithoutUserInput | ProgressRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProgressRecordUpdateManyWithWhereWithoutUserInput | ProgressRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProgressRecordScalarWhereInput | ProgressRecordScalarWhereInput[]
   }
 
-  export type FoodUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput> | FoodCreateWithoutUserInput[] | FoodUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: FoodCreateOrConnectWithoutUserInput | FoodCreateOrConnectWithoutUserInput[]
-    upsert?: FoodUpsertWithWhereUniqueWithoutUserInput | FoodUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: FoodCreateManyUserInputEnvelope
-    set?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    disconnect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    delete?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    connect?: FoodWhereUniqueInput | FoodWhereUniqueInput[]
-    update?: FoodUpdateWithWhereUniqueWithoutUserInput | FoodUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: FoodUpdateManyWithWhereWithoutUserInput | FoodUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: FoodScalarWhereInput | FoodScalarWhereInput[]
+  export type FoodLogUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput> | FoodLogCreateWithoutUserInput[] | FoodLogUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutUserInput | FoodLogCreateOrConnectWithoutUserInput[]
+    upsert?: FoodLogUpsertWithWhereUniqueWithoutUserInput | FoodLogUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FoodLogCreateManyUserInputEnvelope
+    set?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    disconnect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    delete?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    update?: FoodLogUpdateWithWhereUniqueWithoutUserInput | FoodLogUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FoodLogUpdateManyWithWhereWithoutUserInput | FoodLogUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
   }
 
-  export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    upsert?: ProfileUpsertWithoutUserInput
-    disconnect?: ProfileWhereInput | boolean
-    delete?: ProfileWhereInput | boolean
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
+  export type MealSuggestionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput> | MealSuggestionCreateWithoutUserInput[] | MealSuggestionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MealSuggestionCreateOrConnectWithoutUserInput | MealSuggestionCreateOrConnectWithoutUserInput[]
+    upsert?: MealSuggestionUpsertWithWhereUniqueWithoutUserInput | MealSuggestionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MealSuggestionCreateManyUserInputEnvelope
+    set?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    disconnect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    delete?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    connect?: MealSuggestionWhereUniqueInput | MealSuggestionWhereUniqueInput[]
+    update?: MealSuggestionUpdateWithWhereUniqueWithoutUserInput | MealSuggestionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MealSuggestionUpdateManyWithWhereWithoutUserInput | MealSuggestionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MealSuggestionScalarWhereInput | MealSuggestionScalarWhereInput[]
   }
 
-  export type MealLogUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput> | MealLogCreateWithoutUserInput[] | MealLogUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutUserInput | MealLogCreateOrConnectWithoutUserInput[]
-    upsert?: MealLogUpsertWithWhereUniqueWithoutUserInput | MealLogUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MealLogCreateManyUserInputEnvelope
-    set?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    disconnect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    delete?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    update?: MealLogUpdateWithWhereUniqueWithoutUserInput | MealLogUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MealLogUpdateManyWithWhereWithoutUserInput | MealLogUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
+  export type ProgressRecordUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput> | ProgressRecordCreateWithoutUserInput[] | ProgressRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProgressRecordCreateOrConnectWithoutUserInput | ProgressRecordCreateOrConnectWithoutUserInput[]
+    upsert?: ProgressRecordUpsertWithWhereUniqueWithoutUserInput | ProgressRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProgressRecordCreateManyUserInputEnvelope
+    set?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    disconnect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    delete?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    connect?: ProgressRecordWhereUniqueInput | ProgressRecordWhereUniqueInput[]
+    update?: ProgressRecordUpdateWithWhereUniqueWithoutUserInput | ProgressRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProgressRecordUpdateManyWithWhereWithoutUserInput | ProgressRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProgressRecordScalarWhereInput | ProgressRecordScalarWhereInput[]
   }
 
-  export type ProgressUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput> | ProgressCreateWithoutUserInput[] | ProgressUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ProgressCreateOrConnectWithoutUserInput | ProgressCreateOrConnectWithoutUserInput[]
-    upsert?: ProgressUpsertWithWhereUniqueWithoutUserInput | ProgressUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ProgressCreateManyUserInputEnvelope
-    set?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    disconnect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    delete?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    connect?: ProgressWhereUniqueInput | ProgressWhereUniqueInput[]
-    update?: ProgressUpdateWithWhereUniqueWithoutUserInput | ProgressUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ProgressUpdateManyWithWhereWithoutUserInput | ProgressUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
+  export type FoodLogCreateNestedManyWithoutFoodItemInput = {
+    create?: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput> | FoodLogCreateWithoutFoodItemInput[] | FoodLogUncheckedCreateWithoutFoodItemInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutFoodItemInput | FoodLogCreateOrConnectWithoutFoodItemInput[]
+    createMany?: FoodLogCreateManyFoodItemInputEnvelope
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
   }
 
-  export type UserCreateNestedOneWithoutProfileInput = {
-    create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutProfileInput
-    connect?: UserWhereUniqueInput
+  export type FoodLogUncheckedCreateNestedManyWithoutFoodItemInput = {
+    create?: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput> | FoodLogCreateWithoutFoodItemInput[] | FoodLogUncheckedCreateWithoutFoodItemInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutFoodItemInput | FoodLogCreateOrConnectWithoutFoodItemInput[]
+    createMany?: FoodLogCreateManyFoodItemInputEnvelope
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -9892,32 +8718,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type UserUpdateOneRequiredWithoutProfileNestedInput = {
-    create?: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
-    connectOrCreate?: UserCreateOrConnectWithoutProfileInput
-    upsert?: UserUpsertWithoutProfileInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProfileInput, UserUpdateWithoutProfileInput>, UserUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type MealLogCreateNestedManyWithoutSuggestionInput = {
-    create?: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput> | MealLogCreateWithoutSuggestionInput[] | MealLogUncheckedCreateWithoutSuggestionInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutSuggestionInput | MealLogCreateOrConnectWithoutSuggestionInput[]
-    createMany?: MealLogCreateManySuggestionInputEnvelope
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-  }
-
-  export type MealLogUncheckedCreateNestedManyWithoutSuggestionInput = {
-    create?: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput> | MealLogCreateWithoutSuggestionInput[] | MealLogUncheckedCreateWithoutSuggestionInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutSuggestionInput | MealLogCreateOrConnectWithoutSuggestionInput[]
-    createMany?: MealLogCreateManySuggestionInputEnvelope
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-  }
-
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -9926,62 +8726,78 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type MealLogUpdateManyWithoutSuggestionNestedInput = {
-    create?: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput> | MealLogCreateWithoutSuggestionInput[] | MealLogUncheckedCreateWithoutSuggestionInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutSuggestionInput | MealLogCreateOrConnectWithoutSuggestionInput[]
-    upsert?: MealLogUpsertWithWhereUniqueWithoutSuggestionInput | MealLogUpsertWithWhereUniqueWithoutSuggestionInput[]
-    createMany?: MealLogCreateManySuggestionInputEnvelope
-    set?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    disconnect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    delete?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    update?: MealLogUpdateWithWhereUniqueWithoutSuggestionInput | MealLogUpdateWithWhereUniqueWithoutSuggestionInput[]
-    updateMany?: MealLogUpdateManyWithWhereWithoutSuggestionInput | MealLogUpdateManyWithWhereWithoutSuggestionInput[]
-    deleteMany?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
-  export type MealLogUncheckedUpdateManyWithoutSuggestionNestedInput = {
-    create?: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput> | MealLogCreateWithoutSuggestionInput[] | MealLogUncheckedCreateWithoutSuggestionInput[]
-    connectOrCreate?: MealLogCreateOrConnectWithoutSuggestionInput | MealLogCreateOrConnectWithoutSuggestionInput[]
-    upsert?: MealLogUpsertWithWhereUniqueWithoutSuggestionInput | MealLogUpsertWithWhereUniqueWithoutSuggestionInput[]
-    createMany?: MealLogCreateManySuggestionInputEnvelope
-    set?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    disconnect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    delete?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    connect?: MealLogWhereUniqueInput | MealLogWhereUniqueInput[]
-    update?: MealLogUpdateWithWhereUniqueWithoutSuggestionInput | MealLogUpdateWithWhereUniqueWithoutSuggestionInput[]
-    updateMany?: MealLogUpdateManyWithWhereWithoutSuggestionInput | MealLogUpdateManyWithWhereWithoutSuggestionInput[]
-    deleteMany?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
+  export type FoodLogUpdateManyWithoutFoodItemNestedInput = {
+    create?: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput> | FoodLogCreateWithoutFoodItemInput[] | FoodLogUncheckedCreateWithoutFoodItemInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutFoodItemInput | FoodLogCreateOrConnectWithoutFoodItemInput[]
+    upsert?: FoodLogUpsertWithWhereUniqueWithoutFoodItemInput | FoodLogUpsertWithWhereUniqueWithoutFoodItemInput[]
+    createMany?: FoodLogCreateManyFoodItemInputEnvelope
+    set?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    disconnect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    delete?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    update?: FoodLogUpdateWithWhereUniqueWithoutFoodItemInput | FoodLogUpdateWithWhereUniqueWithoutFoodItemInput[]
+    updateMany?: FoodLogUpdateManyWithWhereWithoutFoodItemInput | FoodLogUpdateManyWithWhereWithoutFoodItemInput[]
+    deleteMany?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutMealsInput = {
-    create?: XOR<UserCreateWithoutMealsInput, UserUncheckedCreateWithoutMealsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMealsInput
+  export type FoodLogUncheckedUpdateManyWithoutFoodItemNestedInput = {
+    create?: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput> | FoodLogCreateWithoutFoodItemInput[] | FoodLogUncheckedCreateWithoutFoodItemInput[]
+    connectOrCreate?: FoodLogCreateOrConnectWithoutFoodItemInput | FoodLogCreateOrConnectWithoutFoodItemInput[]
+    upsert?: FoodLogUpsertWithWhereUniqueWithoutFoodItemInput | FoodLogUpsertWithWhereUniqueWithoutFoodItemInput[]
+    createMany?: FoodLogCreateManyFoodItemInputEnvelope
+    set?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    disconnect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    delete?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    connect?: FoodLogWhereUniqueInput | FoodLogWhereUniqueInput[]
+    update?: FoodLogUpdateWithWhereUniqueWithoutFoodItemInput | FoodLogUpdateWithWhereUniqueWithoutFoodItemInput[]
+    updateMany?: FoodLogUpdateManyWithWhereWithoutFoodItemInput | FoodLogUpdateManyWithWhereWithoutFoodItemInput[]
+    deleteMany?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutFoodLogsInput = {
+    create?: XOR<UserCreateWithoutFoodLogsInput, UserUncheckedCreateWithoutFoodLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFoodLogsInput
     connect?: UserWhereUniqueInput
   }
 
-  export type MealSuggestionCreateNestedOneWithoutMealsLoggedInput = {
-    create?: XOR<MealSuggestionCreateWithoutMealsLoggedInput, MealSuggestionUncheckedCreateWithoutMealsLoggedInput>
-    connectOrCreate?: MealSuggestionCreateOrConnectWithoutMealsLoggedInput
-    connect?: MealSuggestionWhereUniqueInput
+  export type FoodItemCreateNestedOneWithoutFoodLogsInput = {
+    create?: XOR<FoodItemCreateWithoutFoodLogsInput, FoodItemUncheckedCreateWithoutFoodLogsInput>
+    connectOrCreate?: FoodItemCreateOrConnectWithoutFoodLogsInput
+    connect?: FoodItemWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutMealsNestedInput = {
-    create?: XOR<UserCreateWithoutMealsInput, UserUncheckedCreateWithoutMealsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMealsInput
-    upsert?: UserUpsertWithoutMealsInput
+  export type UserUpdateOneRequiredWithoutFoodLogsNestedInput = {
+    create?: XOR<UserCreateWithoutFoodLogsInput, UserUncheckedCreateWithoutFoodLogsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFoodLogsInput
+    upsert?: UserUpsertWithoutFoodLogsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMealsInput, UserUpdateWithoutMealsInput>, UserUncheckedUpdateWithoutMealsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFoodLogsInput, UserUpdateWithoutFoodLogsInput>, UserUncheckedUpdateWithoutFoodLogsInput>
   }
 
-  export type MealSuggestionUpdateOneWithoutMealsLoggedNestedInput = {
-    create?: XOR<MealSuggestionCreateWithoutMealsLoggedInput, MealSuggestionUncheckedCreateWithoutMealsLoggedInput>
-    connectOrCreate?: MealSuggestionCreateOrConnectWithoutMealsLoggedInput
-    upsert?: MealSuggestionUpsertWithoutMealsLoggedInput
-    disconnect?: MealSuggestionWhereInput | boolean
-    delete?: MealSuggestionWhereInput | boolean
-    connect?: MealSuggestionWhereUniqueInput
-    update?: XOR<XOR<MealSuggestionUpdateToOneWithWhereWithoutMealsLoggedInput, MealSuggestionUpdateWithoutMealsLoggedInput>, MealSuggestionUncheckedUpdateWithoutMealsLoggedInput>
+  export type FoodItemUpdateOneRequiredWithoutFoodLogsNestedInput = {
+    create?: XOR<FoodItemCreateWithoutFoodLogsInput, FoodItemUncheckedCreateWithoutFoodLogsInput>
+    connectOrCreate?: FoodItemCreateOrConnectWithoutFoodLogsInput
+    upsert?: FoodItemUpsertWithoutFoodLogsInput
+    connect?: FoodItemWhereUniqueInput
+    update?: XOR<XOR<FoodItemUpdateToOneWithWhereWithoutFoodLogsInput, FoodItemUpdateWithoutFoodLogsInput>, FoodItemUncheckedUpdateWithoutFoodLogsInput>
+  }
+
+  export type UserCreateNestedOneWithoutMealSuggestionsInput = {
+    create?: XOR<UserCreateWithoutMealSuggestionsInput, UserUncheckedCreateWithoutMealSuggestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMealSuggestionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutMealSuggestionsNestedInput = {
+    create?: XOR<UserCreateWithoutMealSuggestionsInput, UserUncheckedCreateWithoutMealSuggestionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMealSuggestionsInput
+    upsert?: UserUpsertWithoutMealSuggestionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMealSuggestionsInput, UserUpdateWithoutMealSuggestionsInput>, UserUncheckedUpdateWithoutMealSuggestionsInput>
   }
 
   export type UserCreateNestedOneWithoutProgressRecordsInput = {
@@ -9996,20 +8812,6 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutProgressRecordsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProgressRecordsInput, UserUpdateWithoutProgressRecordsInput>, UserUncheckedUpdateWithoutProgressRecordsInput>
-  }
-
-  export type UserCreateNestedOneWithoutFoodInput = {
-    create?: XOR<UserCreateWithoutFoodInput, UserUncheckedCreateWithoutFoodInput>
-    connectOrCreate?: UserCreateOrConnectWithoutFoodInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutFoodNestedInput = {
-    create?: XOR<UserCreateWithoutFoodInput, UserUncheckedCreateWithoutFoodInput>
-    connectOrCreate?: UserCreateOrConnectWithoutFoodInput
-    upsert?: UserUpsertWithoutFoodInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFoodInput, UserUpdateWithoutFoodInput>, UserUncheckedUpdateWithoutFoodInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10060,6 +8862,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -10139,7 +8952,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10147,7 +8960,26 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -10166,31 +8998,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -10207,505 +9014,511 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type FoodCreateWithoutUserInput = {
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type FoodLogCreateWithoutUserInput = {
     id?: string
-    name: string
-    calories: number
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
+    foodItem: FoodItemCreateNestedOneWithoutFoodLogsInput
   }
 
-  export type FoodUncheckedCreateWithoutUserInput = {
+  export type FoodLogUncheckedCreateWithoutUserInput = {
     id?: string
-    name: string
-    calories: number
+    foodItemId: string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type FoodCreateOrConnectWithoutUserInput = {
-    where: FoodWhereUniqueInput
-    create: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput>
+  export type FoodLogCreateOrConnectWithoutUserInput = {
+    where: FoodLogWhereUniqueInput
+    create: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput>
   }
 
-  export type FoodCreateManyUserInputEnvelope = {
-    data: FoodCreateManyUserInput | FoodCreateManyUserInput[]
+  export type FoodLogCreateManyUserInputEnvelope = {
+    data: FoodLogCreateManyUserInput | FoodLogCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type ProfileCreateWithoutUserInput = {
+  export type MealSuggestionCreateWithoutUserInput = {
     id?: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt?: Date | string
-  }
-
-  export type ProfileUncheckedCreateWithoutUserInput = {
-    id?: string
-    caloricNeeds: number
-    macroSplit: string
-    createdAt?: Date | string
-  }
-
-  export type ProfileCreateOrConnectWithoutUserInput = {
-    where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-  }
-
-  export type MealLogCreateWithoutUserInput = {
-    id?: string
-    customMealName?: string | null
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
-    logTime?: Date | string
-    suggestion?: MealSuggestionCreateNestedOneWithoutMealsLoggedInput
+    createdAt?: Date | string
+    aiModelUsed?: string | null
   }
 
-  export type MealLogUncheckedCreateWithoutUserInput = {
+  export type MealSuggestionUncheckedCreateWithoutUserInput = {
     id?: string
-    suggestionId?: string | null
-    customMealName?: string | null
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
-    logTime?: Date | string
+    createdAt?: Date | string
+    aiModelUsed?: string | null
   }
 
-  export type MealLogCreateOrConnectWithoutUserInput = {
-    where: MealLogWhereUniqueInput
-    create: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput>
+  export type MealSuggestionCreateOrConnectWithoutUserInput = {
+    where: MealSuggestionWhereUniqueInput
+    create: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput>
   }
 
-  export type MealLogCreateManyUserInputEnvelope = {
-    data: MealLogCreateManyUserInput | MealLogCreateManyUserInput[]
+  export type MealSuggestionCreateManyUserInputEnvelope = {
+    data: MealSuggestionCreateManyUserInput | MealSuggestionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type ProgressCreateWithoutUserInput = {
+  export type ProgressRecordCreateWithoutUserInput = {
     id?: string
     weight: number
     bodyFatPct?: number | null
     loggedAt?: Date | string
   }
 
-  export type ProgressUncheckedCreateWithoutUserInput = {
+  export type ProgressRecordUncheckedCreateWithoutUserInput = {
     id?: string
     weight: number
     bodyFatPct?: number | null
     loggedAt?: Date | string
   }
 
-  export type ProgressCreateOrConnectWithoutUserInput = {
-    where: ProgressWhereUniqueInput
-    create: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
+  export type ProgressRecordCreateOrConnectWithoutUserInput = {
+    where: ProgressRecordWhereUniqueInput
+    create: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput>
   }
 
-  export type ProgressCreateManyUserInputEnvelope = {
-    data: ProgressCreateManyUserInput | ProgressCreateManyUserInput[]
+  export type ProgressRecordCreateManyUserInputEnvelope = {
+    data: ProgressRecordCreateManyUserInput | ProgressRecordCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type FoodUpsertWithWhereUniqueWithoutUserInput = {
-    where: FoodWhereUniqueInput
-    update: XOR<FoodUpdateWithoutUserInput, FoodUncheckedUpdateWithoutUserInput>
-    create: XOR<FoodCreateWithoutUserInput, FoodUncheckedCreateWithoutUserInput>
+  export type FoodLogUpsertWithWhereUniqueWithoutUserInput = {
+    where: FoodLogWhereUniqueInput
+    update: XOR<FoodLogUpdateWithoutUserInput, FoodLogUncheckedUpdateWithoutUserInput>
+    create: XOR<FoodLogCreateWithoutUserInput, FoodLogUncheckedCreateWithoutUserInput>
   }
 
-  export type FoodUpdateWithWhereUniqueWithoutUserInput = {
-    where: FoodWhereUniqueInput
-    data: XOR<FoodUpdateWithoutUserInput, FoodUncheckedUpdateWithoutUserInput>
+  export type FoodLogUpdateWithWhereUniqueWithoutUserInput = {
+    where: FoodLogWhereUniqueInput
+    data: XOR<FoodLogUpdateWithoutUserInput, FoodLogUncheckedUpdateWithoutUserInput>
   }
 
-  export type FoodUpdateManyWithWhereWithoutUserInput = {
-    where: FoodScalarWhereInput
-    data: XOR<FoodUpdateManyMutationInput, FoodUncheckedUpdateManyWithoutUserInput>
+  export type FoodLogUpdateManyWithWhereWithoutUserInput = {
+    where: FoodLogScalarWhereInput
+    data: XOR<FoodLogUpdateManyMutationInput, FoodLogUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type FoodScalarWhereInput = {
-    AND?: FoodScalarWhereInput | FoodScalarWhereInput[]
-    OR?: FoodScalarWhereInput[]
-    NOT?: FoodScalarWhereInput | FoodScalarWhereInput[]
-    id?: StringFilter<"Food"> | string
-    name?: StringFilter<"Food"> | string
-    calories?: IntFilter<"Food"> | number
-    userId?: StringFilter<"Food"> | string
+  export type FoodLogScalarWhereInput = {
+    AND?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
+    OR?: FoodLogScalarWhereInput[]
+    NOT?: FoodLogScalarWhereInput | FoodLogScalarWhereInput[]
+    id?: StringFilter<"FoodLog"> | string
+    userId?: StringFilter<"FoodLog"> | string
+    foodItemId?: StringFilter<"FoodLog"> | string
+    quantity?: FloatFilter<"FoodLog"> | number
+    mealType?: StringFilter<"FoodLog"> | string
+    timestamp?: DateTimeFilter<"FoodLog"> | Date | string
   }
 
-  export type ProfileUpsertWithoutUserInput = {
-    update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
-    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    where?: ProfileWhereInput
+  export type MealSuggestionUpsertWithWhereUniqueWithoutUserInput = {
+    where: MealSuggestionWhereUniqueInput
+    update: XOR<MealSuggestionUpdateWithoutUserInput, MealSuggestionUncheckedUpdateWithoutUserInput>
+    create: XOR<MealSuggestionCreateWithoutUserInput, MealSuggestionUncheckedCreateWithoutUserInput>
   }
 
-  export type ProfileUpdateToOneWithWhereWithoutUserInput = {
-    where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
+  export type MealSuggestionUpdateWithWhereUniqueWithoutUserInput = {
+    where: MealSuggestionWhereUniqueInput
+    data: XOR<MealSuggestionUpdateWithoutUserInput, MealSuggestionUncheckedUpdateWithoutUserInput>
   }
 
-  export type ProfileUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type MealSuggestionUpdateManyWithWhereWithoutUserInput = {
+    where: MealSuggestionScalarWhereInput
+    data: XOR<MealSuggestionUpdateManyMutationInput, MealSuggestionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ProfileUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    caloricNeeds?: IntFieldUpdateOperationsInput | number
-    macroSplit?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type MealSuggestionScalarWhereInput = {
+    AND?: MealSuggestionScalarWhereInput | MealSuggestionScalarWhereInput[]
+    OR?: MealSuggestionScalarWhereInput[]
+    NOT?: MealSuggestionScalarWhereInput | MealSuggestionScalarWhereInput[]
+    id?: StringFilter<"MealSuggestion"> | string
+    userId?: StringFilter<"MealSuggestion"> | string
+    suggestion?: StringFilter<"MealSuggestion"> | string
+    meals?: JsonFilter<"MealSuggestion">
+    calories?: IntFilter<"MealSuggestion"> | number
+    createdAt?: DateTimeFilter<"MealSuggestion"> | Date | string
+    aiModelUsed?: StringNullableFilter<"MealSuggestion"> | string | null
   }
 
-  export type MealLogUpsertWithWhereUniqueWithoutUserInput = {
-    where: MealLogWhereUniqueInput
-    update: XOR<MealLogUpdateWithoutUserInput, MealLogUncheckedUpdateWithoutUserInput>
-    create: XOR<MealLogCreateWithoutUserInput, MealLogUncheckedCreateWithoutUserInput>
+  export type ProgressRecordUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProgressRecordWhereUniqueInput
+    update: XOR<ProgressRecordUpdateWithoutUserInput, ProgressRecordUncheckedUpdateWithoutUserInput>
+    create: XOR<ProgressRecordCreateWithoutUserInput, ProgressRecordUncheckedCreateWithoutUserInput>
   }
 
-  export type MealLogUpdateWithWhereUniqueWithoutUserInput = {
-    where: MealLogWhereUniqueInput
-    data: XOR<MealLogUpdateWithoutUserInput, MealLogUncheckedUpdateWithoutUserInput>
+  export type ProgressRecordUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProgressRecordWhereUniqueInput
+    data: XOR<ProgressRecordUpdateWithoutUserInput, ProgressRecordUncheckedUpdateWithoutUserInput>
   }
 
-  export type MealLogUpdateManyWithWhereWithoutUserInput = {
-    where: MealLogScalarWhereInput
-    data: XOR<MealLogUpdateManyMutationInput, MealLogUncheckedUpdateManyWithoutUserInput>
+  export type ProgressRecordUpdateManyWithWhereWithoutUserInput = {
+    where: ProgressRecordScalarWhereInput
+    data: XOR<ProgressRecordUpdateManyMutationInput, ProgressRecordUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type MealLogScalarWhereInput = {
-    AND?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
-    OR?: MealLogScalarWhereInput[]
-    NOT?: MealLogScalarWhereInput | MealLogScalarWhereInput[]
-    id?: StringFilter<"MealLog"> | string
-    userId?: StringFilter<"MealLog"> | string
-    suggestionId?: StringNullableFilter<"MealLog"> | string | null
-    customMealName?: StringNullableFilter<"MealLog"> | string | null
-    calories?: IntFilter<"MealLog"> | number
-    logTime?: DateTimeFilter<"MealLog"> | Date | string
+  export type ProgressRecordScalarWhereInput = {
+    AND?: ProgressRecordScalarWhereInput | ProgressRecordScalarWhereInput[]
+    OR?: ProgressRecordScalarWhereInput[]
+    NOT?: ProgressRecordScalarWhereInput | ProgressRecordScalarWhereInput[]
+    id?: StringFilter<"ProgressRecord"> | string
+    userId?: StringFilter<"ProgressRecord"> | string
+    weight?: FloatFilter<"ProgressRecord"> | number
+    bodyFatPct?: FloatNullableFilter<"ProgressRecord"> | number | null
+    loggedAt?: DateTimeFilter<"ProgressRecord"> | Date | string
   }
 
-  export type ProgressUpsertWithWhereUniqueWithoutUserInput = {
-    where: ProgressWhereUniqueInput
-    update: XOR<ProgressUpdateWithoutUserInput, ProgressUncheckedUpdateWithoutUserInput>
-    create: XOR<ProgressCreateWithoutUserInput, ProgressUncheckedCreateWithoutUserInput>
-  }
-
-  export type ProgressUpdateWithWhereUniqueWithoutUserInput = {
-    where: ProgressWhereUniqueInput
-    data: XOR<ProgressUpdateWithoutUserInput, ProgressUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ProgressUpdateManyWithWhereWithoutUserInput = {
-    where: ProgressScalarWhereInput
-    data: XOR<ProgressUpdateManyMutationInput, ProgressUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ProgressScalarWhereInput = {
-    AND?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
-    OR?: ProgressScalarWhereInput[]
-    NOT?: ProgressScalarWhereInput | ProgressScalarWhereInput[]
-    id?: StringFilter<"Progress"> | string
-    userId?: StringFilter<"Progress"> | string
-    weight?: FloatFilter<"Progress"> | number
-    bodyFatPct?: FloatNullableFilter<"Progress"> | number | null
-    loggedAt?: DateTimeFilter<"Progress"> | Date | string
-  }
-
-  export type UserCreateWithoutProfileInput = {
+  export type FoodLogCreateWithoutFoodItemInput = {
     id?: string
-    clerkUserId: string
-    displayName: string
-    imageUrl: string
-    email: string
-    age?: number | null
-    height?: number | null
-    weight?: number | null
-    gender?: string | null
-    activityLevel?: string | null
-    goal?: string | null
-    food?: FoodCreateNestedManyWithoutUserInput
-    meals?: MealLogCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressCreateNestedManyWithoutUserInput
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
+    user: UserCreateNestedOneWithoutFoodLogsInput
   }
 
-  export type UserUncheckedCreateWithoutProfileInput = {
-    id?: string
-    clerkUserId: string
-    displayName: string
-    imageUrl: string
-    email: string
-    age?: number | null
-    height?: number | null
-    weight?: number | null
-    gender?: string | null
-    activityLevel?: string | null
-    goal?: string | null
-    food?: FoodUncheckedCreateNestedManyWithoutUserInput
-    meals?: MealLogUncheckedCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutProfileInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
-  }
-
-  export type UserUpsertWithoutProfileInput = {
-    update: XOR<UserUpdateWithoutProfileInput, UserUncheckedUpdateWithoutProfileInput>
-    create: XOR<UserCreateWithoutProfileInput, UserUncheckedCreateWithoutProfileInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutProfileInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutProfileInput, UserUncheckedUpdateWithoutProfileInput>
-  }
-
-  export type UserUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
-    weight?: NullableFloatFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUpdateManyWithoutUserNestedInput
-    meals?: MealLogUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutProfileInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
-    weight?: NullableFloatFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUncheckedUpdateManyWithoutUserNestedInput
-    meals?: MealLogUncheckedUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type MealLogCreateWithoutSuggestionInput = {
-    id?: string
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
-    user: UserCreateNestedOneWithoutMealsInput
-  }
-
-  export type MealLogUncheckedCreateWithoutSuggestionInput = {
+  export type FoodLogUncheckedCreateWithoutFoodItemInput = {
     id?: string
     userId: string
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type MealLogCreateOrConnectWithoutSuggestionInput = {
-    where: MealLogWhereUniqueInput
-    create: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput>
+  export type FoodLogCreateOrConnectWithoutFoodItemInput = {
+    where: FoodLogWhereUniqueInput
+    create: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput>
   }
 
-  export type MealLogCreateManySuggestionInputEnvelope = {
-    data: MealLogCreateManySuggestionInput | MealLogCreateManySuggestionInput[]
+  export type FoodLogCreateManyFoodItemInputEnvelope = {
+    data: FoodLogCreateManyFoodItemInput | FoodLogCreateManyFoodItemInput[]
     skipDuplicates?: boolean
   }
 
-  export type MealLogUpsertWithWhereUniqueWithoutSuggestionInput = {
-    where: MealLogWhereUniqueInput
-    update: XOR<MealLogUpdateWithoutSuggestionInput, MealLogUncheckedUpdateWithoutSuggestionInput>
-    create: XOR<MealLogCreateWithoutSuggestionInput, MealLogUncheckedCreateWithoutSuggestionInput>
+  export type FoodLogUpsertWithWhereUniqueWithoutFoodItemInput = {
+    where: FoodLogWhereUniqueInput
+    update: XOR<FoodLogUpdateWithoutFoodItemInput, FoodLogUncheckedUpdateWithoutFoodItemInput>
+    create: XOR<FoodLogCreateWithoutFoodItemInput, FoodLogUncheckedCreateWithoutFoodItemInput>
   }
 
-  export type MealLogUpdateWithWhereUniqueWithoutSuggestionInput = {
-    where: MealLogWhereUniqueInput
-    data: XOR<MealLogUpdateWithoutSuggestionInput, MealLogUncheckedUpdateWithoutSuggestionInput>
+  export type FoodLogUpdateWithWhereUniqueWithoutFoodItemInput = {
+    where: FoodLogWhereUniqueInput
+    data: XOR<FoodLogUpdateWithoutFoodItemInput, FoodLogUncheckedUpdateWithoutFoodItemInput>
   }
 
-  export type MealLogUpdateManyWithWhereWithoutSuggestionInput = {
-    where: MealLogScalarWhereInput
-    data: XOR<MealLogUpdateManyMutationInput, MealLogUncheckedUpdateManyWithoutSuggestionInput>
+  export type FoodLogUpdateManyWithWhereWithoutFoodItemInput = {
+    where: FoodLogScalarWhereInput
+    data: XOR<FoodLogUpdateManyMutationInput, FoodLogUncheckedUpdateManyWithoutFoodItemInput>
   }
 
-  export type UserCreateWithoutMealsInput = {
+  export type UserCreateWithoutFoodLogsInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodCreateNestedManyWithoutUserInput
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    progressRecords?: ProgressCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mealSuggestions?: MealSuggestionCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutMealsInput = {
+  export type UserUncheckedCreateWithoutFoodLogsInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodUncheckedCreateNestedManyWithoutUserInput
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    progressRecords?: ProgressUncheckedCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mealSuggestions?: MealSuggestionUncheckedCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutMealsInput = {
+  export type UserCreateOrConnectWithoutFoodLogsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMealsInput, UserUncheckedCreateWithoutMealsInput>
+    create: XOR<UserCreateWithoutFoodLogsInput, UserUncheckedCreateWithoutFoodLogsInput>
   }
 
-  export type MealSuggestionCreateWithoutMealsLoggedInput = {
+  export type FoodItemCreateWithoutFoodLogsInput = {
     id?: string
     name: string
     calories: number
-    proteins: number
-    fats: number
+    protein: number
     carbs: number
-    ingredients: string
-    sourceApiId?: string | null
+    fat: number
+    category?: string | null
+    isCustom?: boolean
   }
 
-  export type MealSuggestionUncheckedCreateWithoutMealsLoggedInput = {
+  export type FoodItemUncheckedCreateWithoutFoodLogsInput = {
     id?: string
     name: string
     calories: number
-    proteins: number
-    fats: number
+    protein: number
     carbs: number
-    ingredients: string
-    sourceApiId?: string | null
+    fat: number
+    category?: string | null
+    isCustom?: boolean
   }
 
-  export type MealSuggestionCreateOrConnectWithoutMealsLoggedInput = {
-    where: MealSuggestionWhereUniqueInput
-    create: XOR<MealSuggestionCreateWithoutMealsLoggedInput, MealSuggestionUncheckedCreateWithoutMealsLoggedInput>
+  export type FoodItemCreateOrConnectWithoutFoodLogsInput = {
+    where: FoodItemWhereUniqueInput
+    create: XOR<FoodItemCreateWithoutFoodLogsInput, FoodItemUncheckedCreateWithoutFoodLogsInput>
   }
 
-  export type UserUpsertWithoutMealsInput = {
-    update: XOR<UserUpdateWithoutMealsInput, UserUncheckedUpdateWithoutMealsInput>
-    create: XOR<UserCreateWithoutMealsInput, UserUncheckedCreateWithoutMealsInput>
+  export type UserUpsertWithoutFoodLogsInput = {
+    update: XOR<UserUpdateWithoutFoodLogsInput, UserUncheckedUpdateWithoutFoodLogsInput>
+    create: XOR<UserCreateWithoutFoodLogsInput, UserUncheckedCreateWithoutFoodLogsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutMealsInput = {
+  export type UserUpdateToOneWithWhereWithoutFoodLogsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMealsInput, UserUncheckedUpdateWithoutMealsInput>
+    data: XOR<UserUpdateWithoutFoodLogsInput, UserUncheckedUpdateWithoutFoodLogsInput>
   }
 
-  export type UserUpdateWithoutMealsInput = {
+  export type UserUpdateWithoutFoodLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUpdateManyWithoutUserNestedInput
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    progressRecords?: ProgressUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mealSuggestions?: MealSuggestionUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutMealsInput = {
+  export type UserUncheckedUpdateWithoutFoodLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUncheckedUpdateManyWithoutUserNestedInput
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    progressRecords?: ProgressUncheckedUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mealSuggestions?: MealSuggestionUncheckedUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type MealSuggestionUpsertWithoutMealsLoggedInput = {
-    update: XOR<MealSuggestionUpdateWithoutMealsLoggedInput, MealSuggestionUncheckedUpdateWithoutMealsLoggedInput>
-    create: XOR<MealSuggestionCreateWithoutMealsLoggedInput, MealSuggestionUncheckedCreateWithoutMealsLoggedInput>
-    where?: MealSuggestionWhereInput
+  export type FoodItemUpsertWithoutFoodLogsInput = {
+    update: XOR<FoodItemUpdateWithoutFoodLogsInput, FoodItemUncheckedUpdateWithoutFoodLogsInput>
+    create: XOR<FoodItemCreateWithoutFoodLogsInput, FoodItemUncheckedCreateWithoutFoodLogsInput>
+    where?: FoodItemWhereInput
   }
 
-  export type MealSuggestionUpdateToOneWithWhereWithoutMealsLoggedInput = {
-    where?: MealSuggestionWhereInput
-    data: XOR<MealSuggestionUpdateWithoutMealsLoggedInput, MealSuggestionUncheckedUpdateWithoutMealsLoggedInput>
+  export type FoodItemUpdateToOneWithWhereWithoutFoodLogsInput = {
+    where?: FoodItemWhereInput
+    data: XOR<FoodItemUpdateWithoutFoodLogsInput, FoodItemUncheckedUpdateWithoutFoodLogsInput>
   }
 
-  export type MealSuggestionUpdateWithoutMealsLoggedInput = {
+  export type FoodItemUpdateWithoutFoodLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
     carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type MealSuggestionUncheckedUpdateWithoutMealsLoggedInput = {
+  export type FoodItemUncheckedUpdateWithoutFoodLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     calories?: IntFieldUpdateOperationsInput | number
-    proteins?: FloatFieldUpdateOperationsInput | number
-    fats?: FloatFieldUpdateOperationsInput | number
+    protein?: FloatFieldUpdateOperationsInput | number
     carbs?: FloatFieldUpdateOperationsInput | number
-    ingredients?: StringFieldUpdateOperationsInput | string
-    sourceApiId?: NullableStringFieldUpdateOperationsInput | string | null
+    fat?: FloatFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isCustom?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserCreateWithoutMealSuggestionsInput = {
+    id?: string
+    clerkUserId: string
+    name: string
+    email: string
+    imageUrl: string
+    age?: number | null
+    weight?: number | null
+    height?: number | null
+    gender?: string | null
+    activityLevel?: string | null
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMealSuggestionsInput = {
+    id?: string
+    clerkUserId: string
+    name: string
+    email: string
+    imageUrl: string
+    age?: number | null
+    weight?: number | null
+    height?: number | null
+    gender?: string | null
+    activityLevel?: string | null
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogUncheckedCreateNestedManyWithoutUserInput
+    progressRecords?: ProgressRecordUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMealSuggestionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMealSuggestionsInput, UserUncheckedCreateWithoutMealSuggestionsInput>
+  }
+
+  export type UserUpsertWithoutMealSuggestionsInput = {
+    update: XOR<UserUpdateWithoutMealSuggestionsInput, UserUncheckedUpdateWithoutMealSuggestionsInput>
+    create: XOR<UserCreateWithoutMealSuggestionsInput, UserUncheckedCreateWithoutMealSuggestionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMealSuggestionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMealSuggestionsInput, UserUncheckedUpdateWithoutMealSuggestionsInput>
+  }
+
+  export type UserUpdateWithoutMealSuggestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMealSuggestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clerkUserId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUncheckedUpdateManyWithoutUserNestedInput
+    progressRecords?: ProgressRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProgressRecordsInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodCreateNestedManyWithoutUserInput
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    meals?: MealLogCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogCreateNestedManyWithoutUserInput
+    mealSuggestions?: MealSuggestionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProgressRecordsInput = {
     id?: string
     clerkUserId: string
-    displayName: string
-    imageUrl: string
+    name: string
     email: string
+    imageUrl: string
     age?: number | null
-    height?: number | null
     weight?: number | null
+    height?: number | null
     gender?: string | null
     activityLevel?: string | null
-    goal?: string | null
-    food?: FoodUncheckedCreateNestedManyWithoutUserInput
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    meals?: MealLogUncheckedCreateNestedManyWithoutUserInput
+    dietaryPreference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodLogs?: FoodLogUncheckedCreateNestedManyWithoutUserInput
+    mealSuggestions?: MealSuggestionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProgressRecordsInput = {
@@ -10727,235 +9540,165 @@ export namespace Prisma {
   export type UserUpdateWithoutProgressRecordsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUpdateManyWithoutUserNestedInput
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    meals?: MealLogUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUpdateManyWithoutUserNestedInput
+    mealSuggestions?: MealSuggestionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProgressRecordsInput = {
     id?: StringFieldUpdateOperationsInput | string
     clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    imageUrl?: StringFieldUpdateOperationsInput | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
     weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    food?: FoodUncheckedUpdateManyWithoutUserNestedInput
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    meals?: MealLogUncheckedUpdateManyWithoutUserNestedInput
+    dietaryPreference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodLogs?: FoodLogUncheckedUpdateManyWithoutUserNestedInput
+    mealSuggestions?: MealSuggestionUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutFoodInput = {
+  export type FoodLogCreateManyUserInput = {
     id?: string
-    clerkUserId: string
-    displayName: string
-    imageUrl: string
-    email: string
-    age?: number | null
-    height?: number | null
-    weight?: number | null
-    gender?: string | null
-    activityLevel?: string | null
-    goal?: string | null
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    meals?: MealLogCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressCreateNestedManyWithoutUserInput
+    foodItemId: string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type UserUncheckedCreateWithoutFoodInput = {
+  export type MealSuggestionCreateManyUserInput = {
     id?: string
-    clerkUserId: string
-    displayName: string
-    imageUrl: string
-    email: string
-    age?: number | null
-    height?: number | null
-    weight?: number | null
-    gender?: string | null
-    activityLevel?: string | null
-    goal?: string | null
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    meals?: MealLogUncheckedCreateNestedManyWithoutUserInput
-    progressRecords?: ProgressUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutFoodInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutFoodInput, UserUncheckedCreateWithoutFoodInput>
-  }
-
-  export type UserUpsertWithoutFoodInput = {
-    update: XOR<UserUpdateWithoutFoodInput, UserUncheckedUpdateWithoutFoodInput>
-    create: XOR<UserCreateWithoutFoodInput, UserUncheckedCreateWithoutFoodInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutFoodInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutFoodInput, UserUncheckedUpdateWithoutFoodInput>
-  }
-
-  export type UserUpdateWithoutFoodInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
-    weight?: NullableFloatFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    meals?: MealLogUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutFoodInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    clerkUserId?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    height?: NullableFloatFieldUpdateOperationsInput | number | null
-    weight?: NullableFloatFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    activityLevel?: NullableStringFieldUpdateOperationsInput | string | null
-    goal?: NullableStringFieldUpdateOperationsInput | string | null
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    meals?: MealLogUncheckedUpdateManyWithoutUserNestedInput
-    progressRecords?: ProgressUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type FoodCreateManyUserInput = {
-    id?: string
-    name: string
+    suggestion: string
+    meals: JsonNullValueInput | InputJsonValue
     calories: number
+    createdAt?: Date | string
+    aiModelUsed?: string | null
   }
 
-  export type MealLogCreateManyUserInput = {
-    id?: string
-    suggestionId?: string | null
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
-  }
-
-  export type ProgressCreateManyUserInput = {
+  export type ProgressRecordCreateManyUserInput = {
     id?: string
     weight: number
     bodyFatPct?: number | null
     loggedAt?: Date | string
   }
 
-  export type FoodUpdateWithoutUserInput = {
+  export type FoodLogUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodItem?: FoodItemUpdateOneRequiredWithoutFoodLogsNestedInput
   }
 
-  export type FoodUncheckedUpdateWithoutUserInput = {
+  export type FoodLogUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
+    foodItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type FoodUncheckedUpdateManyWithoutUserInput = {
+  export type FoodLogUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    calories?: IntFieldUpdateOperationsInput | number
+    foodItemId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MealLogUpdateWithoutUserInput = {
+  export type MealSuggestionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    suggestion?: MealSuggestionUpdateOneWithoutMealsLoggedNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type MealLogUncheckedUpdateWithoutUserInput = {
+  export type MealSuggestionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    suggestionId?: NullableStringFieldUpdateOperationsInput | string | null
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type MealLogUncheckedUpdateManyWithoutUserInput = {
+  export type MealSuggestionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    suggestionId?: NullableStringFieldUpdateOperationsInput | string | null
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
+    suggestion?: StringFieldUpdateOperationsInput | string
+    meals?: JsonNullValueInput | InputJsonValue
     calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    aiModelUsed?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ProgressUpdateWithoutUserInput = {
+  export type ProgressRecordUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProgressUncheckedUpdateWithoutUserInput = {
+  export type ProgressRecordUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ProgressUncheckedUpdateManyWithoutUserInput = {
+  export type ProgressRecordUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     weight?: FloatFieldUpdateOperationsInput | number
     bodyFatPct?: NullableFloatFieldUpdateOperationsInput | number | null
     loggedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MealLogCreateManySuggestionInput = {
+  export type FoodLogCreateManyFoodItemInput = {
     id?: string
     userId: string
-    customMealName?: string | null
-    calories: number
-    logTime?: Date | string
+    quantity: number
+    mealType: string
+    timestamp?: Date | string
   }
 
-  export type MealLogUpdateWithoutSuggestionInput = {
+  export type FoodLogUpdateWithoutFoodItemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMealsNestedInput
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutFoodLogsNestedInput
   }
 
-  export type MealLogUncheckedUpdateWithoutSuggestionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MealLogUncheckedUpdateManyWithoutSuggestionInput = {
+  export type FoodLogUncheckedUpdateWithoutFoodItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    customMealName?: NullableStringFieldUpdateOperationsInput | string | null
-    calories?: IntFieldUpdateOperationsInput | number
-    logTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FoodLogUncheckedUpdateManyWithoutFoodItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    mealType?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

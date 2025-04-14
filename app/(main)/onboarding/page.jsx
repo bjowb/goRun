@@ -1,24 +1,18 @@
 import React from "react";
-import OnboardingForm from "./_components/onboarding-form";
-import { gettingUserOnboardingStatus } from "@/actions/user";
-import { redirect } from "next/navigation";
-import { foodCategories } from "@/app/data/food";
+import OnboardingForm from "./_components/on-boarding-form";
+import { dietaryPreferences } from "@/app/data/food";
+import { getUserOnboardingStatus } from "@/actions/user";
 
-const OnboardingPage = async () => {
+const OnboardingPage = async () =>{
 
-    const onBoarded = await gettingUserOnboardingStatus();
+    //check if already onboarded
+    const { isOnboarded } = await getUserOnboardingStatus();
 
-    if(onBoarded){
-        redirect("/dashboard");
+    if (isOnboarded) {
+      redirect("/dashboard");
     }
 
-
-    return(
-        <main>
-            <OnboardingForm foodCategories = {foodCategories}/>
-
-        </main>
-    )
+    return <main><OnboardingForm dietaryPreferences = "dietaryPreferences"/></main>
 }
 
 export default OnboardingPage;
