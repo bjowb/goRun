@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String  @id @default(uuid())
+  clerkUserId   String  @unique
+  displayName   String
+  imageUrl      String
+  email         String  @unique
+  age           Int?
+  height        Float?
+  weight        Float?
+  gender        String?
+  activityLevel String?
+  goal          String?
+
+  food            Food[]
+  profile         Profile?
+  meals           MealLog[]
+  progressRecords Progress[]
+}
+
+model Profile {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  caloricNeeds Int
+  macroSplit   String
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [clerkUserId])
+}
+
+model MealSuggestion {
+  id          String  @id @default(uuid())
+  name        String
+  calories    Int
+  proteins    Float
+  fats        Float
+  carbs       Float
+  ingredients String
+  sourceApiId String?
+
+  mealsLogged MealLog[]
+}
+
+model MealLog {
+  id             String   @id @default(uuid())
+  userId         String
+  suggestionId   String?
+  customMealName String?
+  calories       Int
+  logTime        DateTime @default(now())
+
+  user       User            @relation(fields: [userId], references: [clerkUserId])
+  suggestion MealSuggestion? @relation(fields: [suggestionId], references: [id])
+}
+
+model Progress {
+  id         String   @id @default(uuid())
+  userId     String
+  weight     Float
+  bodyFatPct Float?
+  loggedAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [clerkUserId])
+}
+
+model Food {
+  id       String @id @default(cuid())
+  name     String
+  calories Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+}
