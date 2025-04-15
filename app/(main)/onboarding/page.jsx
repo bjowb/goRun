@@ -5,12 +5,12 @@ import { getUserOnboardingStatus } from "@/actions/user";
 
 const OnboardingPage = async () =>{
 
-    //check if already onboarded
-    const { isOnboarded } = await getUserOnboardingStatus();
+//     //check if already onboarded
+//     const { isOnboarded } = await getUserOnboardingStatus();
 
-    if (isOnboarded) {
-      redirect("/dashboard");
-    }
+//     if (isOnboarded) {
+//       redirect("/dashboard");
+//     }
 
     return <main><OnboardingForm dietaryPreferences = "dietaryPreferences"/></main>
 }

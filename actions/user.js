@@ -16,7 +16,7 @@ export async function updateUser(data) {
 
   try {
     // ✅ Step 1: Check if any food item with that category exists
-    const existingCategoryFood = await db.foodItem.findFirst({
+    const existingCategoryFood = await db.foodItem.findMany({
       where: {
         category: data.dietaryPreference,
       },
@@ -52,39 +52,32 @@ export async function updateUser(data) {
     });
 
     revalidatePath("/");
-    return updatedUser;
+    return { success: true, updatedUser }; // Return success flag for redirection
   } catch (error) {
     console.error("Error updating user and category:", error.message);
     throw new Error("Failed to update user profile");
   }
 }
 
-
-export async function getUserOnboardingStatus(){
-  let category = await db.foodCategory.findUnique({
-    where: {
-      name: data.dietaryPreference,
-    },
-  });
+export async function getUserOnboardingStatus() {
+  const { userId } = await auth(); // Get userId from auth
+  if (!userId) throw new Error("Unauthorized");
 
   try {
     const user = await db.user.findUnique({
       where: {
         clerkUserId: userId,
       },
-      select:{
+      select: {
         dietaryPreference: true,
-      }
+      },
     });
 
     return {
-      isOnboarded: !!user?.industry,
+      isOnboarded: !!user?.dietaryPreference, // Check for dietaryPreference, not industry
     };
-
   } catch (error) {
     console.error("Error fetching user onboarding status:", error.message);
-    throw new Error("Failed to fetch user onboarding status");
-    
+    throw new Error("Failed to check onboarding status: " + error.message);
   }
-
 }
