@@ -63,8 +63,8 @@ const ContactPage = () => {
               📧 Email
             </h3>
             <p className="text-muted-foreground">
-              <a href="mailto:support@fixurlyf.app" className="hover:underline">
-                support@fixurlyf.app
+              <a href="mailto:pulktchhr@gmail.com" className="hover:underline">
+                SeProject@gmail.com
               </a>
             </p>
           </div>
@@ -80,7 +80,7 @@ const ContactPage = () => {
                 target="_blank"
                 className="hover:underline"
               >
-                @fixurlyf
+                @seproject
               </a>
             </p>
           </div>
@@ -96,7 +96,7 @@ const ContactPage = () => {
                 target="_blank"
                 className="hover:underline"
               >
-                discord.gg/fixurlyf
+                seProject
               </a>
             </p>
           </div>
@@ -112,7 +112,7 @@ const ContactPage = () => {
                 target="_blank"
                 className="hover:underline"
               >
-                @fixurlyf
+                seProject
               </a>
             </p>
           </div>

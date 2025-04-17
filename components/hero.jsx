@@ -49,21 +49,21 @@ const HeroSection = () => {
 
           <Link href="https://www.youtube.com/shorts/y2EY3jUWtlE">
             <Button size="lg" className="px-8" variant="outline">
-              Cry like bich
+              Dummy
             </Button>
           </Link>
         </div>
 
         <div className="hero-image-wrapper mt-5 md:mt-0">
           <div ref={imageRef} className="hero-image">
-            <Image
+            {/* <Image
               src="/gym.jpg"
               width={900}
               height={1200}
               alt="Banner"
               className="rounded-lg shadow-2xl border mx-auto"
               priority
-            />
+            /> */}
           </div>
         </div>
       </div>
