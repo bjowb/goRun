@@ -33,7 +33,7 @@
 
 ## 🔗 Live Demo
 
-[Check it out here](https://your-deployed-url.com) <!-- Replace with your actual link -->
+[Check it out here](https://go-run-a41x.vercel.app/) <!-- Replace with your actual link -->
 
 ---
 
